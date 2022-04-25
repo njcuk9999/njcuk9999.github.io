@@ -402,8 +402,8 @@ header{
 .testimonila-block img {
     border-radius: 50%;
     border: 1px solid #000;
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 512px;
+    max-height: 480px;
     margin-bottom: 30px;
 }
 .testimonila-block p {
