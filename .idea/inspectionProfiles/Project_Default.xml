@@ -1,0 +1,48 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <Languages>
+        <language minSize="69" name="Python" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="LanguageDetectionInspection" enabled="true" level="TYPO" enabled_by_default="true" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="8">
+            <item index="0" class="java.lang.String" itemvalue="astropy" />
+            <item index="1" class="java.lang.String" itemvalue="numpy" />
+            <item index="2" class="java.lang.String" itemvalue="bottleneck" />
+            <item index="3" class="java.lang.String" itemvalue="scipy" />
+            <item index="4" class="java.lang.String" itemvalue="numba" />
+            <item index="5" class="java.lang.String" itemvalue="matplotlib" />
+            <item index="6" class="java.lang.String" itemvalue="yaml" />
+            <item index="7" class="java.lang.String" itemvalue="tqdm" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="astropy.units.nm" />
+          <option value="astropy.units.deg" />
+          <option value="astropy.units.mas" />
+          <option value="astropy.units.km" />
+          <option value="astropy.constants.c" />
+          <option value="astropy.units.arcsec" />
+          <option value="astropy.units.pixel" />
+          <option value="astropy.units.yr" />
+          <option value="astropy.units.day" />
+          <option value="astropy.units.hour" />
+          <option value="os.sys" />
+          <option value="_importlib_modulespec.ModuleType.main" />
+          <option value="_importlib_modulespec.ModuleType.lang_db_proxy" />
+          <option value="types.ModuleType.main" />
+          <option value="apero.base.drs_db.MySQLDatabase._conn_" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
