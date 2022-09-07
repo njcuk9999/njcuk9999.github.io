@@ -548,6 +548,9 @@ header{
 .github{
   background-image: url(../images/github.png);
 }
+.link{
+  background-image: url(../images/link.png); 
+}
 
 /* /////////////////////////////////////////////////////////////////////
 //  08 - Footer
