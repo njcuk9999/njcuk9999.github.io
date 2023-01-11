@@ -6,7 +6,7 @@ const uploadRouter = require('./router');
 const app = express();
 
 app.get('/', (_, res) => {
-  res.sendFile(`${__dirname}/index.html`);
+  res.sendFile(`${__dirname}/test.html`);
 });
 
 app.use(express.json());
