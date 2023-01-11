@@ -1,59 +1,27 @@
-<script src="https://cdn.jsdelivr.net/gh/tanaikech/ResumableUploadForGoogleDrive_js@master/resumableupload_js.min.js"></script>
-<script src="https://apis.google.com/js/api.js" async defer></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
-<body>
-  <form>
-    <input name="file" id="uploadfile" type="file" />
-  </form>
-  <div id="progress"></div>
-</body>
+  <body>
+    <form>
+      <input type="file" name="Files" required multiple />
+      <input type="text" name="Name" placeholder="Name" />
+      <input type="text" name="Country" placeholder="Country" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
 
-<script>
-  
-  gapi.client.setToken('credentials.json');
-  const accessToken = gapi.auth.getToken().access_token; // Please set access token here.
-  
-  document.getElementById("uploadfile").addEventListener("change", run, false);
-
-  function run(obj) {
-    const file = obj.target.files[0];
-    if (file.name != "") {
-      let fr = new FileReader();
-      fr.fileName = file.name;
-      fr.fileSize = file.size;
-      fr.fileType = file.type;
-      fr.readAsArrayBuffer(file);
-      fr.onload = resumableUpload;
-    }
-  }
-
-  function resumableUpload(e) {
-    document.getElementById("progress").innerHTML = "Initializing.";
-    const f = e.target;
-    const resource = {
-      fileName: f.fileName,
-      fileSize: f.fileSize,
-      fileType: f.fileType,
-      fileBuffer: f.result,
-      accessToken: accessToken,
-    };
-    const ru = new ResumableUploadToGoogleDrive();
-    ru.Do(resource, function (res, err) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(res);
-      let msg = "";
-      if (res.status == "Uploading") {
-        msg =
-          Math.round(
-            (res.progressNumber.current / res.progressNumber.end) * 100
-          ) + "%";
-      } else {
-        msg = res.status;
-      }
-      document.getElementById("progress").innerText = msg;
+  <script>
+    const formElem = document.querySelector('form');
+    formElem.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await fetch('/upload', {
+        method: 'POST',
+        body: new FormData(formElem),
+      });
     });
-  }
-</script>
+  </script>
+</html>
