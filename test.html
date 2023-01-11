@@ -8,8 +8,9 @@
 </body>
 
 <script>
-  // const accessToken = gapi.auth.getToken().access_token; // Please set access token here.
-  const accessToken = "476e56badd382927edbdb96d2d7224576c0b4b0d";
+  
+  gapi.client.setToken('credentials.json');
+  const accessToken = gapi.auth.getToken().access_token; // Please set access token here.
   
   document.getElementById("uploadfile").addEventListener("change", run, false);
 
