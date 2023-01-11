@@ -1,0 +1,43 @@
+<head>
+</head>
+
+
+<body>
+  
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload</button>
+
+<script src="https://apis.google.com/js/api.js"></script>
+  
+<script>
+  function uploadFile() {
+    // Get the file to upload
+    var file = document.getElementById('fileInput').files[0];
+
+    // Create a Google Drive client
+    var drive = new gapi.drive.Drive({
+      apiKey: 'API_KEY'
+    });
+
+    // Create a new file on Google Drive
+    drive.files.create({
+      resource: {
+        name: file.name
+      },
+      media: {
+        mimeType: file.type,
+        body: file
+      },
+      fields: 'id'
+    }, function (err, file) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+
+      console.log(`File ID: ${file.id}`);
+    });
+  }
+</script>
+  
+</body>
