@@ -3,7 +3,7 @@
 const stream = require('stream');
 const express = require('express');
 const multer = require('multer');
-const { google } = require('googleapis');
+const drive = require('./service');
 
 const uploadRouter = express.Router();
 const upload = multer();
@@ -11,7 +11,7 @@ const upload = multer();
 const uploadFile = async (fileObject) => {
   const bufferStream = new stream.PassThrough();
   bufferStream.end(fileObject.buffer);
-  const { data } = await google.drive({ version: 'v3' }).files.create({
+  const { data } = await drive({ version: 'v3' }).files.create({
     media: {
       mimeType: fileObject.mimeType,
       body: bufferStream,
