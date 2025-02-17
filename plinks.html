@@ -58,97 +58,45 @@
     <!-- Testimonial Area -->
     <section id="testimonial" class="testimonial-area">
 
+<script>
+async function loadLinks() {
+    const response = await fetch("links.txt");
+    const text = await response.text();
+    
+    const sections = text.split("\n\n");
+    const container = document.getElementById("dynamic-links");
+    container.innerHTML = "";  
+
+    sections.forEach(section => {
+        if (!section.trim()) return;
+        const lines = section.split("\n");
+        const sectionTitle = lines[0].replace(/\[|\]/g, "");
+
+        const sectionDiv = document.createElement("div");
+        sectionDiv.innerHTML = `<h2>${sectionTitle}</h2><ul></ul>`;
+        const ul = sectionDiv.querySelector("ul");
+
+        lines.slice(1).forEach(line => {
+            const [name, url] = line.split(", ");
+            if (name && url) {
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="${url}">${name}</a>`;
+                ul.appendChild(li);
+            }
+        });
+
+        container.appendChild(sectionDiv);
+    });
+}
+
+window.onload = loadLinks;
+</script>
+
+      
       <h1 class="block_title">Useful links</h1>
+      <div id="dynamic-links"></div>
 
-      <div class="container">
-        <h2 class="block_title">Astrophysics</h2>
-        <div>
-            <ul class="list-group-item-text">
-              <li><a href="http://apero.exoplanets.ca">APERO documentation and Reduction interface</a></li>
-              <li><a href="https://detexify.kirelabs.org/classify.html">Detexify - draw LaTeX symbols</a></li>
-              <li><a href="https://automeris.io/WebPlotDigitizer/">Digitalize graphs</a></li>
-              <li><a href="https://dace.unige.ch/radialVelocities/">DACE radial velocity explorer</a></li>
-              <li><a href="http://www.star.bris.ac.uk/~mbt/topcat/">TOPCAT: Tool for OPerations on Catalogues And Tables</a></li>
-              <li><a href="https://sites.google.com/cfa.harvard.edu/saoimageds9">SAOImageDS9 - An image display and visualization tool for astronomical data</a></li>
-              <li><a href="http://exoplanets.org/plots">Exoplanet plotting online</a></li>
-              <li><a href="https://www.google.com/maps/d/viewer?mid=1TBo05ECa1o_r7d7iOYplvyGyTuQ&ll=37.09561580968978%2C-24.53067968115235&z=3">World Astronomy Map</a></li>
-              <li><a href="http://www.physics.usyd.edu.au/~vmoss/jobvis/">American Astronomical Society Job Visualiser</a></li>
-              <li><a href="http://arxiver.moonhats.com/">ArXiver - ArXiV with pictures</a></li>
-              <li><a href="http://astro.unl.edu/animationsLinks.html">Astronomy Simulations and Animations</a></li>
-              <li><a href="http://svo2.cab.inta-csic.es/theory/fps/">SVO Filter Profile Service</a></li>
-              <li><a href="http://www.damianpeach.com">Amazing Astrophotography</a></li>
-              <li><a href="https://highered.mheducation.com/sites/0072482621/student_view0/interactives.html">Interactive astronomy resources</a></li>
-              <li><a href="https://udemontreal-my.sharepoint.com/:p:/g/personal/etienne_artigau_umontreal_ca/EThW-hd-45ZIiqbAMYtTVhUBitFfaRLRp_nlZ_N3nGmGYA?e=v0Mztu">Udem NIRPS babysitting doc</a></li>
-
-            </ul>
-        </div>
-      </div>
-
-      <br>
-
-      <div class="container">
-        <h2 class="block_title">Programming</h2>
-        <div>
-            <ul class="list-group-item-text">
-              <li><a href="https://github.com/njcuk9999/neil_python_examples/tree/master"> Useful python examples</a></li>
-              <li><a href="https://www.jetbrains.com/pycharm/">PyCharm - The Python IDE for Professional Developers</a></li>
-              <li><a href="https://cheatography.com/weidadeyue/cheat-sheets/jupyter-notebook/pdf_bw/">Jupyter Notebook cheat sheet</a></li>
-              <li><a href="https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md">Markdown cheat sheet</a></li>
-              <li><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Conda cheat sheet</a></li>
-              <li><a href="https://demo.bokeh.org/">Bokeh plotting demos</a></li>
-              <li><a href="http://matplotlib.org/examples/color/colormaps_reference.html">Matplotlib colourmaps</a></li>
-              <li><a href="http://matplotlib.org/mpl_examples/color/named_colors.hires.png">Matplotlib named colours</a></li>
-              <li><a href="http://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/">How bad is your colour map?</a></li>
-              <li><a href="http://www.dsf.unica.it/~fiore/psc.pdf">A Primer on Scientific Programming with Python (Full book)</a></li>
-              <li><a href="http://www.evernote.com/l/Apce24DfiNJKBoxBU8cDnOEW3iPdBkqxhcQ/">Python 201 - Intermediate Python (Full book)</a></li>
-              <li><a href="https://njcuk9999.github.io/">Geometric Algorithms (programming examples)</a></li>
-              <li><a href="https://www.codingame.com/">Practice coding with some mini games</a></li>
-              <li><a href="https://www.hackerrank.com/dashboard">More coding practice</a></li>
-            </ul>
-        </div>
-      </div>
-
-      <br>
-
-      <div class="container">
-        <h2 class="block_title">University</h2>
-        <div>
-            <ul class="list-group-item-text">
-              <li><a href="http://www.exoplanetes.umontreal.ca/?lang=en">Institute for Research on Exoplanets (iREx)</a></li>
-              <li><a href="https://www.umontreal.ca/en/">University of Montreal</a></li>
-              <li><a href="https://www.astrolab.qc.ca/en/">ASTROLab (Observatoire du Mont Mégantic)</a></li>
-              <li><a href="http://msi.mcgill.ca/Home.html">McGill Space Institute</a></li>
-              <li><a href="http://www.physics.yorku.ca/">York University, Toronto, Physics and Astronomy department</a></li>
-              <li><a href="http://www.herts.ac.uk/research/stri/research-areas/car">University of Hertfordshire, Centre for Astrophysics Research</a></li>
-              <li><a href="https://www.herts.ac.uk/bayfordbury/bayfordbury-observatory">Bayfordbury Observatory</a></li>
-              <li><a href="http://www.jb.man.ac.uk/">University of Manchester, Jodrell Bank site</a></li>
-            </ul>
-        </div>
-      </div>
-
-
-      <div class="container">
-        <h2 class="block_title">Work</h2>
-        <p>Only really useful for me</p>
-        <div>
-            <ul class="list-group-item-text">
-              <li><a href="https://monudem.umontreal.ca/">Mon UdeM: UdeM Portal</a></li>
-              <li><a href="https://www.synchro.umontreal.ca/psp/upprpr9/?cmd=login&languageCd=CFR">Udem synchro (requires VPN)</a></li>
-              <li><a href="https://umontreal.zoom.us/">Udem Zoom management (requires VPN)</a></li>
-              <li><a href="https://wiki.umontreal.ca/login.action?os_destination=%2Fpages%2Fviewpage.action%3FspaceKey%3DNIR%26title%3DNEAT%2Bteam%2Binformation&permissionViolation=true">NEAT wiki (required login)</a></li>
-              <li><a href="https://teamup.com/c/oo59oa/calendrier-irexomm">iREx staff calendar (login required)</li>
-              <li><a href="https://www.researchgate.net/profile/Neil-Cook-2">Research Gate (my profile)</a></li>
-              <li><a href="https://rrum.umontreal.ca/accueil/">UdeM Pension Plan</a></li>
-              <li><a href="https://listes.umontreal.ca/wws/home">UdeM List Server</li>
-              <li><a href="https://ccdb.alliancecan.ca/">Alliance Canada</li>
-            </ul>
-        </div>
-      </div>
-
-
-
-    </section>
-
+  
     <!-- testimonial -->
     <!-- Contact Area -->
     <section id="contact" class="mapWrap">
