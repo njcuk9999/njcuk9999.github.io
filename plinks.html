@@ -52,6 +52,8 @@
           </div>
         </div>
       </div>
+
+    <!----------------------------------------------------------------------------------->
     </section>
     <!-- Content Area -->
 
@@ -59,11 +61,12 @@
     <section id="testimonial" class="testimonial-area">
       
       <h1 class="block_title">Useful links</h1>
-      
-      <section>
+
       <div id="dynamic-links"></div>
-      </section>
   
+    </section>
+    <!----------------------------------------------------------------------------------->
+
     <!-- testimonial -->
     <!-- Contact Area -->
     <section id="contact" class="mapWrap">
@@ -155,6 +158,7 @@ class="form-control" rows="5" required=""></textarea> </div>
             if (line.startsWith("[") && line.endsWith("]")) {
                 // New section
                 currentSection = document.createElement("div");
+                currentSection.classList.add("container"); // Add class="container"
                 const sectionTitle = document.createElement("h2");
                 sectionTitle.textContent = line.slice(1, -1);
                 const ul = document.createElement("ul");
