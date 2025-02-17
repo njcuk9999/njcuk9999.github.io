@@ -1,0 +1,54 @@
+[Astrophysics]
+APERO documentation and Reduction interface, http://apero.exoplanets.ca
+Detexify - draw LaTeX symbols, https://detexify.kirelabs.org/classify.html
+Digitalize graphs, https://automeris.io/WebPlotDigitizer/
+DACE radial velocity explorer, https://dace.unige.ch/radialVelocities/
+TOPCAT: Tool for OPerations on Catalogues And Tables, http://www.star.bris.ac.uk/~mbt/topcat/
+SAOImageDS9 - An image display and visualization tool for astronomical data, https://sites.google.com/cfa.harvard.edu/saoimageds9
+Exoplanet plotting online, http://exoplanets.org/plots
+World Astronomy Map, https://www.google.com/maps/d/viewer?mid=1TBo05ECa1o_r7d7iOYplvyGyTuQ&ll=37.09561580968978%2C-24.53067968115235&z=3
+American Astronomical Society Job Visualiser, http://www.physics.usyd.edu.au/~vmoss/jobvis/
+ArXiver - ArXiV with pictures, http://arxiver.moonhats.com/
+Astronomy Simulations and Animations, http://astro.unl.edu/animationsLinks.html
+SVO Filter Profile Service, http://svo2.cab.inta-csic.es/theory/fps/
+Amazing Astrophotography, http://www.damianpeach.com
+Interactive astronomy resources, https://highered.mheducation.com/sites/0072482621/student_view0/interactives.html
+Udem NIRPS babysitting doc, https://udemontreal-my.sharepoint.com/:p:/g/personal/etienne_artigau_umontreal_ca/EThW-hd-45ZIiqbAMYtTVhUBitFfaRLRp_nlZ_N3nGmGYA?e=v0Mztu
+
+[Programming]
+Useful python examples, https://github.com/njcuk9999/neil_python_examples/tree/master
+PyCharm - The Python IDE for Professional Developers, https://www.jetbrains.com/pycharm/
+Jupyter Notebook cheat sheet, https://cheatography.com/weidadeyue/cheat-sheets/jupyter-notebook/pdf_bw/
+Markdown cheat sheet, https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md
+Conda cheat sheet, https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf
+Bokeh plotting demos, https://demo.bokeh.org/
+Matplotlib colourmaps, http://matplotlib.org/examples/color/colormaps_reference.html
+Matplotlib named colours, http://matplotlib.org/mpl_examples/color/named_colors.hires.png
+How bad is your colour map?, http://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/
+A Primer on Scientific Programming with Python (Full book), http://www.dsf.unica.it/~fiore/psc.pdf
+Python 201 - Intermediate Python (Full book), http://www.evernote.com/l/Apce24DfiNJKBoxBU8cDnOEW3iPdBkqxhcQ/
+Geometric Algorithms (programming examples), https://njcuk9999.github.io/
+Practice coding with some mini games, https://www.codingame.com/
+More coding practice, https://www.hackerrank.com/dashboard
+
+[University]
+Institute for Research on Exoplanets (iREx), http://www.exoplanetes.umontreal.ca/?lang=en
+University of Montreal, https://www.umontreal.ca/en/
+ASTROLab (Observatoire du Mont Mégantic), https://www.astrolab.qc.ca/en/
+McGill Space Institute, http://msi.mcgill.ca/Home.html
+York University, Toronto, Physics and Astronomy department, http://www.physics.yorku.ca/
+University of Hertfordshire, Centre for Astrophysics Research, http://www.herts.ac.uk/research/stri/research-areas/car
+Bayfordbury Observatory, https://www.herts.ac.uk/bayfordbury/bayfordbury-observatory
+University of Manchester, Jodrell Bank site, http://www.jb.man.ac.uk/
+
+[Work]
+Mon UdeM: UdeM Portal, https://monudem.umontreal.ca/
+Udem synchro (requires VPN), https://www.synchro.umontreal.ca/psp/upprpr9/?cmd=login&languageCd=CFR
+Udem Zoom management (requires VPN), https://umontreal.zoom.us/
+NEAT wiki (required login), https://wiki.umontreal.ca/login.action?os_destination=%2Fpages%2Fviewpage.action%3FspaceKey%3DNIR%26title%3DNEAT%2Bteam%2Binformation&permissionViolation=true
+iREx staff calendar (login required), https://teamup.com/c/oo59oa/calendrier-irexomm
+Research Gate (my profile), https://www.researchgate.net/profile/Neil-Cook-2
+UdeM Pension Plan, https://rrum.umontreal.ca/accueil/
+UdeM List Server, https://listes.umontreal.ca/wws/home
+Alliance Canada, https://ccdb.alliancecan.ca/
+
