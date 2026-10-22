@@ -1,7 +1,7 @@
 [SPIRou]
 image: assets/images/portfolio1.jpg
 by: CFHT
-url: #
+url: https://www.cfht.hawaii.edu/Instruments/SPIRou/
 urltext: Website
 
 [NIRPS]
@@ -22,10 +22,10 @@ by: NASA:STScI
 url: https://jwst-docs.stsci.edu/jwst-near-infrared-imager-and-slitless-spectrograph/niriss-observing-modes/niriss-aperture-masking-interferometry
 urltext: Take a look
 
-[ANDES/HIRES]
-image: assets/images/portfolio5.jpg
+[ANDES]
+image: assets/images/cropped-andes-logo-light-1.png
 by: ESO:ELT
-url: https://elt.eso.org/instrument/HIRES/
+url: https://andes.inaf.it/
 urltext: Website
 
 [My PhD Thesis]
