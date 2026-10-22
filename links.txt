@@ -14,6 +14,7 @@ SVO Filter Profile Service, http://svo2.cab.inta-csic.es/theory/fps/
 Amazing Astrophotography, http://www.damianpeach.com
 Interactive astronomy resources, https://highered.mheducation.com/sites/0072482621/student_view0/interactives.html
 Udem NIRPS babysitting doc, https://udemontreal-my.sharepoint.com/:p:/g/personal/etienne_artigau_umontreal_ca/EThW-hd-45ZIiqbAMYtTVhUBitFfaRLRp_nlZ_N3nGmGYA?e=v0Mztu
+Benty Fields - Academic networking and paper discovery platform, https://www.benty-fields.com/
 
 [Programming]
 Useful python examples, https://github.com/njcuk9999/neil_python_examples/tree/master
@@ -52,6 +53,3 @@ UdeM Pension Plan, https://rrum.umontreal.ca/accueil/
 UdeM List Server, https://listes.umontreal.ca/wws/home
 Alliance Canada, https://ccdb.alliancecan.ca/
 CANFAR, https://www.canfar.net/science-portal/
-
-
-
