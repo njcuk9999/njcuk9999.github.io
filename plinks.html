@@ -1,40 +1,95 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-  <!--<![endif]-->
+<html lang="en">
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Neil James Cook</title>
-    <!-- meta -->
+    <meta charset="utf-8">
+    <title>Useful links - Neil James Cook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- stylesheets -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" href="assets/font_icon/css/helper.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- google fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Dosis:200,300,400,500%7CLato:300,400,700,900,300italic,400italic,700italic,900italic%7CRaleway:400,200,300,500,100%7CTitillium+Web:400,200,300italic,300,200italic"
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500%7CLato:300,400,700%7CRaleway:100,300"
       rel="stylesheet" type="text/css">
-    <script src="assets/js/modernizr.js"></script>
+    <style>
+      :root {
+        --lk-bg: #14161b;
+        --lk-card: #1c2028;
+        --lk-card-hover: #232833;
+        --lk-line: #2b303b;
+        --lk-ink: #e9ebef;
+        --lk-muted: #98a1b0;
+        --lk-accent: #e66f69;
+      }
+      body { background: var(--lk-bg); color: var(--lk-ink); }
+      #navigation { position: sticky; top: 0; z-index: 20; }
+
+      .lk-hero { padding: 56px 0 20px; text-align: center; }
+      .lk-hero h1 { font-family: 'Raleway', sans-serif; font-weight: 100; font-size: 3.6em; margin: 0 0 6px; }
+      .lk-hero p { color: var(--lk-muted); margin: 0 0 24px; }
+      .lk-search { position: relative; max-width: 520px; margin: 0 auto; }
+      .lk-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+                     font-size: 22px; color: var(--lk-muted); pointer-events: none; }
+      .lk-search input { width: 100%; padding: 12px 44px 12px 44px; border-radius: 999px;
+                         border: 1px solid var(--lk-line); background: var(--lk-card); color: var(--lk-ink);
+                         font-size: 16px; outline: none; transition: border-color .2s; }
+      .lk-search input:focus { border-color: var(--lk-accent); }
+      .lk-search kbd { position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+                       background: none; border: 1px solid var(--lk-line); color: var(--lk-muted);
+                       box-shadow: none; font-size: 12px; padding: 1px 6px; }
+
+      .lk-tabs { position: sticky; top: 0; z-index: 10; background: var(--lk-bg);
+                 display: flex; gap: 8px; overflow-x: auto; padding: 14px 0; margin-bottom: 8px;
+                 border-bottom: 1px solid var(--lk-line); scrollbar-width: none; }
+      .lk-tabs::-webkit-scrollbar { display: none; }
+      .lk-tab { flex: none; border: 1px solid var(--lk-line); background: transparent; color: var(--lk-muted);
+                border-radius: 999px; padding: 6px 14px; font-family: 'Dosis', sans-serif; font-size: 15px;
+                letter-spacing: .02em; transition: all .2s; }
+      .lk-tab:hover { color: var(--lk-ink); border-color: var(--lk-muted); }
+      .lk-tab.is-active { background: var(--lk-accent); border-color: var(--lk-accent); color: #fff; }
+      .lk-tab .lk-count { opacity: .7; margin-left: 4px; font-size: 13px; }
+      .lk-tab.is-empty { opacity: .4; }
+
+      .lk-group { margin: 26px 0 8px; }
+      .lk-group h2 { font-family: 'Dosis', sans-serif; font-weight: 400; font-size: 1.5em; margin: 0 0 14px;
+                     color: var(--lk-ink); display: flex; align-items: baseline; gap: 10px; }
+      .lk-group h2 span { color: var(--lk-muted); font-size: .6em; }
+      .lk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+
+      .lk-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 68px;
+                 background: var(--lk-card); border: 1px solid var(--lk-line); border-radius: 10px;
+                 color: var(--lk-ink); transition: transform .15s, background .15s, border-color .15s; }
+      .lk-card:hover, .lk-card:focus { background: var(--lk-card-hover); border-color: var(--lk-accent);
+                                       color: var(--lk-ink); transform: translateY(-2px); opacity: 1; }
+      .lk-ico { flex: none; width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center;
+                background: #fff; overflow: hidden; font-family: 'Dosis', sans-serif; font-weight: 500;
+                font-size: 20px; color: #fff; }
+      .lk-ico img { width: 24px; height: 24px; }
+      .lk-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+      .lk-name { font-size: 15px; line-height: 1.3; }
+      .lk-host { font-size: 12px; color: var(--lk-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .lk-go { flex: none; font-size: 24px; color: var(--lk-muted); transition: color .15s, transform .15s; }
+      .lk-card:hover .lk-go { color: var(--lk-accent); transform: translateX(3px); }
+
+      .lk-empty { text-align: center; color: var(--lk-muted); padding: 60px 0; font-size: 16px; }
+      .lk-empty i { display: block; font-size: 48px; margin-bottom: 8px; }
+      main.container { padding-bottom: 60px; }
+      footer { margin-top: 0; }
+      @media (max-width: 480px) {
+        .lk-hero { padding-top: 36px; }
+        .lk-hero h1 { font-size: 2.6em; }
+        .lk-search kbd { display: none; }
+        #navigation .logo-text { font-size: 2em; }
+      }
+    </style>
   </head>
   <body id="body">
-    <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>        <![endif]-->
-    <!-- Header area -->
-
     <!-- Navigation area -->
     <section id="navigation">
       <div class="container">
         <div class="row">
           <div class="col-xs-6">
-            <div class="logo"><a data-scroll="" href="#body" class="logo-text">Neil James Cook</a></div>
+            <div class="logo"><a href="index.html" class="logo-text">Neil James Cook</a></div>
           </div>
           <div class="col-xs-6">
             <div class="nav"> <a href="#" data-placement="bottom" title="Menu"
@@ -42,9 +97,11 @@
               <div class="dropdown-menu">
                 <div class="arrow-up"></div>
                 <ul>
-                  <li><a data-scroll="" href="index.html">Home <i class="pe-7s-home"></i></a><span
+                  <li><a href="index.html">Home <i class="pe-7s-home"></i></a><span
                       class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="plinks.html">Links <i class="pe-7s-global"></i></a><span
+                  <li><a href="index.html#contact">Contact <i class="pe-7s-mail"></i></a><span
+                      class="menu-effect"></span></li>
+                  <li><a href="plinks.html">Links <i class="pe-7s-global"></i></a><span
                       class="menu-effect"></span></li>
                 </ul>
               </div>
@@ -52,109 +109,171 @@
           </div>
         </div>
       </div>
-
-    <!----------------------------------------------------------------------------------->
     </section>
-    <!-- Content Area -->
 
-    <!-- Testimonial Area -->
-    <section id="testimonial" class="testimonial-area">
-      
-      <h1 class="block_title">Useful links</h1>
-
-      <div id="dynamic-links"></div>
-  
-    </section>
-    <!----------------------------------------------------------------------------------->
-
-    <!-- testimonial -->
-    <!-- Contact Area -->
-    <section id="contact" class="mapWrap">
-      <div style="width:100%;"></div>
-      <div id="contact-area">
-        <div class="container">
-          <h2 class="block_title">Contact</h2>
-          <div class="row">
-            <div class="col-xs-12"> </div>
-            <div class="col-sm-6">
-              <div class="moreDetails">
-                <h2 class="con-title"></h2>
-                <ul class="address">
-                  <li><i class="pe-7s-map-marker"></i><span>Campus MIL 1375
-                      Ave.Thérèse-Lavoie-Roux,<br>
-                      Montréal, QC, H2V 0B3,<br>
-                      Canada</span></li>
-                  <li><i class="pe-7s-mail"></i><span>neil.cook at umontreal.ca</span></li>
-                  <li><i class="pe-7s-mail"></i><span>neil.james.cook at gmail.com</span></li>
-                  <li><i class="pe-7s-global"></i><span><a href="#">https://njcuk9999.github.io</a></span></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <h2 class="con-title">Drop me a line</h2>
-              <form role="form">
-                <div class="form-group"> <input class="form-control" id="user_name"
-                    placeholder="Enter your name" type="text"> </div>
-                <div class="form-group"> <input class="form-control" id="your_email"
-                    placeholder="Enter your email" type="email"> </div>
-                <div class="form-group"> <textarea name="InputMessage" id="user_message"
-class="form-control" rows="5" required=""></textarea> </div>
-                <button type="submit" class="btn medium">Send</button> </form>
-            </div>
-          </div>
-        </div>
-        <!-- container --> </div>
-      <!-- contact-area -->
-      <div id="social">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <ul class="scoialinks">
-                <li class="normal-txt">Find me on</li>
-                <li class="social-icons"><a class="github" href="https://github.com/njcuk9999"></a><br>
-                </li>
-                <li class="social-icons"><a class="twitter" href="https://twitter.com/njcuk9999"></a><br>
-                </li>
-                <li class="social-icons"><a class="linkedin" href="https://www.linkedin.com/in/neil-cook-6953215a/"></a><br>
-                </li>
-                <li class="social-icons"><a class="google-scholar" href="https://scholar.google.ca/citations?user=1R-pZC8AAAAJ&hl=en"></a><br>
-                </li>
-                <li class="social-icons"><a class="orcid" href="https://orcid.org/0000-0003-4166-4121"></a><br>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <!-- Links (loaded from links.txt, edit via admin.html) -->
+    <main class="container">
+      <div class="lk-hero">
+        <h1>Useful links</h1>
+        <p id="lk-summary">&nbsp;</p>
+        <div class="lk-search">
+          <i class="pe-7s-search"></i>
+          <input id="lk-q" type="search" placeholder="Search links" aria-label="Search links" autocomplete="off">
+          <kbd>/</kbd>
         </div>
       </div>
-      <!-- social --> </section>
-    <!-- contact -->
+      <nav id="lk-tabs" class="lk-tabs" aria-label="Link sections"></nav>
+      <div id="lk-results"></div>
+    </main>
+
     <!-- Footer Area -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <p class="copyright">© Copyright 2022 <a href="https://njcuk9999.github.io"
-                target="_blank">https://njcuk9999.github.io</a></p>
+            <p class="copyright">© Copyright 2022 <a href="https://njcuk9999.github.io">https://njcuk9999.github.io</a></p>
           </div>
         </div>
       </div>
     </footer>
-    <!-- Custom script-->
-    <script src="assets/js/sitedata.js"></script>
-    <script>
-    // links are loaded from links.txt (edit it via admin.html)
-    SiteData.load("links.txt").then(function (text) {
-        document.getElementById("dynamic-links").innerHTML =
-            SiteData.renderLinks(SiteData.parseLinks(text));
-    }).catch(function (e) { console.error(e); });
-    </script>
-    <!-- Necessery scripts -->
+
     <script src="assets/js/jquery-2.1.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script src="assets/js/jquery.actual.min.js"></script>
-    <script src="assets/js/smooth-scroll.js"></script>
-    <script src="assets/js/owl.carousel.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/sitedata.js"></script>
+    <script>
+    (function () {
+        var esc = SiteData.esc;
+        var sections = [];
+        var active = "all";
+        var query = "";
+        var COLOURS = ["#e66f69", "#4e9ad6", "#5bb381", "#c18be0", "#e0a64e", "#4bb5b0"];
+
+        function slug(s) {
+            return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+        }
+
+        function host(url) {
+            try { return new URL(url).hostname.replace(/^www\./, ""); } catch (e) { return ""; }
+        }
+
+        // letter tile fallback for sites without a favicon
+        function tile(name) {
+            var h = 0;
+            for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0;
+            return '<span class="lk-ico" style="background:' + COLOURS[h % COLOURS.length] + '">' +
+                esc((name.match(/[A-Za-z0-9]/) || ["?"])[0].toUpperCase()) + "</span>";
+        }
+
+        function card(link) {
+            var d = host(link.url);
+            var icon = d
+                ? '<span class="lk-ico"><img loading="lazy" alt="" src="https://www.google.com/s2/favicons?sz=64&domain=' +
+                  encodeURIComponent(d) + '" data-name="' + esc(link.name) + '"></span>'
+                : tile(link.name);
+            return '<a class="lk-card" href="' + esc(SiteData.safeUrl(link.url)) + '" target="_blank" rel="noopener">' +
+                icon + '<span class="lk-text"><span class="lk-name">' + esc(link.name) + "</span>" +
+                '<span class="lk-host">' + esc(d || link.url) + "</span></span>" +
+                '<i class="pe-7s-angle-right lk-go"></i></a>';
+        }
+
+        function matches(link) {
+            if (!query) return true;
+            return (link.name + " " + link.url).toLowerCase().indexOf(query) >= 0;
+        }
+
+        function renderTabs() {
+            var total = 0;
+            var html = sections.map(function (s) {
+                var n = s.links.filter(matches).length;
+                total += n;
+                return '<button class="lk-tab' + (active === s.slug ? " is-active" : "") + (n ? "" : " is-empty") +
+                    '" data-tab="' + s.slug + '">' + esc(s.title) + '<span class="lk-count">' + n + "</span></button>";
+            }).join("");
+            document.getElementById("lk-tabs").innerHTML =
+                '<button class="lk-tab' + (active === "all" ? " is-active" : "") + '" data-tab="all">All' +
+                '<span class="lk-count">' + total + "</span></button>" + html;
+        }
+
+        function renderResults() {
+            var shown = sections.filter(function (s) { return active === "all" || s.slug === active; });
+            var html = shown.map(function (s) {
+                var links = s.links.filter(matches);
+                if (!links.length) return "";
+                var heading = active === "all"
+                    ? "<h2>" + esc(s.title) + "<span>" + links.length + "</span></h2>" : "";
+                return '<section class="lk-group">' + heading + '<div class="lk-grid">' +
+                    links.map(card).join("") + "</div></section>";
+            }).join("");
+            document.getElementById("lk-results").innerHTML = html ||
+                '<div class="lk-empty"><i class="pe-7s-search"></i>No links match “' + esc(query) + "”" +
+                (active !== "all" ? " in this section" : "") + ".</div>";
+        }
+
+        function render() {
+            renderTabs();
+            renderResults();
+        }
+
+        function setTab(tab, push) {
+            if (tab !== "all" && !sections.some(function (s) { return s.slug === tab; })) tab = "all";
+            active = tab;
+            if (push) history.replaceState(null, "", tab === "all" ? location.pathname : "#" + tab);
+            render();
+        }
+
+        document.getElementById("lk-tabs").addEventListener("click", function (e) {
+            var btn = e.target.closest("[data-tab]");
+            if (btn) setTab(btn.getAttribute("data-tab"), true);
+        });
+
+        var q = document.getElementById("lk-q");
+        q.addEventListener("input", function () {
+            query = q.value.trim().toLowerCase();
+            render();
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+            else if (e.key === "Escape" && document.activeElement === q) { q.value = ""; query = ""; render(); }
+        });
+
+        window.addEventListener("hashchange", function () {
+            setTab(location.hash.slice(1) || "all", false);
+        });
+
+        // Google returns a generic globe for unknown sites (16px); swap that for a letter tile
+        document.getElementById("lk-results").addEventListener("load", function (e) {
+            var img = e.target;
+            if (img.tagName === "IMG" && img.naturalWidth && img.naturalWidth <= 16) {
+                img.parentNode.outerHTML = tile(img.getAttribute("data-name"));
+            }
+        }, true);
+        document.getElementById("lk-results").addEventListener("error", function (e) {
+            var img = e.target;
+            if (img.tagName === "IMG") img.parentNode.outerHTML = tile(img.getAttribute("data-name"));
+        }, true);
+
+        // keep the tab bar pinned just below the sticky nav
+        function pinTabs() {
+            document.getElementById("lk-tabs").style.top =
+                document.getElementById("navigation").offsetHeight + "px";
+        }
+        pinTabs();
+        window.addEventListener("resize", pinTabs);
+
+        SiteData.load("links.txt").then(function (text) {
+            sections = SiteData.parseLinks(text);
+            sections.forEach(function (s) { s.slug = slug(s.title); });
+            var count = sections.reduce(function (n, s) { return n + s.links.length; }, 0);
+            document.getElementById("lk-summary").textContent =
+                count + " links across " + sections.length + " collections";
+            setTab(location.hash.slice(1) || "all", false);
+        }).catch(function (e) {
+            console.error(e);
+            document.getElementById("lk-results").innerHTML =
+                '<div class="lk-empty"><i class="pe-7s-attention"></i>Couldn’t load the links.</div>';
+        });
+    })();
+    </script>
   </body>
 </html>

@@ -170,15 +170,6 @@ var SiteData = (function () {
     }).join("");
   }
 
-  function renderLinks(sections) {
-    return sections.map(function (s) {
-      return '<div class="container"><h2>' + esc(s.title) + "</h2><ul>" +
-        s.links.map(function (l) {
-          return '<li><a href="' + esc(safeUrl(l.url)) + '">' + esc(l.name) + "</a></li>";
-        }).join("") + "</ul></div>";
-    }).join("");
-  }
-
   // no-cache: always revalidate so edits show up as soon as Pages rebuilds
   function load(path) {
     return fetch(path, { cache: "no-cache" }).then(function (r) {
@@ -194,11 +185,11 @@ var SiteData = (function () {
     parseLinks: parseLinks,
     serializeLinks: serializeLinks,
     esc: esc,
+    safeUrl: safeUrl,
     paragraphs: paragraphs,
     renderResearch: renderResearch,
     renderProjects: renderProjects,
     renderContact: renderContact,
-    renderLinks: renderLinks,
     load: load
   };
 })();
