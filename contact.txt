@@ -1,0 +1,22 @@
+[Address]
+icon: pe-7s-map-marker
+Campus MIL 1375 Ave.Thérèse-Lavoie-Roux,
+Montréal, QC, H2V 0B3,
+Canada
+
+[Work email]
+icon: pe-7s-mail
+neil.cook at umontreal.ca
+
+[Personal email]
+icon: pe-7s-mail
+neil.james.cook at gmail.com
+
+[Website]
+icon: pe-7s-global
+url: https://njcuk9999.github.io
+https://njcuk9999.github.io
+
+[Phone]
+icon: pe-7s-call
+514 343-6111 3797

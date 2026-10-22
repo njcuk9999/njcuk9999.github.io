@@ -1,0 +1,40 @@
+[APERO Pipeline]
+icon: pe-7s-network
+url: http://apero.exoplanets.ca/
+The pipeline for SPIRou and NIRPS
+
+[LBL]
+icon: pe-7s-graph3
+url: https://lbl.exoplanets.ca/
+A line-by-line approach to radial velocity analysis.
+
+[JWST MTL]
+icon: pe-7s-share
+url: https://github.com/njcuk9999/jwst-mtl
+SOSS simulations, extract, and transits fitting
+AMI: commissioning and analysis
+
+[ANDES]
+icon: pe-7s-attention
+url: https://elt.eso.org/instrument/HIRES/
+ArmazoNes high Dispersion Echelle Spectrograph
+
+[GitHub]
+icon: pe-7s-global
+url: https://github.com/njcuk9999?tab=repositories
+My GitHub code repositories
+
+[Google scholar]
+icon: pe-7s-albums
+url: https://scholar.google.ca/citations?user=1R-pZC8AAAAJ&hl=en
+My publications on Google Scholar
+
+[ORCID]
+icon: pe-7s-user
+url: https://orcid.org/0000-0003-4166-4121
+Open Researcher and Conributor ID
+
+[iREx]
+icon: pe-7s-science
+url: http://www.exoplanetes.umontreal.ca/?lang=en
+Institute for Research on Exoplanets

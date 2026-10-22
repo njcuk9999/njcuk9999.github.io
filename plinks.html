@@ -140,45 +140,13 @@ class="form-control" rows="5" required=""></textarea> </div>
       </div>
     </footer>
     <!-- Custom script-->
+    <script src="assets/js/sitedata.js"></script>
     <script>
-    async function loadLinks() {
-        const response = await fetch("links.txt");
-        const text = await response.text();
-    
-        const lines = text.split("\n");
-        const container = document.getElementById("dynamic-links");
-        container.innerHTML = "";  
-    
-        let currentSection = null;
-    
-        lines.forEach(line => {
-            line = line.trim();
-            if (!line) return; // Skip empty lines
-    
-            if (line.startsWith("[") && line.endsWith("]")) {
-                // New section
-                currentSection = document.createElement("div");
-                currentSection.classList.add("container"); // Add class="container"
-                const sectionTitle = document.createElement("h2");
-                sectionTitle.textContent = line.slice(1, -1);
-                const ul = document.createElement("ul");
-    
-                currentSection.appendChild(sectionTitle);
-                currentSection.appendChild(ul);
-                container.appendChild(currentSection);
-            } else if (currentSection) {
-                // Extract name and URL
-                const [name, url] = line.split(", ");
-                if (name && url) {
-                    const li = document.createElement("li");
-                    li.innerHTML = `<a href="${url}">${name}</a>`;
-                    currentSection.querySelector("ul").appendChild(li);
-                }
-            }
-        });
-    }
-    
-    window.onload = loadLinks;
+    // links are loaded from links.txt (edit it via admin.html)
+    SiteData.load("links.txt").then(function (text) {
+        document.getElementById("dynamic-links").innerHTML =
+            SiteData.renderLinks(SiteData.parseLinks(text));
+    }).catch(function (e) { console.error(e); });
     </script>
     <!-- Necessery scripts -->
     <script src="assets/js/jquery-2.1.3.min.js"></script>

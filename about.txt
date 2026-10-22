@@ -1,0 +1,6 @@
+image: assets/images/200923_EA_1771_corr_me.jpg
+Since September 2021, I have been a researcher at the University of Montreal as part of the iREx expolanet group. I work in collaboration with the NIRPS and SPIRou teams, especially with Étienne Artigau, developing pipelines, as well with Loïc Albert and the rest of the iREx JWST team working on software for the JWST NIRISS SOSS and AMI instruments.
+
+Previously, I held a Trottier postdoctoral fellowship since 2017 at the University of Montreal. Before this I had a short postdoctoral fellowship at the University of York, Toronto working with Ray Jayawardhana using Gaia and SuperWASP data to further our knowledge of the very low mass and ultracool members of nearby young moving groups. I finished my PhD at University of Hertfordshire, UK. in August 2016. My thesis was based around finding ultracool dwarf (brown dwarf and giant exoplanet) companions to M dwarfs, constructing a very large catalogue of M dwarfs and exploiting it to look for unresolved companions using a new and untested approach developed by us.
+
+I'm interested in all things cool (M dwarfs, brown dwarfs or especially exoplanets), with a growing interest in the detection of habitable worlds around cool stars. I am a keen coder, so enjoys any and all astrophysical coding problems.

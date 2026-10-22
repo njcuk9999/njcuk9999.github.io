@@ -1,0 +1,35 @@
+[SPIRou]
+image: assets/images/portfolio1.jpg
+by: CFHT
+url: #
+urltext: Website
+
+[NIRPS]
+image: assets/images/portfolio2.jpg
+by: ESO: 3.6-m
+url: https://www.eso.org/public/teles-instr/lasilla/36/nirps/
+urltext: Website
+
+[JWST:NIRISS:SOSS]
+image: assets/images/portfolio3.jpg
+by: NASA:STScI
+url: https://jwst-docs.stsci.edu/jwst-near-infrared-imager-and-slitless-spectrograph/niriss-observing-modes/niriss-single-object-slitless-spectroscopy
+urltext: Website
+
+[JWST:NIRISS:AMI]
+image: assets/images/portfolio4.jpg
+by: NASA:STScI
+url: https://jwst-docs.stsci.edu/jwst-near-infrared-imager-and-slitless-spectrograph/niriss-observing-modes/niriss-aperture-masking-interferometry
+urltext: Take a look
+
+[ANDES/HIRES]
+image: assets/images/portfolio5.jpg
+by: ESO:ELT
+url: https://elt.eso.org/instrument/HIRES/
+urltext: Website
+
+[My PhD Thesis]
+image: assets/images/portfolio6.jpg
+by: Neil Cook
+url: https://zenodo.org/record/61337
+urltext: Zenodo
