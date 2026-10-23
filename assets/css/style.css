@@ -304,17 +304,13 @@ header{
 .sidebar-nav a.is-active i {
     color: #e66f69;
 }
-.sidebar-social {
-    list-style: none;
-    margin: auto 0 0 0;
-    padding: 24px 22px 0 22px;
+/* Admin sits at the bottom of the sidebar, apart from the sections */
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 24px;
 }
-.sidebar-social .social-icons {
-    padding: 0 3px 6px 3px;
-}
-.sidebar-social .social-icons a {
-    width: 32px;
-    height: 32px;
+.sidebar-bottom a {
+    color: #8a8a8a;
 }
 
 

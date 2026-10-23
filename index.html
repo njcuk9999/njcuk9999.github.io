@@ -32,13 +32,14 @@
       <ul class="sidebar-nav">
         <li><a data-scroll="" href="#header"><i class="pe-7s-home"></i>Home</a></li>
         <li><a data-scroll="" href="#services"><i class="pe-7s-science"></i>Links to research</a></li>
-        <li><a data-scroll="" href="#portfolio"><i class="pe-7s-config"></i>Projects</a></li>
+        <li><a data-scroll="" href="#portfolio"><i class="pe-7s-portfolio"></i>Projects</a></li>
         <li><a data-scroll="" href="#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
         <li><a data-scroll="" href="#testimonial"><i class="pe-7s-user"></i>About me</a></li>
         <li><a data-scroll="" href="#contact"><i class="pe-7s-mail"></i>Contact</a></li>
-        <li><a href="plinks.html"><i class="pe-7s-global"></i>Useful links</a></li>
       </ul>
-      <ul id="social-sidebar" class="sidebar-social"></ul>
+      <ul class="sidebar-nav sidebar-bottom">
+        <li><a href="admin.html"><i class="pe-7s-config"></i>Admin</a></li>
+      </ul>
     </aside>
     <!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>        <![endif]-->
@@ -80,7 +81,7 @@
                       class="menu-effect"></span></li>
                   <li><a data-scroll="" href="#services">Links to Research<i class="pe-7s-science"></i></a><span
                       class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="#portfolio">Projects I work on<i class="pe-7s-config"></i></a><span
+                  <li><a data-scroll="" href="#portfolio">Projects I work on<i class="pe-7s-portfolio"></i></a><span
                       class="menu-effect"></span></li>
                   <li><a data-scroll="" href="#publications">Publications<i class="pe-7s-notebook"></i></a><span
                       class="menu-effect"></span></li>
@@ -88,7 +89,7 @@
                         class="menu-effect"></span></a></li>
                   <li><a data-scroll="" href="#contact">Contact <i class="pe-7s-mail"></i></a><span
                       class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="plinks.html">Links <i class="pe-7s-global"></i></a><span
+                  <li><a href="admin.html">Admin <i class="pe-7s-config"></i></a><span
                       class="menu-effect"></span></li>
                 </ul>
               </div>
@@ -256,7 +257,7 @@
     }).catch(function (e) { console.error(e); });
     SiteData.load("social.txt").then(function (t) {
         var html = SiteData.renderSocial(SiteData.parseRecords(t));
-        ["social-header", "social-footer", "social-sidebar"].forEach(function (id) {
+        ["social-header", "social-footer"].forEach(function (id) {
             var ul = document.getElementById(id);
             ul.innerHTML = html;
             SiteData.fitSocialIcons(ul);

@@ -91,13 +91,14 @@
       <ul class="sidebar-nav">
         <li><a href="index.html#header"><i class="pe-7s-home"></i>Home</a></li>
         <li><a href="index.html#services"><i class="pe-7s-science"></i>Links to research</a></li>
-        <li><a href="index.html#portfolio"><i class="pe-7s-config"></i>Projects</a></li>
+        <li><a href="index.html#portfolio"><i class="pe-7s-portfolio"></i>Projects</a></li>
         <li><a href="index.html#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
         <li><a href="index.html#testimonial"><i class="pe-7s-user"></i>About me</a></li>
         <li><a href="index.html#contact"><i class="pe-7s-mail"></i>Contact</a></li>
-        <li><a href="plinks.html" class="is-active"><i class="pe-7s-global"></i>Useful links</a></li>
       </ul>
-      <ul id="social-sidebar" class="sidebar-social"></ul>
+      <ul class="sidebar-nav sidebar-bottom">
+        <li><a href="admin.html"><i class="pe-7s-config"></i>Admin</a></li>
+      </ul>
     </aside>
     <!-- Navigation area -->
     <section id="navigation">
@@ -116,7 +117,7 @@
                       class="menu-effect"></span></li>
                   <li><a href="index.html#contact">Contact <i class="pe-7s-mail"></i></a><span
                       class="menu-effect"></span></li>
-                  <li><a href="plinks.html">Links <i class="pe-7s-global"></i></a><span
+                  <li><a href="admin.html">Admin <i class="pe-7s-config"></i></a><span
                       class="menu-effect"></span></li>
                 </ul>
               </div>
@@ -275,12 +276,6 @@
         }
         pinTabs();
         window.addEventListener("resize", pinTabs);
-
-        SiteData.load("social.txt").then(function (t) {
-            var ul = document.getElementById("social-sidebar");
-            ul.innerHTML = SiteData.renderSocial(SiteData.parseRecords(t));
-            SiteData.fitSocialIcons(ul);
-        }).catch(function (e) { console.error(e); });
 
         SiteData.load("links.txt").then(function (text) {
             sections = SiteData.parseLinks(text);
