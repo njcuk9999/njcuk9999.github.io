@@ -84,6 +84,21 @@
     </style>
   </head>
   <body id="body">
+    <!-- Sidebar (large screens only, replaces the top bar) -->
+    <aside class="sidebar" aria-label="Site navigation">
+      <a class="sidebar-name" href="index.html">Neil James Cook</a>
+      <p class="sidebar-role">Astrophysics researcher<br>iREx, Universit&eacute; de Montr&eacute;al</p>
+      <ul class="sidebar-nav">
+        <li><a href="index.html#header"><i class="pe-7s-home"></i>Home</a></li>
+        <li><a href="index.html#services"><i class="pe-7s-science"></i>Links to research</a></li>
+        <li><a href="index.html#portfolio"><i class="pe-7s-config"></i>Projects</a></li>
+        <li><a href="index.html#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
+        <li><a href="index.html#testimonial"><i class="pe-7s-user"></i>About me</a></li>
+        <li><a href="index.html#contact"><i class="pe-7s-mail"></i>Contact</a></li>
+        <li><a href="plinks.html" class="is-active"><i class="pe-7s-global"></i>Useful links</a></li>
+      </ul>
+      <ul id="social-sidebar" class="sidebar-social"></ul>
+    </aside>
     <!-- Navigation area -->
     <section id="navigation">
       <div class="container">
@@ -260,6 +275,12 @@
         }
         pinTabs();
         window.addEventListener("resize", pinTabs);
+
+        SiteData.load("social.txt").then(function (t) {
+            var ul = document.getElementById("social-sidebar");
+            ul.innerHTML = SiteData.renderSocial(SiteData.parseRecords(t));
+            SiteData.fitSocialIcons(ul);
+        }).catch(function (e) { console.error(e); });
 
         SiteData.load("links.txt").then(function (text) {
             sections = SiteData.parseLinks(text);

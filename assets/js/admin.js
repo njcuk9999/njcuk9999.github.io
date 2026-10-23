@@ -416,7 +416,8 @@
 
     Object.assign({
       id: "projects", label: "Projects", path: "projects.txt",
-      help: "The image tiles in 'Projects I work on' on the home page.",
+      help: "The image tiles in 'Projects I work on' on the home page. Every tile has the shape of a " +
+        "400x311 image; other images are scaled to fill it and cropped evenly around the centre.",
       editor: function (m) {
         return recordList(m, function (rec, retitle) {
           return h("div", null,

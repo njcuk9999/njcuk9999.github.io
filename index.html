@@ -25,6 +25,21 @@
     <script src="assets/js/modernizr.js"></script>
   </head>
   <body id="body">
+    <!-- Sidebar (large screens only, replaces the top bar) -->
+    <aside class="sidebar" aria-label="Site navigation">
+      <a class="sidebar-name" href="#header" data-scroll="">Neil James Cook</a>
+      <p class="sidebar-role">Astrophysics researcher<br>iREx, Universit&eacute; de Montr&eacute;al</p>
+      <ul class="sidebar-nav">
+        <li><a data-scroll="" href="#header"><i class="pe-7s-home"></i>Home</a></li>
+        <li><a data-scroll="" href="#services"><i class="pe-7s-science"></i>Links to research</a></li>
+        <li><a data-scroll="" href="#portfolio"><i class="pe-7s-config"></i>Projects</a></li>
+        <li><a data-scroll="" href="#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
+        <li><a data-scroll="" href="#testimonial"><i class="pe-7s-user"></i>About me</a></li>
+        <li><a data-scroll="" href="#contact"><i class="pe-7s-mail"></i>Contact</a></li>
+        <li><a href="plinks.html"><i class="pe-7s-global"></i>Useful links</a></li>
+      </ul>
+      <ul id="social-sidebar" class="sidebar-social"></ul>
+    </aside>
     <!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>        <![endif]-->
     <!-- Header area -->
@@ -241,7 +256,7 @@
     }).catch(function (e) { console.error(e); });
     SiteData.load("social.txt").then(function (t) {
         var html = SiteData.renderSocial(SiteData.parseRecords(t));
-        ["social-header", "social-footer"].forEach(function (id) {
+        ["social-header", "social-footer", "social-sidebar"].forEach(function (id) {
             var ul = document.getElementById(id);
             ul.innerHTML = html;
             SiteData.fitSocialIcons(ul);
@@ -269,6 +284,27 @@
                 "&body=" + encodeURIComponent(body);
         });
     });
+
+    // sidebar: highlight the section in the middle of the screen
+    (function () {
+        var links = {};
+        Array.prototype.forEach.call(document.querySelectorAll(".sidebar-nav a[href^='#']"), function (a) {
+            links[a.getAttribute("href").slice(1)] = a;
+        });
+        if (!("IntersectionObserver" in window)) return;
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                Object.keys(links).forEach(function (id) {
+                    links[id].classList.toggle("is-active", id === e.target.id);
+                });
+            });
+        }, { rootMargin: "-45% 0px -50% 0px" });
+        Object.keys(links).forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) spy.observe(el);
+        });
+    })();
 
     document.getElementById("year").textContent = new Date().getFullYear();
     </script>
