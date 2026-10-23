@@ -459,47 +459,9 @@ header{
     padding: 80px 0px 60px 0px;
     background: #f7f7f8;
 }
-.pubs {
-    list-style: none;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0;
-}
-.pub {
-    display: flex;
-    gap: 18px;
-    padding: 14px 0px;
-    border-bottom: 1px solid #e4e4e6;
-}
-.pub-year {
-    flex: none;
-    width: 52px;
-    font-family: 'Dosis', sans-serif;
-    font-size: 1.3em;
-    color: #e66f69;
-}
-.pub-text a {
-    color: #222;
-    font-size: 15px;
-    line-height: 1.4;
-}
-.pub-text a:hover {
-    color: #e66f69;
-}
-.pub-venue {
-    display: block;
-    margin-top: 2px;
-    font-size: 13px;
-    font-style: italic;
-    color: #888;
-}
-.pub-status {
-    text-align: center;
-    color: #888;
-}
 .pub-actions {
     text-align: center;
-    margin-top: 28px;
+    margin: 0 0 30px 0;
 }
 .pub-btn {
     display: inline-block;
@@ -516,6 +478,217 @@ header{
 .pub-btn:hover, .pub-btn:focus {
     background: #222;
     color: #fff;
+}
+
+/* stat tiles */
+.pub-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 860px;
+    margin: 0 auto 24px auto;
+}
+.pub-stat {
+    flex: 1 1 150px;
+    max-width: 200px;
+    padding: 16px 12px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #e4e4e6;
+    border-radius: 12px;
+}
+.pub-stat-num {
+    display: block;
+    font-family: 'Dosis', sans-serif;
+    font-size: 2.4em;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #222;
+}
+.pub-stat-label {
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #777;
+}
+
+/* citations per year */
+.pub-chart {
+    max-width: 860px;
+    margin: 0 auto 8px auto;
+}
+.pub-chart figcaption {
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.2em;
+    color: #444;
+    margin-bottom: 6px;
+}
+.pub-chart-wrap {
+    position: relative;
+}
+.pub-chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.pub-chart-year, .pub-chart-val {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    text-anchor: middle;
+}
+.pub-chart-year {
+    fill: #888;
+}
+.pub-chart-val {
+    fill: #333;
+    font-weight: 700;
+}
+.pub-chart-base {
+    stroke: #cfcfd3;
+    stroke-width: 1;
+}
+.pub-chart-hit {
+    fill: transparent;
+    cursor: default;
+    outline: none;
+}
+.pub-chart-hit:hover, .pub-chart-hit:focus {
+    fill: rgba(0, 0, 0, 0.04);
+}
+.pub-tip {
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -100%);
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #222;
+    color: #fff;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.pub-source {
+    max-width: 860px;
+    margin: 0 auto 20px auto;
+    font-size: 12px;
+    color: #888;
+}
+
+/* filter + sort */
+.pub-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: 860px;
+    margin: 0 auto 6px auto;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e4e4e6;
+}
+.pub-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.pub-pill {
+    padding: 5px 14px;
+    border: 1px solid #d6d6da;
+    border-radius: 999px;
+    background: #fff;
+    color: #555;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1em;
+    transition: 0.2s ease all;
+}
+.pub-pill:hover {
+    border-color: #888;
+    color: #222;
+}
+.pub-pill.is-active {
+    background: #222;
+    border-color: #222;
+    color: #fff;
+}
+.pub-pill span {
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+/* list */
+.pubs {
+    list-style: none;
+    max-width: 860px;
+    margin: 0 auto 20px auto;
+    padding: 0;
+}
+.pub {
+    display: flex;
+    gap: 18px;
+    padding: 16px 0px;
+    border-bottom: 1px solid #e4e4e6;
+}
+.pub-year {
+    flex: none;
+    width: 52px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.3em;
+    color: #e66f69;
+}
+.pub-text {
+    min-width: 0;
+}
+.pub-title {
+    color: #222;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.pub-title:hover {
+    color: #e66f69;
+}
+.pub-authors {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #555;
+}
+.pub-authors strong {
+    color: #222;
+}
+.pub-authors-more {
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: #e66f69;
+    font-size: 13px;
+}
+.pub-authors-more:hover {
+    text-decoration: underline;
+}
+.pub-meta {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #888;
+}
+.pub-venue {
+    font-style: italic;
+}
+.pub-dot {
+    margin: 0 6px;
+}
+.pub-tag {
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #fbe7e6;
+    color: #a8403b;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+.pub-status {
+    text-align: center;
+    color: #888;
 }
 
 
