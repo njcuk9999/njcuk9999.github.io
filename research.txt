@@ -1,7 +1,9 @@
 [APERO Pipeline]
 icon: pe-7s-network
 url: http://apero.exoplanets.ca/
-The pipeline for SPIRou and NIRPS
+A PipEline to Reduce Observations - High resolution echelle spectrograph data reduction software
+
+(Including instruments: SPIRou, NIRPS, SPIP, iLocater)
 
 [LBL]
 icon: pe-7s-graph3
@@ -10,7 +12,7 @@ A line-by-line approach to radial velocity analysis.
 
 [POGOS]
 icon: pe-7s-loop
-url: https://github.com/njcuk9999/jwst-mtl
+url: https://github.com/njcuk9999/pogos
 PrOcessing General ObServations [JWST pre-extraction, extraction and post-extraciton wrapper]
 
 (Including our custom software: TSOVORE, SOSSISSE, MIRIAM and SORBET)
