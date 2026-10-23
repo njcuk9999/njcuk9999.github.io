@@ -118,8 +118,10 @@
         </div>
         <div id="pub-stats" class="pub-stats" hidden></div>
         <figure id="pub-chart" class="pub-chart" hidden></figure>
-        <p id="pub-source" class="pub-source" hidden>Citation counts and author lists from
-          <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>; they can differ from Google Scholar or ADS.</p>
+        <p id="pub-source" class="pub-source" hidden>Publications from
+          <a href="https://openalex.org/authors/A5078094363" target="_blank" rel="noopener">OpenAlex</a> and
+          <a href="https://orcid.org/0000-0003-4166-4121" target="_blank" rel="noopener">ORCID</a>; citation counts
+          from OpenAlex, which can differ from Google Scholar or ADS.</p>
         <div id="pub-toolbar" class="pub-toolbar" hidden>
           <div class="pub-group" role="group" aria-label="Filter">
             <button type="button" class="pub-pill is-active" data-filter="all">All <span id="pub-count-all"></span></button>
@@ -251,7 +253,7 @@
         });
     }).catch(function (e) { console.error(e); });
 
-    Publications.init("0000-0003-4166-4121");
+    Publications.init();
 
     // "Drop me a line": there is no server, so hand the message to the
     // visitor's email app, addressed to the first email line in contact.txt

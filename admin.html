@@ -68,6 +68,13 @@
       .icongrid button i { font-size: 30px; color: var(--ink); }
       .icongrid button.sel { border-color: var(--accent); background: #eef4fb; }
       ol.steps li { margin-bottom: 6px; }
+      .pubrow { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border: 1px solid var(--line);
+                border-radius: 8px; background: #fff; margin-bottom: 6px; cursor: pointer; }
+      .pubrow input { margin-top: 4px; }
+      .pubrow.is-hidden { opacity: .55; background: #f1f2f4; }
+      .pubrow.is-hidden .pubtitle { text-decoration: line-through; }
+      .pubyear { flex: none; width: 40px; font-weight: 600; color: var(--muted); }
+      .pubtitle { display: block; }
       code { background: #eef0f3; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
     </style>
   </head>
@@ -140,6 +147,7 @@
     </div>
 
     <script src="assets/js/sitedata.js"></script>
+    <script src="assets/js/publications.js"></script>
     <script src="assets/js/admin.js"></script>
   </body>
 </html>

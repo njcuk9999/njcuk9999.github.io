@@ -483,6 +483,25 @@
     }, records(["image", "url"])),
 
     {
+      id: "publications", label: "Publications", path: Publications.CONFIG.hideFile,
+      help: "Every work found on your OpenAlex profile and ORCID record. Untick anything that isn't " +
+        "yours or that you don't want listed; it's saved to the hide list. Add missing papers in " +
+        "ORCID or OpenAlex, not here.",
+      parse: function (t) { return { hidden: Publications.parseHidden(t), q: "" }; },
+      serialize: function (m) {
+        var byKey = {};
+        (pubWorks || []).forEach(function (p) { byKey[Publications.keyOf(p).toLowerCase()] = p; });
+        return "# Publications hidden from the home page. Edit from admin.html (Publications tab).\n" +
+          "# One DOI, OpenAlex work ID (W...) or orcid:<put-code> per line; text after # is ignored.\n" +
+          Object.keys(m.hidden).sort().map(function (k) {
+            var p = byKey[k];
+            return k + (p ? "  # " + p.year + " " + p.title.replace(/\s+/g, " ") : "");
+          }).join("\n") + "\n";
+      },
+      editor: publicationsEditor
+    },
+
+    {
       id: "links", label: "Links page", path: "links.txt",
       help: "Sections and links on plinks.html.",
       parse: SiteData.parseLinks,
@@ -523,6 +542,71 @@
       }
     }
   ];
+
+  // ------------------------------------------------------------------
+  // publications hide list
+  // ------------------------------------------------------------------
+
+  // every work from the sources, loaded once per session
+  var pubWorks = null;
+
+  function publicationsEditor(m) {
+    var box = h("div", null, h("p", { class: "status" }, "Loading works from OpenAlex and ORCID..."));
+    var cfg = { orcid: Publications.CONFIG.orcid, openalex: Publications.CONFIG.openalex };
+    (pubWorks ? Promise.resolve(pubWorks) : Publications.load(cfg).then(function (r) {
+      pubWorks = r.pubs.sort(function (a, b) { return a.sortKey < b.sortKey ? 1 : a.sortKey > b.sortKey ? -1 : 0; });
+      return pubWorks;
+    })).then(function (works) {
+      box.innerHTML = "";
+      var count = h("span", { class: "muted small" });
+      var list = h("div");
+      function paintCount() {
+        var n = works.filter(function (p) { return Publications.isHidden(p, m.hidden); }).length;
+        count.textContent = (works.length - n) + " shown on the site, " + n + " hidden";
+      }
+      function paintList() {
+        var q = m.q.trim().toLowerCase();
+        list.innerHTML = "";
+        works.filter(function (p) {
+          return !q || (p.title + " " + p.venue + " " + p.year).toLowerCase().indexOf(q) >= 0;
+        }).forEach(function (p) {
+          var shown = !Publications.isHidden(p, m.hidden);
+          var tick = h("input", { type: "checkbox", checked: shown, title: "Show on the site" });
+          var row = h("label", { class: "pubrow" + (shown ? "" : " is-hidden") }, tick,
+            h("span", { class: "pubyear" }, p.year),
+            h("span", { class: "grow" },
+              h("span", { class: "pubtitle" }, p.title),
+              h("span", { class: "muted small" }, [p.venue, p.type === "article" || p.type === "journal-article" ? null : p.type,
+                (p.cites || 0) + " citations",
+                p.source === "orcid" ? "ORCID only" : null].filter(Boolean).join(" · "))));
+          tick.addEventListener("change", function () {
+            if (tick.checked) {
+              [p.doi, p.oaId && p.oaId.toLowerCase(), p.putCode && "orcid:" + p.putCode].forEach(function (k) {
+                if (k) delete m.hidden[k];
+              });
+            } else {
+              m.hidden[Publications.keyOf(p).toLowerCase()] = true;
+            }
+            row.className = "pubrow" + (tick.checked ? "" : " is-hidden");
+            markDirty();
+            paintCount();
+          });
+          append(list, row);
+        });
+      }
+      // searching isn't an edit, so this input isn't bound()
+      var search = h("input", { type: "text", class: "grow", value: m.q, placeholder: "Search titles, journals, years" });
+      search.addEventListener("input", function () { m.q = search.value; paintList(); });
+      append(box, h("div", { class: "row", style: "margin-bottom:10px" }, search, count));
+      append(box, list);
+      paintCount();
+      paintList();
+    }).catch(function (e) {
+      box.innerHTML = "";
+      append(box, h("p", { class: "status err" }, "Couldn't load publications: " + (e.message || e)));
+    });
+    return box;
+  }
 
   // ------------------------------------------------------------------
   // tab state, rendering, save / reload

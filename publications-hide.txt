@@ -1,0 +1,2 @@
+# Publications hidden from the home page. Edit from admin.html (Publications tab).
+# One DOI, OpenAlex work ID (W...) or orcid:<put-code> per line; text after # is ignored.

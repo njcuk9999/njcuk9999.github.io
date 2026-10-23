@@ -1,98 +1,174 @@
 // publications.js
-// The Publications section of the home page. The list of works comes from
-// the public ORCID record; author lists and citation counts are added from
-// OpenAlex (matched by DOI). Results are cached in the browser for a day.
+// The Publications section of the home page (and the admin "Publications"
+// tab). Works come from the OpenAlex author profile, merged with the public
+// ORCID record for anything OpenAlex lacks. Works listed in the hide file
+// (edited from the admin page) are left out.
 
 var Publications = (function () {
   "use strict";
 
   var esc = SiteData.esc;
-  var CACHE_KEY = "pubs-v1";
-  var CACHE_MS = 24 * 60 * 60 * 1000;
+  // where the list comes from (shared by the home page and the admin page)
+  var CONFIG = {
+    orcid: "0000-0003-4166-4121",
+    openalex: "A5078094363",
+    hideFile: "publications-hide.txt"
+  };
+  var CACHE_KEY = "pubs-oa-v1";
+  var CACHE_MS = 12 * 60 * 60 * 1000;
   var PAGE = 8;            // papers shown before "Show all"
   var AUTHORS_SHOWN = 6;   // authors shown before "+N more"
   var BAR = "#d85a54";     // accent, deepened to pass 3:1 against #f7f7f8
 
   var WORK_TYPES = {
-    "journal-article": "Journal article", "conference-paper": "Conference paper",
-    "conference-abstract": "Conference abstract", "preprint": "Preprint", "book": "Book",
-    "book-chapter": "Book chapter", "dissertation-thesis": "Thesis", "working-paper": "Working paper"
+    "journal-article": "Journal article", "article": "Journal article",
+    "conference-paper": "Conference paper", "conference-abstract": "Conference abstract",
+    "preprint": "Preprint", "book": "Book", "book-chapter": "Book chapter",
+    "dissertation": "Thesis", "dissertation-thesis": "Thesis", "working-paper": "Working paper"
   };
+  // OpenAlex records that aren't publications in their own right
+  var SKIP_TYPES = { "dataset": 1, "erratum": 1, "paratext": 1, "peer-review": 1, "retraction": 1, "supplementary-materials": 1 };
+  // repository copies, PDF mirrors and data-centre DOIs of papers that also have a journal DOI
+  var MIRROR_DOI = /^10\.(48620|3929|5281|26093)\/|\/pdf$/;
+  // when the same title appears more than once, keep the published version
+  var TYPE_RANK = { "article": 4, "review": 4, "book-chapter": 3, "conference-paper": 3, "dissertation": 3, "book": 3, "preprint": 1 };
+
+  // OpenAlex sometimes names a mirror (Springer Link, a university
+  // repository, ...) as a paper's venue; the DOI prefix gives the journal
+  var MIRROR_VENUE = /springer link|repository|cris|research data|arxiv|zenodo/i;
+  var DOI_VENUES = [
+    ["10.1051/0004-6361/", "Astronomy & Astrophysics"],
+    ["10.1093/mnras/", "Monthly Notices of the Royal Astronomical Society"],
+    ["10.3847/1538-3881/", "The Astronomical Journal"],
+    ["10.3847/1538-4357/", "The Astrophysical Journal"],
+    ["10.3847/2041-8213/", "The Astrophysical Journal Letters"],
+    ["10.3847/psj/", "The Planetary Science Journal"],
+    ["10.1088/1538-3873/", "Publications of the Astronomical Society of the Pacific"],
+    ["10.1038/s41550-", "Nature Astronomy"],
+    ["10.1038/s41586-", "Nature"],
+    ["10.1117/12.", "Proceedings of the SPIE"]
+  ];
+
+  function venueFromDoi(doi) {
+    for (var i = 0; i < DOI_VENUES.length; i++) {
+      if (doi.indexOf(DOI_VENUES[i][0]) === 0) return DOI_VENUES[i][1];
+    }
+    return "";
+  }
 
   function val(o) { return o && o.value; }
 
-  // ------------------------------------------------------------------
-  // data
-  // ------------------------------------------------------------------
+  function stripTags(s) { return String(s || "").replace(/<[^>]+>/g, ""); }
 
-  function loadOrcid(orcid) {
-    return fetch("https://pub.orcid.org/v3.0/" + orcid + "/works", {
-      headers: { "Accept": "application/json" }
-    }).then(function (r) {
-      if (!r.ok) throw new Error("ORCID: HTTP " + r.status);
-      return r.json();
-    }).then(function (d) {
-      return (d.group || []).map(function (g) {
-        var w = g["work-summary"][0];
-        var date = w["publication-date"] || {};
-        var doi = ((w["external-ids"] || {})["external-id"] || []).filter(function (x) {
-          return x["external-id-type"] === "doi";
-        })[0];
-        return {
-          title: val((w.title || {}).title) || "(untitled)",
-          venue: val(w["journal-title"]) || WORK_TYPES[w.type] || "",
-          year: val(date.year) || "",
-          sortKey: [val(date.year) || "0000", val(date.month) || "00", val(date.day) || "00"].join("-"),
-          doi: doi ? String(doi["external-id-value"]).toLowerCase().replace(/^https?:\/\/(dx\.)?doi\.org\//, "") : "",
-          putCode: w["put-code"],
-          url: val(w.url) || (doi && val(doi["external-id-url"])) ||
-            "https://orcid.org/" + orcid + "/work/" + w["put-code"],
-          authors: null,
-          firstAuthor: false,
-          cites: null,
-          citesByYear: null
-        };
-      });
-    });
-  }
+  function titleKey(t) { return stripTags(t).toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60); }
 
-  // is this authorship me? ORCID match first, name match as a fallback
-  function isMe(a, orcid) {
+  function cleanDoi(d) { return String(d || "").toLowerCase().replace(/^https?:\/\/(dx\.)?doi\.org\//, ""); }
+
+  // is this author me? ID match first, name match as a fallback
+  function isMe(a, cfg) {
+    var oa = (a.author && a.author.id) || "";
+    if (cfg.openalex && oa.slice(-cfg.openalex.length) === cfg.openalex) return true;
     var id = (a.author && a.author.orcid) || "";
-    if (id && id.slice(-orcid.length) === orcid) return true;
+    if (id && id.slice(-cfg.orcid.length) === cfg.orcid) return true;
     var name = a.raw_author_name || (a.author && a.author.display_name) || "";
     return /\bcook\b/i.test(name) && /\bn(eil)?\b/i.test(name);
   }
 
-  function enrich(pubs, orcid) {
-    var dois = pubs.filter(function (p) { return p.doi; }).map(function (p) { return p.doi; });
-    var chunks = [];
-    for (var i = 0; i < dois.length; i += 50) chunks.push(dois.slice(i, i + 50));
-    return Promise.all(chunks.map(function (c) {
-      var url = "https://api.openalex.org/works?per-page=50" +
-        "&select=doi,cited_by_count,counts_by_year,authorships" +
-        "&filter=doi:" + c.map(encodeURIComponent).join("|");
-      return fetch(url).then(function (r) {
-        if (!r.ok) throw new Error("OpenAlex: HTTP " + r.status);
-        return r.json();
-      }).then(function (d) { return d.results || []; });
-    })).then(function (lists) {
-      var byDoi = {};
-      lists.forEach(function (l) {
-        l.forEach(function (w) {
-          byDoi[String(w.doi || "").toLowerCase().replace("https://doi.org/", "")] = w;
+  function setAuthors(p, authors) {
+    p.authors = authors;
+    var first = authors[0];
+    p.firstAuthor = !!first && (first.me || /\bcook$/i.test(first.name));
+  }
+
+  // ------------------------------------------------------------------
+  // sources
+  // ------------------------------------------------------------------
+
+  function getJson(url, headers) {
+    return fetch(url, { headers: headers || {} }).then(function (r) {
+      if (!r.ok) throw new Error(url.split("?")[0] + ": HTTP " + r.status);
+      return r.json();
+    });
+  }
+
+  function loadOrcid(cfg) {
+    return getJson("https://pub.orcid.org/v3.0/" + cfg.orcid + "/works", { "Accept": "application/json" })
+      .then(function (d) {
+        return (d.group || []).map(function (g) {
+          var w = g["work-summary"][0];
+          var date = w["publication-date"] || {};
+          var doi = ((w["external-ids"] || {})["external-id"] || []).filter(function (x) {
+            return x["external-id-type"] === "doi";
+          })[0];
+          return {
+            source: "orcid",
+            putCode: w["put-code"],
+            title: val((w.title || {}).title) || "(untitled)",
+            journal: val(w["journal-title"]) || "",
+            venue: val(w["journal-title"]) || WORK_TYPES[w.type] || "",
+            type: w.type,
+            year: val(date.year) || "",
+            sortKey: [val(date.year) || "0000", val(date.month) || "00", val(date.day) || "00"].join("-"),
+            doi: doi ? cleanDoi(doi["external-id-value"]) : "",
+            url: val(w.url) || (doi && val(doi["external-id-url"])) ||
+              "https://orcid.org/" + cfg.orcid + "/work/" + w["put-code"],
+            authors: null,
+            firstAuthor: false,
+            cites: null,
+            citesByYear: null
+          };
         });
       });
-      pubs.forEach(function (p) {
-        var w = byDoi[p.doi];
-        if (!w) return;
-        p.cites = w.cited_by_count || 0;
-        p.citesByYear = (w.counts_by_year || []).map(function (c) { return [c.year, c.cited_by_count]; });
-        setAuthors(p, (w.authorships || []).map(function (a) {
-          return { name: (a.author && a.author.display_name) || a.raw_author_name || "?", me: isMe(a, orcid) };
-        }));
+  }
+
+  // all works on the OpenAlex author profile, trimmed to what the page
+  // needs and cached (the full response is several MB uncompressed)
+  function loadOpenAlex(cfg) {
+    try {
+      localStorage.removeItem("pubs-v1");  // caches from earlier versions
+      localStorage.removeItem("pubs-v2");
+      var c = JSON.parse(localStorage.getItem(CACHE_KEY));
+      if (c && c.id === cfg.openalex && Date.now() - c.time < CACHE_MS) return Promise.resolve(c.works);
+    } catch (e) { /* no cache */ }
+    var base = "https://api.openalex.org/works?per-page=200&filter=author.id:" + cfg.openalex +
+      "&select=id,doi,title,publication_date,publication_year,type,cited_by_count,counts_by_year,primary_location,authorships";
+    var works = [];
+    function page(cursor) {
+      return getJson(base + "&cursor=" + encodeURIComponent(cursor)).then(function (d) {
+        (d.results || []).forEach(function (w) {
+          var doi = cleanDoi(w.doi);
+          var pl = w.primary_location || {};
+          var venue = (pl.source && pl.source.display_name) || "";
+          if (!venue || (doi && MIRROR_VENUE.test(venue) && w.type !== "preprint")) {
+            venue = venueFromDoi(doi) || (MIRROR_VENUE.test(venue) ? "" : venue);
+          }
+          var p = {
+            source: "openalex",
+            oaId: String(w.id || "").split("/").pop(),
+            title: stripTags(w.title) || "(untitled)",
+            venue: venue || WORK_TYPES[w.type] || "",
+            type: w.type,
+            year: String(w.publication_year || ""),
+            sortKey: w.publication_date || String(w.publication_year || "0000"),
+            doi: doi,
+            url: doi ? "https://doi.org/" + doi : (pl.landing_page_url || w.id),
+            cites: w.cited_by_count || 0,
+            citesByYear: (w.counts_by_year || []).map(function (c) { return [c.year, c.cited_by_count]; })
+          };
+          setAuthors(p, (w.authorships || []).map(function (a) {
+            return { name: (a.author && a.author.display_name) || a.raw_author_name || "?", me: isMe(a, cfg) };
+          }));
+          works.push(p);
+        });
+        var next = d.meta && d.meta.next_cursor;
+        return next && d.results && d.results.length ? page(next) : works;
       });
-      return enrichFromOrcid(pubs, orcid);
+    }
+    return page("*").then(function (w) {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ id: cfg.openalex, time: Date.now(), works: w }));
+      } catch (e) { /* storage full or blocked */ }
+      return w;
     });
   }
 
@@ -102,68 +178,116 @@ var Publications = (function () {
     return m ? m[2] + " " + m[1] : String(n || "?");
   }
 
-  function setAuthors(p, authors) {
-    p.authors = authors;
-    var first = authors[0];
-    p.firstAuthor = !!first && (first.me || /\bcook$/i.test(first.name));
-  }
-
-  // works OpenAlex didn't match (mostly no DOI): use the contributor lists
-  // stored in the full ORCID records, fetched in one bulk request
-  function enrichFromOrcid(pubs, orcid) {
-    var missing = pubs.filter(function (p) { return !p.authors; }).slice(0, 100);
-    if (!missing.length) return Promise.resolve(pubs);
-    return fetch("https://pub.orcid.org/v3.0/" + orcid + "/works/" +
-      missing.map(function (p) { return p.putCode; }).join(","), {
-      headers: { "Accept": "application/json" }
-    }).then(function (r) {
-      if (!r.ok) throw new Error("ORCID bulk: HTTP " + r.status);
-      return r.json();
-    }).then(function (d) {
-      var byCode = {};
-      (d.bulk || []).forEach(function (b) { if (b.work) byCode[b.work["put-code"]] = b.work; });
-      missing.forEach(function (p) {
-        var w = byCode[p.putCode];
-        var cs = ((w && w.contributors) || {}).contributor || [];
-        var authors = cs.map(function (c) {
-          var name = flipName(val(c["credit-name"]));
-          var id = (c["contributor-orcid"] || {}).path;
-          return { name: name, me: id === orcid || isMe({ raw_author_name: name }, orcid) };
+  // ORCID-only works: use the contributor lists stored in the full ORCID
+  // records, fetched in one bulk request
+  function enrichFromOrcid(pubs, cfg) {
+    var missing = pubs.filter(function (p) { return p.putCode && !p.authors; }).slice(0, 100);
+    if (!missing.length) return Promise.resolve();
+    return getJson("https://pub.orcid.org/v3.0/" + cfg.orcid + "/works/" +
+      missing.map(function (p) { return p.putCode; }).join(","), { "Accept": "application/json" })
+      .then(function (d) {
+        var byCode = {};
+        (d.bulk || []).forEach(function (b) { if (b.work) byCode[b.work["put-code"]] = b.work; });
+        missing.forEach(function (p) {
+          var w = byCode[p.putCode];
+          var cs = ((w && w.contributors) || {}).contributor || [];
+          var authors = cs.map(function (c) {
+            var name = flipName(val(c["credit-name"]));
+            var id = (c["contributor-orcid"] || {}).path;
+            return { name: name, me: id === cfg.orcid || isMe({ raw_author_name: name }, cfg) };
+          });
+          if (authors.length) setAuthors(p, authors);
         });
-        if (authors.length) setAuthors(p, authors);
-      });
-      return pubs;
-    }, function (e) {
-      console.error(e);
-      return pubs;
+      }, function (e) { console.error(e); });
+  }
+
+  // ORCID-only works with a DOI may still be in OpenAlex (e.g. filed under
+  // another author profile): look them up by DOI for authors and citations
+  function enrichByDoi(pubs, cfg) {
+    var todo = pubs.filter(function (p) { return p.source === "orcid" && p.doi && !p.authors; }).slice(0, 50);
+    if (!todo.length) return Promise.resolve();
+    return getJson("https://api.openalex.org/works?per-page=50" +
+      "&select=doi,cited_by_count,counts_by_year,authorships" +
+      "&filter=doi:" + todo.map(function (p) { return encodeURIComponent(p.doi); }).join("|"))
+      .then(function (d) {
+        var byDoi = {};
+        (d.results || []).forEach(function (w) { byDoi[cleanDoi(w.doi)] = w; });
+        todo.forEach(function (p) {
+          var w = byDoi[p.doi];
+          if (!w) return;
+          p.cites = w.cited_by_count || 0;
+          p.citesByYear = (w.counts_by_year || []).map(function (c) { return [c.year, c.cited_by_count]; });
+          setAuthors(p, (w.authorships || []).map(function (a) {
+            return { name: (a.author && a.author.display_name) || a.raw_author_name || "?", me: isMe(a, cfg) };
+          }));
+        });
+      }, function (e) { console.error(e); });
+  }
+
+  function rank(p) { return (TYPE_RANK[p.type] || 2) * 1e7 + (p.cites || 0); }
+
+  // OpenAlex works, de-duplicated by title, plus ORCID works not found there
+  function merge(oa, orcid) {
+    var byTitle = {};
+    oa.forEach(function (p) {
+      if (SKIP_TYPES[p.type] || (p.doi && MIRROR_DOI.test(p.doi))) return;
+      var k = titleKey(p.title);
+      if (!k) return;
+      if (!byTitle[k] || rank(p) > rank(byTitle[k])) byTitle[k] = p;
     });
+    var list = Object.keys(byTitle).map(function (k) { return byTitle[k]; });
+    var byDoi = {};
+    list.forEach(function (p) { if (p.doi) byDoi[p.doi] = p; });
+    orcid.forEach(function (p) {
+      var match = (p.doi && byDoi[p.doi]) || byTitle[titleKey(p.title)];
+      if (match) {
+        match.putCode = p.putCode;  // so it can also be hidden by ORCID put-code
+        if (p.journal) match.venue = p.journal;
+      } else {
+        list.push(p);
+      }
+    });
+    list.forEach(function (p) {
+      if (p.venue === "Astronomy and Astrophysics") p.venue = "Astronomy & Astrophysics";
+    });
+    return list;
   }
 
-  function readCache(orcid) {
-    try {
-      var c = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (c && c.orcid === orcid && Date.now() - c.time < CACHE_MS) return c.pubs;
-    } catch (e) { /* no cache */ }
-    return null;
+  // hide file: one DOI, OpenAlex ID (W...) or "orcid:<put-code>" per line; # starts a comment
+  function parseHidden(text) {
+    var set = {};
+    String(text || "").split(/\r?\n/).forEach(function (line) {
+      var k = line.replace(/#.*/, "").trim().split(/\s+/)[0];
+      if (k) set[cleanDoi(k)] = true;
+    });
+    return set;
   }
 
-  function writeCache(orcid, pubs) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ orcid: orcid, time: Date.now(), pubs: pubs }));
-    } catch (e) { /* storage full or blocked */ }
+  function keyOf(p) {
+    return p.doi || p.oaId || "orcid:" + p.putCode;
   }
 
-  // resolves {pubs, enriched}; OpenAlex failing still gives the ORCID list
-  function load(orcid) {
-    var cached = readCache(orcid);
-    if (cached) return Promise.resolve({ pubs: cached, enriched: true });
-    return loadOrcid(orcid).then(function (pubs) {
-      return enrich(pubs, orcid).then(function (p) {
-        writeCache(orcid, p);
-        return { pubs: p, enriched: true };
-      }, function (e) {
-        console.error(e);
-        return { pubs: pubs, enriched: false };
+  function isHidden(p, set) {
+    return !!((p.doi && set[p.doi]) || (p.oaId && set[p.oaId.toLowerCase()]) ||
+      (p.putCode && set["orcid:" + p.putCode]));
+  }
+
+  // resolves {pubs, enriched}; every work has .hidden set. Either source
+  // failing still gives a list from the other.
+  function load(cfg) {
+    return Promise.all([
+      cfg.openalex ? loadOpenAlex(cfg).catch(function (e) { console.error(e); return null; }) : null,
+      loadOrcid(cfg).catch(function (e) { console.error(e); return []; }),
+      cfg.hideFile ? SiteData.load(cfg.hideFile).then(parseHidden, function () { return {}; }) : {}
+    ]).then(function (r) {
+      var oa = r[0], orcid = r[1], hidden = r[2];
+      if (!oa && !orcid.length) throw new Error("No publication source could be loaded");
+      var pubs = oa ? merge(oa, orcid) : orcid;
+      return enrichByDoi(pubs, cfg).then(function () {
+        return enrichFromOrcid(pubs, cfg);
+      }).then(function () {
+        pubs.forEach(function (p) { p.hidden = isHidden(p, hidden); });
+        return { pubs: pubs, enriched: !!oa };
       });
     });
   }
@@ -303,7 +427,9 @@ var Publications = (function () {
   // section wiring
   // ------------------------------------------------------------------
 
-  function init(orcid) {
+  // cfg: {orcid, openalex, hideFile}, defaults to CONFIG
+  function init(cfg) {
+    cfg = cfg || CONFIG;
     var $ = function (id) { return document.getElementById(id); };
     var state = { pubs: [], filter: "all", sort: "new", all: false };
 
@@ -341,17 +467,17 @@ var Publications = (function () {
       e.target.parentNode.outerHTML = renderAuthors(p.authors, true);
     });
 
-    load(orcid).then(function (r) {
-      state.pubs = r.pubs;
+    load(cfg).then(function (r) {
+      var pubs = r.pubs.filter(function (p) { return !p.hidden; });
+      state.pubs = pubs;
       $("pub-status").hidden = true;
-      $("pub-stats").innerHTML = renderStats(r.pubs, r.enriched);
+      $("pub-stats").innerHTML = renderStats(pubs, r.enriched);
       $("pub-stats").hidden = false;
+      $("pub-count-all").textContent = pubs.length;
+      $("pub-count-first").textContent = pubs.filter(function (p) { return p.firstAuthor; }).length;
+      $("pub-toolbar").hidden = false;
       if (r.enriched) {
-        var nFirst = r.pubs.filter(function (p) { return p.firstAuthor; }).length;
-        $("pub-count-all").textContent = r.pubs.length;
-        $("pub-count-first").textContent = nFirst;
-        $("pub-toolbar").hidden = false;
-        var per = citesPerYear(r.pubs);
+        var per = citesPerYear(pubs);
         if (per.length > 1) {
           $("pub-chart").hidden = false;
           renderChart($("pub-chart"), per);
@@ -376,5 +502,8 @@ var Publications = (function () {
     });
   }
 
-  return { init: init, load: load, hIndex: hIndex };
+  return {
+    CONFIG: CONFIG, init: init, load: load, keyOf: keyOf,
+    parseHidden: parseHidden, isHidden: isHidden, hIndex: hIndex
+  };
 })();
