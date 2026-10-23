@@ -134,18 +134,14 @@ var SiteData = (function () {
   }
 
   function renderResearch(records) {
-    var html = '<div class="row">';
-    records.forEach(function (r, i) {
-      if (i > 0 && i % 4 === 0) html += '</div><br><div class="row">';
+    return '<div class="row research-row">' + records.map(function (r) {
       var title = r.fields.url
-        ? '<a href="' + esc(safeUrl(r.fields.url)) + '">' + esc(r.title) + "</a>"
+        ? '<a class="stretch" href="' + esc(safeUrl(r.fields.url)) + '">' + esc(r.title) + "</a>"
         : esc(r.title);
-      html += '<div class="col-md-3 col-sm-6"><div class="services"><div class="service-wrap">' +
-        '<i class="' + esc(r.fields.icon || "pe-7s-science") + ' pe-dj pe-va"></i>' +
-        "<h3>" + title + "</h3>" + paragraphs(r.body) +
-        "</div></div></div>";
-    });
-    return html + "</div>";
+      return '<div class="col-md-3 col-sm-6 col-xs-12 research-col"><div class="research-card">' +
+        '<i class="' + esc(r.fields.icon || "pe-7s-science") + '"></i>' +
+        "<h3>" + title + "</h3>" + paragraphs(r.body) + "</div></div>";
+    }).join("") + "</div>";
   }
 
   function renderProjects(records) {
@@ -170,6 +166,74 @@ var SiteData = (function () {
     }).join("");
   }
 
+  function renderSocial(records) {
+    return records.map(function (r) {
+      return '<li class="social-icons"><a href="' + esc(safeUrl(r.fields.url)) + '" title="' + esc(r.title) +
+        '" aria-label="' + esc(r.title) + '" data-img="' + esc(r.fields.image || "") + '"></a></li>';
+    }).join("");
+  }
+
+  // The original icons are 50x100 sprites (normal state on top, hover state
+  // below). Any other image is shown whole and fades on hover instead.
+  function fitSocialIcons(root) {
+    Array.prototype.forEach.call(root.querySelectorAll("a[data-img]"), function (a) {
+      var src = a.getAttribute("data-img");
+      if (!src) return;
+      a.style.backgroundImage = "url(" + JSON.stringify(src) + ")";
+      var img = new Image();
+      img.onload = function () {
+        if (img.naturalHeight < 1.8 * img.naturalWidth) a.className += " social-plain";
+      };
+      img.src = src;
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // publications from the public ORCID record
+  // ------------------------------------------------------------------
+
+  var WORK_TYPES = {
+    "journal-article": "Journal article", "conference-paper": "Conference paper",
+    "conference-abstract": "Conference abstract", "preprint": "Preprint", "book": "Book",
+    "book-chapter": "Book chapter", "dissertation-thesis": "Thesis", "working-paper": "Working paper"
+  };
+
+  function val(o) { return o && o.value; }
+
+  function loadPublications(orcid) {
+    return fetch("https://pub.orcid.org/v3.0/" + orcid + "/works", {
+      headers: { "Accept": "application/json" }
+    }).then(function (r) {
+      if (!r.ok) throw new Error("ORCID: HTTP " + r.status);
+      return r.json();
+    }).then(function (d) {
+      return (d.group || []).map(function (g) {
+        var w = g["work-summary"][0];
+        var date = w["publication-date"] || {};
+        var doi = ((w["external-ids"] || {})["external-id"] || []).filter(function (x) {
+          return x["external-id-type"] === "doi";
+        })[0];
+        return {
+          title: val((w.title || {}).title) || "(untitled)",
+          venue: val(w["journal-title"]) || WORK_TYPES[w.type] || "",
+          year: val(date.year) || "",
+          sortKey: [val(date.year) || "0000", val(date.month) || "00", val(date.day) || "00"].join("-"),
+          url: val(w.url) || (doi && val(doi["external-id-url"])) ||
+            "https://orcid.org/" + orcid + "/work/" + w["put-code"]
+        };
+      }).sort(function (a, b) { return a.sortKey < b.sortKey ? 1 : a.sortKey > b.sortKey ? -1 : 0; });
+    });
+  }
+
+  function renderPublications(pubs) {
+    return pubs.map(function (p) {
+      return '<li class="pub"><span class="pub-year">' + esc(p.year) + "</span>" +
+        '<div class="pub-text"><a href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">' +
+        esc(p.title) + "</a>" + (p.venue ? '<span class="pub-venue">' + esc(p.venue) + "</span>" : "") +
+        "</div></li>";
+    }).join("");
+  }
+
   // no-cache: always revalidate so edits show up as soon as Pages rebuilds
   function load(path) {
     return fetch(path, { cache: "no-cache" }).then(function (r) {
@@ -190,6 +254,10 @@ var SiteData = (function () {
     renderResearch: renderResearch,
     renderProjects: renderProjects,
     renderContact: renderContact,
+    renderSocial: renderSocial,
+    fitSocialIcons: fitSocialIcons,
+    loadPublications: loadPublications,
+    renderPublications: renderPublications,
     load: load
   };
 })();

@@ -211,41 +211,65 @@ header{
 
 
 
-.services {
-    max-width: 293px;
-    height: 263px;
+.service-area {
+    margin: 80px 0px 40px 0px;
 }
 .exp{
 	padding-top: 76px;
 }
-.service-area {
-    margin: 80px 0px 40px 0px;
+.research-row {
+    display: flex;
+    flex-wrap: wrap;
 }
-
-.service-wrap {
+.research-row:before, .research-row:after {
+    display: none;
+}
+.research-col {
+    display: flex;
+    margin-bottom: 30px;
+}
+.research-card {
+    position: relative;
     width: 100%;
-    height: 100%;
-    border: 1px solid #B5B5B5;
+    padding: 32px 22px 22px;
     text-align: center;
-    display: block;
-    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    border-radius: 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
-.service-wrap i {
-    margin-top: 40px;
-    transition: all 0.3s ease;
+.research-card:hover {
+    transform: translateY(-4px);
+    border-color: #e66f69;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 }
-.service-wrap:hover i {
+.research-card i {
+    font-size: 4.2em;
+    color: #333;
+    transition: color 0.25s ease;
+}
+.research-card:hover i {
     color: #e66f69;
 }
-.service-wrap p {
-    padding: 0px 40px;
+.research-card h3 {
+    margin: 14px 0px 10px 0px;
+    font-size: 1.6em;
+}
+.research-card p {
+    margin: 0 0 6px 0;
     font-size: 13px;
+    color: #666;
 }
-.service-wrap h3 {
-    margin: 10px 0px;
+/* the title link covers the whole card; links in the text stay clickable */
+.research-card a.stretch:after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    border-radius: 16px;
 }
-.pe-dj {
-    font-size: 5em;
+.research-card p a {
+    position: relative;
+    z-index: 1;
 }
 
 
@@ -352,6 +376,15 @@ header{
 	transition: transform 0.4s, opacity 0.1s;
 }
 
+@media (hover: none) {
+	.cs-style-3 figcaption {
+		position: relative;
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
 .cs-style-3 figcaption a {
 	position: absolute;
 	bottom: 31px;
@@ -419,6 +452,74 @@ header{
 
 
 /* /////////////////////////////////////////////////////////////////////
+//  06b - Publications
+/////////////////////////////////////////////////////////////////////*/
+
+#publications {
+    padding: 80px 0px 60px 0px;
+    background: #f7f7f8;
+}
+.pubs {
+    list-style: none;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0;
+}
+.pub {
+    display: flex;
+    gap: 18px;
+    padding: 14px 0px;
+    border-bottom: 1px solid #e4e4e6;
+}
+.pub-year {
+    flex: none;
+    width: 52px;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.3em;
+    color: #e66f69;
+}
+.pub-text a {
+    color: #222;
+    font-size: 15px;
+    line-height: 1.4;
+}
+.pub-text a:hover {
+    color: #e66f69;
+}
+.pub-venue {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    font-style: italic;
+    color: #888;
+}
+.pub-status {
+    text-align: center;
+    color: #888;
+}
+.pub-actions {
+    text-align: center;
+    margin-top: 28px;
+}
+.pub-btn {
+    display: inline-block;
+    margin: 4px;
+    padding: 8px 20px;
+    border: 1px solid #222;
+    border-radius: 999px;
+    background: transparent;
+    color: #222;
+    font-family: 'Dosis', sans-serif;
+    font-size: 1.1em;
+    transition: 0.3s ease all;
+}
+.pub-btn:hover, .pub-btn:focus {
+    background: #222;
+    color: #fff;
+}
+
+
+/* /////////////////////////////////////////////////////////////////////
 //  07 - Contact
 /////////////////////////////////////////////////////////////////////*/
 
@@ -446,6 +547,12 @@ header{
 
 .moreDetails {
     color: #fff;
+}
+.form-note {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #fff;
+    opacity: 0.7;
 }
 .con-title {
     font-weight: 300;
@@ -522,7 +629,24 @@ header{
 }
 
 .social-icons a:hover {
-    background-position: 0px -50px;
+    background-position: 0px 100%;
+}
+.social-icons a.social-plain {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.social-icons a.social-plain:hover {
+    background-position: center;
+    opacity: 0.7;
+}
+.find-me {
+    color: #fff;
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
+    font-size: 2.4em;
+    font-weight: 200;
+    margin: 0px 0px 15px 0px;
 }
 .facebook{
 	background-image: url(../images/facebook.png);
@@ -600,43 +724,6 @@ footer {
 	}
 }
 
-@media all and (max-width: 1200px) and (min-width: 992px) {
-
-	.services {
-		max-width: 293px;
-		height: 213px;
-	}
-	.service-wrap i {
-	    font-size: 4em;
-	    margin-top: 28px;
-	}
-	.service-wrap h3 {
-	    font-size: 1.4em;
-	}
-	.service-wrap p {
-	    font-size: 11px;
-	    padding: 0px 35px;
-	}
-}
-
-@media all and (max-width: 991px) and (min-width: 768px) {
-
-	.services {
-		max-width: 293px;
-		height: 293px;
-		margin: 0 auto;
-		margin-bottom: 30px;
-	}
-	.service-wrap p {
-		padding: 0px 40px;
-		font-size: 14px;
-	}
-	.pe-dj {
-		font-size: 6em;
-	}
-
-}
-
 @media all and (max-width: 991px) {
 
 	header{
@@ -648,18 +735,6 @@ footer {
 }
 
 @media all and (max-width: 768px) {
-	.services {
-		max-width: 293px;
-		height: 293px;
-		margin: 0 auto;
-		margin-bottom: 30px;
-	}
-	.pe-dj {
-		font-size: 6em;
-	}
-	.service-wrap i {
-		margin-top: 50px;
-	}
 	.centered p {
 		font-size: 2em;
 	}
@@ -717,5 +792,19 @@ footer {
 	.scrollDown {
 	    top: 70%;
 	    left: 44%;
+	}
+}
+
+@media all and (max-width: 480px) {
+	.logo-text {
+	    font-size: 1.9em;
+	    white-space: nowrap;
+	}
+	.block_title {
+	    font-size: 2.6em;
+	    margin-bottom: 40px;
+	}
+	.pub {
+	    gap: 12px;
 	}
 }

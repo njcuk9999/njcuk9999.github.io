@@ -1,0 +1,23 @@
+[GitHub]
+image: assets/images/github.png
+url: https://github.com/njcuk9999
+
+[iREx]
+image: assets/images/irex.png
+url: https://exoplanetes.umontreal.ca/en/team-member/neil-cook/
+
+[LinkedIn]
+image: assets/images/linkedin.png
+url: https://www.linkedin.com/in/neil-cook-6953215a/
+
+[Google Scholar]
+image: assets/images/googlescholar.png
+url: https://scholar.google.ca/citations?user=1R-pZC8AAAAJ&hl=en
+
+[ORCID]
+image: assets/images/orcid.png
+url: https://orcid.org/0000-0003-4166-4121
+
+[Useful links]
+image: assets/images/plink.png
+url: plinks.html

@@ -449,7 +449,8 @@
 
     Object.assign({
       id: "contact", label: "Contact", path: "contact.txt",
-      help: "Lines in the Contact section. The label is only shown here, not on the site.",
+      help: "Lines in the Contact section. The label is only shown here, not on the site. " +
+        "The 'Drop me a line' form sends to the first email line.",
       editor: function (m) {
         return recordList(m, function (rec, retitle) {
           return h("div", null,
@@ -463,6 +464,23 @@
         }, "Add contact line");
       }
     }, records(["icon", "url"])),
+
+    Object.assign({
+      id: "social", label: "Social icons", path: "social.txt",
+      help: "Round icons at the top and bottom of the home page. Images can be 50x100 sprites " +
+        "(normal on top, hover underneath, like the originals) or any square image.",
+      editor: function (m) {
+        return recordList(m, function (rec, retitle) {
+          return h("div", null,
+            h("div", { class: "grid2" },
+              field("Name (tooltip)", bound(rec, "title", { oninput: retitle })),
+              field("Link (URL)", bound(rec.fields, "url", { type: "url", placeholder: "https://" }))),
+            field("Icon image", imageField(rec.fields)));
+        }, function () {
+          return { title: "New profile", fields: { image: "", url: "" }, body: "" };
+        }, "Add social icon");
+      }
+    }, records(["image", "url"])),
 
     {
       id: "links", label: "Links page", path: "links.txt",
