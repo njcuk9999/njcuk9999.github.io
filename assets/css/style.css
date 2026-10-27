@@ -304,13 +304,26 @@ header{
 .sidebar-nav a.is-active i {
     color: #e66f69;
 }
-/* Admin sits at the bottom of the sidebar, apart from the sections */
-.sidebar-bottom {
+/* icon-only links at the bottom of the sidebar (admin, useful links) */
+.sidebar-tools {
+    display: flex;
+    gap: 6px;
     margin-top: auto;
-    padding-top: 24px;
+    padding: 24px 20px 0 20px;
 }
-.sidebar-bottom a {
-    color: #8a8a8a;
+.sidebar-tools a {
+    display: block;
+    padding: 4px;
+    color: #555;
+    font-size: 26px;
+    line-height: 1;
+    transition: 0.2s ease all;
+}
+.sidebar-tools a:hover, .sidebar-tools a:focus {
+    color: #fff;
+}
+.sidebar-tools a.is-active {
+    color: #e66f69;
 }
 
 
