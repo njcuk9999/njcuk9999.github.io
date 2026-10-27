@@ -53,3 +53,6 @@ UdeM Pension Plan, https://rrum.umontreal.ca/accueil/
 UdeM List Server, https://listes.umontreal.ca/wws/home
 Alliance Canada, https://ccdb.alliancecan.ca/
 CANFAR, https://www.canfar.net/science-portal/
+
+[Personal]
+Personal home page, https://ourlilnest.duckdns.org/home
