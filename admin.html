@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300" rel="stylesheet" type="text/css">
     <style>
       :root {
         --bg: #f4f5f7; --card: #fff; --ink: #1d2433; --muted: #667085;
@@ -75,10 +76,71 @@
       .pubrow.is-hidden .pubtitle { text-decoration: line-through; }
       .pubyear { flex: none; width: 40px; font-weight: 600; color: var(--muted); }
       .pubtitle { display: block; }
+      /* site chrome: same sidebar / top bar as index.html and plinks.html */
+      .topbar { background: #111; display: flex; align-items: center; padding: 0 24px; position: relative; z-index: 20; }
+      .topbar .logo-text { flex: 1; min-width: 0; color: #fff; text-decoration: none; padding: .2em 0;
+                           font: 100 3em/1.2 'Raleway', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .topbar .menu { border: 0; background: none; color: #fff; font-size: 3em; padding: 0; line-height: 1; }
+      .topbar .menu:hover { border: 0; }
+      .topmenu { position: absolute; right: 16px; top: 100%; min-width: 240px; background: #fff;
+                 border: 1px solid #000; list-style: none; margin: 5px 0 0; padding: 1em 2em; }
+      .topmenu li { padding: .3em 0 .6em; font-size: 1.3em; }
+      .topmenu a { color: #333; text-decoration: none; display: flex; justify-content: space-between; align-items: center; }
+      .topmenu a:hover { color: #e66f69; }
+      .topmenu i { font-size: 25px; }
+      .sidebar { display: none; }
+      @media (min-width: 1200px) {
+        body { padding-left: 240px; }
+        .topbar { display: none; }
+        .sidebar { position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; width: 240px; display: flex;
+                   flex-direction: column; padding: 36px 0 24px; overflow-y: auto; background: #111; color: #fff; }
+      }
+      @media (max-width: 480px) { .topbar .logo-text { font-size: 2em; } }
+      .sidebar a { text-decoration: none; }
+      .sidebar-name { display: block; padding: 0 26px; color: #fff; font: 100 2.2em/1.15 'Raleway', sans-serif; }
+      .sidebar-name:hover { color: #fff; }
+      .sidebar-role { margin: 12px 0 28px; padding: 0 26px; font-size: 12px; line-height: 1.5; color: #9a9a9a; }
+      .sidebar-nav { list-style: none; margin: 0; padding: 0; }
+      .sidebar-nav a { display: flex; align-items: center; gap: 14px; padding: 10px 26px; border-left: 3px solid transparent;
+                       color: #d8d8d8; font: 15px 'Raleway', sans-serif; transition: .2s ease all; }
+      .sidebar-nav a i { font-size: 22px; width: 22px; text-align: center; }
+      .sidebar-nav a:hover, .sidebar-nav a:focus { background: #1b1b1b; color: #fff; }
+      .sidebar-tools { display: flex; gap: 6px; margin-top: auto; padding: 24px 20px 0; }
+      .sidebar-tools a { display: block; padding: 4px; color: #555; font-size: 26px; line-height: 1; transition: .2s ease all; }
+      .sidebar-tools a:hover, .sidebar-tools a:focus { color: #fff; }
+      .sidebar-tools a.is-active { color: #e66f69; }
       code { background: #eef0f3; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
     </style>
   </head>
   <body>
+    <!-- Sidebar (large screens only, replaces the top bar) -->
+    <aside class="sidebar" aria-label="Site navigation">
+      <a class="sidebar-name" href="index.html">Neil James Cook</a>
+      <p class="sidebar-role">Astrophysics researcher<br>iREx, Universit&eacute; de Montr&eacute;al</p>
+      <ul class="sidebar-nav">
+        <li><a href="index.html#header"><i class="pe-7s-home"></i>Home</a></li>
+        <li><a href="index.html#services"><i class="pe-7s-science"></i>Links to research</a></li>
+        <li><a href="index.html#portfolio"><i class="pe-7s-portfolio"></i>Projects</a></li>
+        <li><a href="index.html#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
+        <li><a href="index.html#testimonial"><i class="pe-7s-user"></i>About me</a></li>
+        <li><a href="index.html#contact"><i class="pe-7s-mail"></i>Contact</a></li>
+      </ul>
+      <div class="sidebar-tools">
+        <a href="admin.html" title="Admin" aria-label="Admin" class="is-active"><i class="pe-7s-config"></i></a>
+        <a href="plinks.html" title="Useful links" aria-label="Useful links"><i class="pe-7s-link"></i></a>
+      </div>
+    </aside>
+    <!-- Top bar (smaller screens) -->
+    <nav class="topbar">
+      <a href="index.html" class="logo-text">Neil James Cook</a>
+      <button class="menu" id="menu-btn" title="Menu" aria-expanded="false" aria-controls="top-menu"><i class="pe-7s-menu"></i></button>
+      <ul class="topmenu" id="top-menu" hidden>
+        <li><a href="index.html">Home <i class="pe-7s-home"></i></a></li>
+        <li><a href="index.html#contact">Contact <i class="pe-7s-mail"></i></a></li>
+        <li><a href="plinks.html">Useful links <i class="pe-7s-link"></i></a></li>
+      </ul>
+    </nav>
+
     <div class="wrap">
 
       <!-- login -->
@@ -146,6 +208,19 @@
       </div>
     </div>
 
+    <script>
+      (function () {
+        var btn = document.getElementById("menu-btn"), menu = document.getElementById("top-menu");
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          menu.hidden = !menu.hidden;
+          btn.setAttribute("aria-expanded", String(!menu.hidden));
+        });
+        document.addEventListener("click", function (e) {
+          if (!menu.hidden && !menu.contains(e.target)) { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); }
+        });
+      })();
+    </script>
     <script src="assets/js/sitedata.js"></script>
     <script src="assets/js/publications.js"></script>
     <script src="assets/js/admin.js"></script>
