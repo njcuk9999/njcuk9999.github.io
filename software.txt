@@ -20,6 +20,14 @@ Code de vitesses radiales raie par raie.
 --- es ---
 Código de velocidades radiales línea por línea.
 
+[POGOS]
+repo: njcuk9999/pogos
+PrOcessing General ObServations: A wrapper for JWST time series observations.
+
+Pre-extraction: TSOVORE, Eureka!, NAMELESS, JWST
+Extraction: SOSSISSE, MIRIAM,  Eureka!, NAMELESS, JWST
+Post-extraction: SORBET
+
 [SOSSISSE]
 repo: njcuk9999/sossisse
 SOSS Inspired SpectroScopic Extraction, for JWST NIRISS SOSS time series.
@@ -71,11 +79,3 @@ Outils statistiques pour l’analyse combinée de signaux de vitesse radiale.
 
 --- es ---
 Herramientas estadísticas para el análisis combinado de señales de velocidad radial.
-
-[POGOS]
-repo: njcuk9999/pogos
-PrOcessing General ObServations: A wrapper for JWST time series observations.
-
-Pre-extraction: TSOVORE, Eureka!, NAMELESS, JWST
-Extraction: SOSSISSE, MIRIAM,  Eureka!, NAMELESS, JWST
-Post-extraction: SORBET
