@@ -71,3 +71,11 @@ Outils statistiques pour l’analyse combinée de signaux de vitesse radiale.
 
 --- es ---
 Herramientas estadísticas para el análisis combinado de señales de velocidad radial.
+
+[POGOS]
+repo: njcuk9999/pogos
+PrOcessing General ObServations: A wrapper for JWST time series observations.
+
+Pre-extraction: TSOVORE, Eureka!, NAMELESS, JWST
+Extraction: SOSSISSE, MIRIAM,  Eureka!, NAMELESS, JWST
+Post-extraction: SORBET
