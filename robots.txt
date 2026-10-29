@@ -1,5 +1,7 @@
 # www.robotstxt.org/
 
-# Allow crawling of all content
+# Allow crawling of all content except the admin page
 User-agent: *
-Disallow:
+Disallow: /admin.html
+
+Sitemap: https://njcuk9999.github.io/sitemap.xml

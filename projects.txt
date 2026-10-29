@@ -3,32 +3,46 @@ image: assets/images/portfolio1.jpg
 by: CFHT
 url: https://www.cfht.hawaii.edu/Instruments/SPIRou/
 urltext: Website
+urltext.fr: Site web
+urltext.es: Sitio web
 
 [NIRPS]
 image: assets/images/portfolio2.jpg
 by: ESO: 3.6-m
+by.fr: ESO : 3,6 m
+by.es: ESO: 3,6 m
 url: https://www.eso.org/public/teles-instr/lasilla/36/nirps/
 urltext: Website
+urltext.fr: Site web
+urltext.es: Sitio web
 
 [JWST:NIRISS:SOSS]
 image: assets/images/portfolio3.jpg
 by: NASA:STScI
 url: https://jwst-docs.stsci.edu/jwst-near-infrared-imager-and-slitless-spectrograph/niriss-observing-modes/niriss-single-object-slitless-spectroscopy
 urltext: Website
+urltext.fr: Site web
+urltext.es: Sitio web
 
 [JWST:NIRISS:AMI]
 image: assets/images/portfolio4.jpg
 by: NASA:STScI
 url: https://jwst-docs.stsci.edu/jwst-near-infrared-imager-and-slitless-spectrograph/niriss-observing-modes/niriss-aperture-masking-interferometry
 urltext: Take a look
+urltext.fr: Voir
+urltext.es: Echa un vistazo
 
 [ANDES]
 image: assets/images/cropped-andes-logo-light-1.png
 by: ESO:ELT
 url: https://andes.inaf.it/
 urltext: Website
+urltext.fr: Site web
+urltext.es: Sitio web
 
 [My PhD Thesis]
+title.fr: Ma thèse de doctorat
+title.es: Mi tesis doctoral
 image: assets/images/portfolio6.jpg
 by: Neil Cook
 url: https://zenodo.org/record/61337

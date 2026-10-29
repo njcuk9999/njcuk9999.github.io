@@ -1,0 +1,35 @@
+[Montréal]
+zone: America/Toronto
+lat: 45.50
+lon: -73.57
+
+[United Kingdom]
+title.fr: Royaume-Uni
+title.es: Reino Unido
+zone: Europe/London
+lat: 51.51
+lon: -0.13
+
+[France]
+title.es: Francia
+zone: Europe/Paris
+lat: 48.86
+lon: 2.35
+
+[Hawaiʻi]
+zone: Pacific/Honolulu
+lat: 19.82
+lon: -155.47
+
+[Japan]
+title.fr: Japon
+title.es: Japón
+zone: Asia/Tokyo
+lat: 35.68
+lon: 139.69
+
+[Sydney]
+title.es: Sídney
+zone: Australia/Sydney
+lat: -33.87
+lon: 151.21

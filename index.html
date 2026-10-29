@@ -6,13 +6,48 @@
     <!-- meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="color-scheme" content="light dark">
     <meta name="description" content="Neil James Cook, astrophysics researcher at iREx, Université de Montréal: data pipelines and software for NIRPS, SPIRou, JWST NIRISS and ANDES.">
-    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://njcuk9999.github.io/">
+    <link rel="alternate" hreflang="en" href="https://njcuk9999.github.io/?lang=en">
+    <link rel="alternate" hreflang="fr" href="https://njcuk9999.github.io/?lang=fr">
+    <link rel="alternate" hreflang="es" href="https://njcuk9999.github.io/?lang=es">
+    <link rel="alternate" hreflang="x-default" href="https://njcuk9999.github.io/">
+    <meta property="og:type" content="profile">
     <meta property="og:title" content="Neil James Cook">
     <meta property="og:description" content="Astrophysics researcher at iREx, Université de Montréal: data pipelines and software for NIRPS, SPIRou, JWST NIRISS and ANDES.">
     <meta property="og:url" content="https://njcuk9999.github.io/">
-    <meta property="og:image" content="https://njcuk9999.github.io/assets/images/200923_EA_1771_corr_me.jpg">
+    <meta property="og:image" content="https://njcuk9999.github.io/assets/images/me-1200.jpg">
+    <meta property="og:locale" content="en_CA">
+    <meta property="og:locale:alternate" content="fr_CA">
+    <meta property="og:locale:alternate" content="es_ES">
     <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Neil James Cook",
+      "url": "https://njcuk9999.github.io/",
+      "image": "https://njcuk9999.github.io/assets/images/me-600.jpg",
+      "jobTitle": "Astrophysics researcher",
+      "affiliation": {
+        "@type": "ResearchOrganization",
+        "name": "Institute for Research on Exoplanets (iREx), Université de Montréal",
+        "url": "https://exoplanetes.umontreal.ca/"
+      },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Hertfordshire" },
+      "knowsAbout": ["Exoplanets", "M dwarfs", "Brown dwarfs", "Radial velocity", "High-resolution spectroscopy",
+        "James Webb Space Telescope", "Data reduction pipelines", "Python"],
+      "sameAs": [
+        "https://orcid.org/0000-0003-4166-4121",
+        "https://scholar.google.ca/citations?user=1R-pZC8AAAAJ",
+        "https://github.com/njcuk9999",
+        "https://www.linkedin.com/in/neil-cook-6953215a/",
+        "https://exoplanetes.umontreal.ca/en/team-member/neil-cook/",
+        "https://openalex.org/authors/A5078094363"
+      ]
+    }
+    </script>
     <!-- stylesheets -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
@@ -23,27 +58,11 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500%7CLato:300,400,700,900,300italic,400italic,700italic,900italic%7CRaleway:400,200,300,500,100%7CTitillium+Web:400,200,300italic,300,200italic"
       rel="stylesheet" type="text/css">
     <script src="assets/js/modernizr.js"></script>
+    <script src="assets/js/i18n.js"></script>
   </head>
-  <body id="body">
-    <!-- Sidebar (large screens only, replaces the top bar) -->
-    <aside class="sidebar" aria-label="Site navigation">
-      <a class="sidebar-name" href="#header" data-scroll="">Neil James Cook</a>
-      <p class="sidebar-role">Astrophysics researcher<br>iREx, Universit&eacute; de Montr&eacute;al</p>
-      <ul class="sidebar-nav">
-        <li><a data-scroll="" href="#header"><i class="pe-7s-home"></i>Home</a></li>
-        <li><a data-scroll="" href="#services"><i class="pe-7s-science"></i>Links to research</a></li>
-        <li><a data-scroll="" href="#portfolio"><i class="pe-7s-portfolio"></i>Projects</a></li>
-        <li><a data-scroll="" href="#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
-        <li><a data-scroll="" href="#testimonial"><i class="pe-7s-user"></i>About me</a></li>
-        <li><a data-scroll="" href="#contact"><i class="pe-7s-mail"></i>Contact</a></li>
-      </ul>
-      <div class="sidebar-tools">
-        <a href="admin.html" title="Admin" aria-label="Admin"><i class="pe-7s-config"></i></a>
-        <a href="plinks.html" title="Useful links" aria-label="Useful links"><i class="pe-7s-link"></i></a>
-      </div>
-    </aside>
-    <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>        <![endif]-->
+  <body id="body" data-page="home">
+    <!-- Sidebar (large screens only, replaces the top bar; built by chrome.js) -->
+    <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
     <!-- Header area -->
     <header id="header">
 
@@ -54,18 +73,18 @@
 
 
       <div class="bottom"> <a data-scroll="" href="#navigation" class="scrollDown animated pulse"
-          id="scrollToContent"><i class="pe-7s-angle-down-circle pe-va"></i></a>
+          id="scrollToContent" aria-label="Scroll down"><i class="pe-7s-angle-down-circle pe-va"></i></a>
       </div>
 
       <div class="center text-center">
-        <h2 class="subheadline">Neil James Cook</h2>
+        <h1 class="subheadline">Neil James Cook</h1>
         <br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <h4 class="h2">Astrophysics Researcher iREx University of Montreal<br></h4>
+        <p class="h2 tagline" data-i18n="site.tagline">Astrophysics researcher · iREx · Université de Montréal</p>
       </div>
 
     </header>
 
-    <!-- Navigation area -->
+    <!-- Navigation area (small screens) -->
     <section id="navigation">
       <div class="container">
         <div class="row">
@@ -73,188 +92,201 @@
             <div class="logo"><a data-scroll="" href="#body" class="logo-text">Neil James Cook</a></div>
           </div>
           <div class="col-xs-6">
-            <div class="nav"> <a href="#" data-placement="bottom" title="Menu"
+            <div class="nav"> <a href="#" data-placement="bottom" title="Menu" data-i18n-attr="title:nav.menu"
                 class="menu" data-toggle="dropdown"><i class="pe-7s-menu"></i></a>
               <div class="dropdown-menu">
                 <div class="arrow-up"></div>
-                <ul>
-                  <li><a data-scroll="" href="index.html">Home <i class="pe-7s-home"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="#services">Links to Research<i class="pe-7s-science"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="#portfolio">Projects I work on<i class="pe-7s-portfolio"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="#publications">Publications<i class="pe-7s-notebook"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a data-scroll="" href="#testimonial">About me<i class="pe-7s-user"></i><span
-                        class="menu-effect"></span></a></li>
-                  <li><a data-scroll="" href="#contact">Contact <i class="pe-7s-mail"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a href="admin.html">Admin <i class="pe-7s-config"></i></a><span
-                      class="menu-effect"></span></li>
-                </ul>
+                <ul id="nav-menu"></ul>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- Content Area -->
-    <!-- services section -->
+    <!-- takes the bar's place once it is fixed to the top (script.js) -->
+    <div id="nav-spacer"></div>
+
+    <!-- News (news.txt) -->
+    <section id="news" class="news-area" hidden>
+      <div class="container">
+        <h2 class="block_title" data-i18n="sec.news">Recently</h2>
+        <ol id="news-list" class="news-list"></ol>
+        <div class="pub-actions"><button id="news-more" type="button" class="pub-btn" hidden></button></div>
+      </div>
+    </section>
+
+    <!-- Links to research (research.txt) -->
     <section id="services" class="service-area">
       <div class="container">
-        <h2 class="block_title">Links to research</h2>
+        <h2 class="block_title" data-i18n="sec.research">Links to research</h2>
         <div id="research-links"></div>
       </div>
     </section>
-    <!-- services -->
-    <!-- Portfolio Area -->
+
+    <!-- Projects (projects.txt) -->
     <section id="portfolio" class="portfolio-area">
       <div class="container">
-        <h2 class="block_title">Projects I work on</h2>
-        <div id="projects" class="row port cs-style-3">
-<!--          <div class="col-xs-12">-->
-<!--            <div class="btn-center"><a href="#" class="big button">View all</a></div>-->
-<!--          </div>-->
-        </div>
+        <h2 class="block_title" data-i18n="sec.projects">Projects I work on</h2>
+        <div id="projects" class="row port cs-style-3"></div>
       </div>
-      <!-- container --> </section>
-    <!-- portfolio -->
-    <!-- Publications Area (loaded from the public ORCID record) -->
+    </section>
+
+    <!-- Software (software.txt, plus live numbers from GitHub) -->
+    <section id="software" class="software-area" hidden>
+      <div class="container">
+        <h2 class="block_title" data-i18n="sec.software">Software</h2>
+        <p class="section-intro" data-i18n="sec.software.intro">Open-source code I write and maintain.</p>
+        <div id="software-list" class="sw-grid"></div>
+      </div>
+    </section>
+
+    <!-- Publications (OpenAlex + ORCID, see publications.js) -->
     <section id="publications" class="pub-area">
       <div class="container">
-        <h2 class="block_title">Publications</h2>
+        <h2 class="block_title" data-i18n="sec.publications">Publications</h2>
         <div class="pub-actions">
           <a class="pub-btn" href="https://orcid.org/0000-0003-4166-4121" target="_blank" rel="noopener">ORCID</a>
           <a class="pub-btn" href="https://scholar.google.ca/citations?user=1R-pZC8AAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a class="pub-btn" href="https://ui.adsabs.harvard.edu/search/q=orcid%3A0000-0003-4166-4121&amp;sort=date%20desc" target="_blank" rel="noopener">ADS</a>
         </div>
         <div id="pub-stats" class="pub-stats" hidden></div>
         <figure id="pub-chart" class="pub-chart" hidden></figure>
-        <p id="pub-source" class="pub-source" hidden>Publications from
-          <a href="https://openalex.org/authors/A5078094363" target="_blank" rel="noopener">OpenAlex</a> and
-          <a href="https://orcid.org/0000-0003-4166-4121" target="_blank" rel="noopener">ORCID</a>; citation counts
-          from OpenAlex, which can differ from Google Scholar or ADS.</p>
+        <p id="pub-source" class="pub-source" hidden></p>
         <div id="pub-toolbar" class="pub-toolbar" hidden>
-          <div class="pub-group" role="group" aria-label="Filter">
-            <button type="button" class="pub-pill is-active" data-filter="all">All <span id="pub-count-all"></span></button>
-            <button type="button" class="pub-pill" data-filter="first">First author <span id="pub-count-first"></span></button>
+          <div class="pub-group" role="group" data-i18n-attr="aria-label:pub.filter">
+            <button type="button" class="pub-pill is-active" data-filter="all"><b data-i18n="pub.all">All</b> <span id="pub-count-all"></span></button>
+            <button type="button" class="pub-pill" data-filter="first"><b data-i18n="pub.first">First author</b> <span id="pub-count-first"></span></button>
           </div>
-          <div class="pub-group" role="group" aria-label="Sort">
-            <button type="button" class="pub-pill is-active" data-sort="new">Newest</button>
-            <button type="button" class="pub-pill" data-sort="cited">Most cited</button>
+          <div class="pub-group" role="group" data-i18n-attr="aria-label:pub.sort">
+            <button type="button" class="pub-pill is-active" data-sort="new" data-i18n="pub.newest">Newest</button>
+            <button type="button" class="pub-pill" data-sort="cited" data-i18n="pub.mostCited">Most cited</button>
+          </div>
+          <div class="pub-group pub-find">
+            <input id="pub-q" type="search" class="pub-search" placeholder="Search titles, authors, journals"
+              data-i18n-attr="placeholder:pub.search,aria-label:pub.search" autocomplete="off">
+            <select id="pub-year" class="pub-select" data-i18n-attr="aria-label:pub.allYears">
+              <option value="" data-i18n="pub.allYears">All years</option>
+            </select>
+            <button type="button" id="pub-export" class="pub-pill" data-i18n-attr="title:pub.exportTitle"><i class="pe-7s-download"></i> BibTeX</button>
           </div>
         </div>
-        <p id="pub-status" class="pub-status">Loading publications from ORCID&hellip;</p>
+        <p id="pub-status" class="pub-status" data-i18n="pub.loading">Loading publications…</p>
         <ol id="pub-list" class="pubs"></ol>
         <div class="pub-actions">
           <button id="pub-more" type="button" class="pub-btn" hidden></button>
         </div>
       </div>
     </section>
-    <!-- publications -->
-    <!-- Testimonial Area -->
+
+    <!-- Talks (talks.txt) -->
+    <section id="talks" class="talks-area" hidden>
+      <div class="container">
+        <h2 class="block_title" data-i18n="sec.talks">Talks &amp; outreach</h2>
+        <ol id="talks-list" class="talks-list"></ol>
+        <div class="pub-actions"><button id="talks-more" type="button" class="pub-btn" hidden></button></div>
+      </div>
+    </section>
+
+    <!-- Students (students.txt) -->
+    <section id="students" class="students-area" hidden>
+      <div class="container">
+        <h2 class="block_title" data-i18n="sec.students">Students &amp; mentoring</h2>
+        <div id="students-list"></div>
+      </div>
+    </section>
+
+    <!-- About me (about.txt) -->
     <section id="testimonial" class="testimonial-area">
       <div class="container">
-        <h2 class="block_title">About me</h2>
+        <h2 class="block_title" data-i18n="sec.about">About me</h2>
         <div class="row">
           <div id="testimonial-container" class="col-xs-12">
-            <div class="testimonila-block"><img id="about-image" src=""
-                alt="about me" class="selfshot">
+            <div class="testimonila-block"><img id="about-image" src="assets/images/me-600.jpg"
+                alt="Neil James Cook" class="selfshot" width="256" height="256" loading="lazy" decoding="async">
               <div id="about-text"></div>
-              <!--<strong>Monir Hossain</strong> <br>
-              <small>C.E.O</small> </div>            <div class="testimonila-block"> <img src="assets/images/testimonial2.jpg"                alt="clients" class="selfshot">              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.                Quidem sed mollitia illum! Molestiae dignissimos, hic dolorem et                eius ut nobis. Corrupti totam amet aperiam aut voluptate nobis                dolor at soluta.</p>              <strong>Nur Ul Hossain</strong> <br>              <small>Project Manager</small> </div>            <div class="testimonila-block"> <img src="assets/images/testimonial3.jpg"                alt="clients" class="selfshot">              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.                Quidem sed mollitia illum! Molestiae dignissimos, hic dolorem et                eius ut nobis. Corrupti totam amet aperiam aut voluptate nobis                dolor at soluta.</p>              <strong>Hossain Abrar</strong> <br>
-              <small>Developer</small> </div>-->
+              <p class="about-actions"><a class="btn" href="cv.html"><i class="pe-7s-id"></i> <span data-i18n="about.cv">Curriculum vitae</span></a></p>
             </div>
           </div>
         </div>
-        <!-- container --> </div>
+      </div>
     </section>
-    <!-- testimonial -->
-    <!-- Contact Area -->
+
+    <!-- Contact (contact.txt) -->
     <section id="contact" class="mapWrap">
-      <div style="width:100%;"></div>
       <div id="contact-area">
         <div class="container">
-          <h2 class="block_title">Contact</h2>
+          <h2 class="block_title" data-i18n="sec.contact">Contact</h2>
           <div class="row">
-            <div class="col-xs-12"> </div>
             <div class="col-sm-6">
               <div class="moreDetails">
-                <h2 class="con-title"></h2>
                 <ul id="contact-list" class="address">
                 </ul>
               </div>
             </div>
             <div class="col-sm-6">
-              <h2 class="con-title">Drop me a line</h2>
-              <form id="contact-form" role="form">
-                <div class="form-group"> <input class="form-control" id="user_name"
-                    placeholder="Your name" type="text" required> </div>
-                <div class="form-group"> <input class="form-control" id="your_email"
-                    placeholder="Your email (so I can reply)" type="email"> </div>
-                <div class="form-group"> <textarea name="InputMessage" id="user_message"
-                    class="form-control" rows="5" placeholder="Your message" required></textarea> </div>
-                <button type="submit" class="btn medium">Send</button>
-                <p class="form-note">Opens your email app with the message ready to send.</p>
+              <h3 class="con-title" data-i18n="contact.drop">Drop me a line</h3>
+              <form id="contact-form">
+                <div class="form-group"> <input class="form-control" id="user_name" placeholder="Your name"
+                    data-i18n-attr="placeholder:contact.name,aria-label:contact.name" type="text" required> </div>
+                <div class="form-group"> <input class="form-control" id="your_email" placeholder="Your email (so I can reply)"
+                    data-i18n-attr="placeholder:contact.email,aria-label:contact.email" type="email"> </div>
+                <div class="form-group"> <textarea name="InputMessage" id="user_message" class="form-control" rows="5"
+                    placeholder="Your message" data-i18n-attr="placeholder:contact.message,aria-label:contact.message" required></textarea> </div>
+                <button type="submit" class="btn medium" data-i18n="contact.send">Send</button>
+                <p class="form-note" data-i18n="contact.note">Opens your email app with the message ready to send.</p>
               </form>
             </div>
           </div>
         </div>
-        <!-- container --> </div>
-      <!-- contact-area -->
+      </div>
       <div id="social">
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-              <p class="find-me">Find me on</p>
+              <p class="find-me" data-i18n="contact.findMe">Find me on</p>
               <ul id="social-footer" class="socialinks"></ul>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- social --> </section>
-    <!-- contact -->
-    <!-- Footer Area -->
+    <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <p class="copyright">© Copyright <span id="year">2026</span> <a href="https://njcuk9999.github.io"
-                target="_blank">https://njcuk9999.github.io</a>
-              &middot; <a href="admin.html" style="opacity:.5">admin</a></p>
+            <p class="copyright">© Copyright <span id="year">2026</span> <a href="https://njcuk9999.github.io">https://njcuk9999.github.io</a></p>
           </div>
         </div>
       </div>
     </footer>
-    <!-- Necessery scripts -->
+    <!-- scripts -->
     <script src="assets/js/jquery-2.1.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.actual.min.js"></script>
+    <script src="assets/js/sitedata.js"></script>
+    <script src="assets/js/chrome.js"></script>
     <script src="assets/js/smooth-scroll.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/sitedata.js"></script>
     <script src="assets/js/publications.js"></script>
     <script>
+    I18n.apply();
+    document.title = "Neil James Cook";
+
     // page content is loaded from the .txt files (edit them via admin.html)
     function fill(path, id, render) {
         SiteData.load(path).then(function (text) {
-            document.getElementById(id).innerHTML = render(text);
+            document.getElementById(id).innerHTML = render(SiteData.parseRecords(text));
         }).catch(function (e) { console.error(e); });
     }
-    fill("research.txt", "research-links", function (t) {
-        return SiteData.renderResearch(SiteData.parseRecords(t));
-    });
-    fill("projects.txt", "projects", function (t) {
-        return SiteData.renderProjects(SiteData.parseRecords(t));
-    });
-    fill("contact.txt", "contact-list", function (t) {
-        return SiteData.renderContact(SiteData.parseRecords(t));
-    });
+    fill("research.txt", "research-links", SiteData.renderResearch);
+    fill("projects.txt", "projects", SiteData.renderProjects);
+    fill("contact.txt", "contact-list", SiteData.renderContact);
     SiteData.load("about.txt").then(function (t) {
-        var about = SiteData.parseRecords(t)[0] || { fields: {}, body: "" };
-        document.getElementById("about-image").src = about.fields.image || "";
-        document.getElementById("about-text").innerHTML = SiteData.paragraphs(about.body);
+        var about = SiteData.parseRecords(t)[0] || { fields: {}, body: "", bodies: {} };
+        if (about.fields.image) document.getElementById("about-image").src = about.fields.image;
+        document.getElementById("about-text").innerHTML = SiteData.paragraphs(SiteData.tr(about, "body"));
     }).catch(function (e) { console.error(e); });
     SiteData.load("social.txt").then(function (t) {
         var html = SiteData.renderSocial(SiteData.parseRecords(t));
@@ -264,6 +296,36 @@
             SiteData.fitSocialIcons(ul);
         });
     }).catch(function (e) { console.error(e); });
+
+    // optional sections: shown (with their menu links) once they have entries.
+    // Long lists show the first few with a "Show all" button.
+    function section(path, id, render, opts) {
+        opts = opts || {};
+        SiteData.loadRecords(path).then(function (recs) {
+            var on = recs.length > 0;
+            document.getElementById(id).hidden = !on;
+            Chrome.show(id, on);
+            if (!on) return;
+            var box = document.getElementById(id + "-list");
+            var more = opts.limit && document.getElementById(id + "-more");
+            var all = false;
+            function draw() {
+                var list = opts.limit && !all ? SiteData.byDateDesc(recs).slice(0, opts.limit) : recs;
+                box.innerHTML = render(list);
+                if (more) {
+                    more.hidden = recs.length <= opts.limit;
+                    more.textContent = all ? I18n.t("common.showFewer") : I18n.t("common.showAll", { n: recs.length });
+                }
+                if (opts.after) opts.after(box);
+            }
+            if (more) more.addEventListener("click", function () { all = !all; draw(); });
+            draw();
+        });
+    }
+    section("news.txt", "news", SiteData.renderNews, { limit: 4 });
+    section("software.txt", "software", SiteData.renderSoftware, { after: SiteData.enrichRepos });
+    section("talks.txt", "talks", SiteData.renderTalks, { limit: 6 });
+    section("students.txt", "students", SiteData.renderStudents);
 
     Publications.init();
 
@@ -282,7 +344,7 @@
             var body = document.getElementById("user_message").value +
                 "\n\n- " + name + (from ? " (" + from + ")" : "");
             location.href = "mailto:" + to + "?subject=" +
-                encodeURIComponent("Message from " + name + " via njcuk9999.github.io") +
+                encodeURIComponent(I18n.t("contact.subject", { name: name })) +
                 "&body=" + encodeURIComponent(body);
         });
     });

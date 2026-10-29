@@ -1,0 +1,73 @@
+[APERO]
+repo: njcuk9999/apero-drs
+docs: http://apero.exoplanets.ca/
+A PipelinE to Reduce Observations: the data reduction software for SPIRou (CFHT) and NIRPS (ESO 3.6-m).
+
+--- fr ---
+A PipelinE to Reduce Observations : le logiciel de réduction de données de SPIRou (TCFH) et de NIRPS (ESO 3,6 m).
+
+--- es ---
+A PipelinE to Reduce Observations: el software de reducción de datos de SPIRou (CFHT) y NIRPS (ESO 3,6 m).
+
+[LBL]
+repo: njcuk9999/lbl
+docs: https://lbl.exoplanets.ca/
+Line-by-line radial velocity code.
+
+--- fr ---
+Code de vitesses radiales raie par raie.
+
+--- es ---
+Código de velocidades radiales línea por línea.
+
+[SOSSISSE]
+repo: njcuk9999/sossisse
+SOSS Inspired SpectroScopic Extraction, for JWST NIRISS SOSS time series.
+
+--- fr ---
+SOSS Inspired SpectroScopic Extraction, pour les séries temporelles JWST NIRISS SOSS.
+
+--- es ---
+SOSS Inspired SpectroScopic Extraction, para series temporales de JWST NIRISS SOSS.
+
+[APERO utilities]
+title.fr: Utilitaires APERO
+title.es: Utilidades de APERO
+repo: njcuk9999/apero-utils
+APERO-affiliated utilities and tools.
+
+--- fr ---
+Utilitaires et outils associés à APERO.
+
+--- es ---
+Utilidades y herramientas asociadas a APERO.
+
+[pystilts]
+repo: njcuk9999/pystilts
+A native Python wrapper for TOPCAT/STILTS.
+
+--- fr ---
+Une interface Python native pour TOPCAT/STILTS.
+
+--- es ---
+Una interfaz nativa de Python para TOPCAT/STILTS.
+
+[coauthors2tex]
+repo: njcuk9999/coauthors2tex
+Quickly generate a LaTeX author list from linked Google spreadsheets.
+
+--- fr ---
+Génère rapidement une liste d’auteurs LaTeX à partir de feuilles Google liées.
+
+--- es ---
+Genera rápidamente una lista de autores en LaTeX a partir de hojas de cálculo de Google enlazadas.
+
+[SCARVS]
+repo: njcuk9999/scarvs
+Statistical tools for Combined Analysis of Radial Velocity Signals.
+
+--- fr ---
+Outils statistiques pour l’analyse combinée de signaux de vitesse radiale.
+
+--- es ---
+Herramientas estadísticas para el análisis combinado de señales de velocidad radial.

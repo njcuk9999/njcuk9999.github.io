@@ -1,21 +1,49 @@
 [APERO Pipeline]
+title.fr: Pipeline APERO
+title.es: Pipeline APERO
 icon: pe-7s-network
 url: http://apero.exoplanets.ca/
 A PipEline to Reduce Observations - High resolution echelle spectrograph data reduction software
 
 (Including instruments: SPIRou, NIRPS, SPIP, iLocater)
 
+--- fr ---
+A PipEline to Reduce Observations - logiciel de réduction de données pour spectrographes échelle à haute résolution
+
+(Instruments : SPIRou, NIRPS, SPIP, iLocater)
+
+--- es ---
+A PipEline to Reduce Observations - software de reducción de datos para espectrógrafos echelle de alta resolución
+
+(Instrumentos: SPIRou, NIRPS, SPIP, iLocater)
+
 [LBL]
 icon: pe-7s-graph3
 url: https://lbl.exoplanets.ca/
 A line-by-line approach to radial velocity analysis.
 
+--- fr ---
+Une approche raie par raie pour l’analyse des vitesses radiales.
+
+--- es ---
+Un enfoque línea por línea para el análisis de velocidades radiales.
+
 [POGOS]
 icon: pe-7s-loop
 url: https://github.com/njcuk9999/pogos
-PrOcessing General ObServations [JWST pre-extraction, extraction and post-extraciton wrapper]
+PrOcessing General ObServations [JWST pre-extraction, extraction and post-extraction wrapper]
 
 (Including our custom software: TSOVORE, SOSSISSE, MIRIAM and SORBET)
+
+--- fr ---
+PrOcessing General ObServations [enveloppe pour la pré-extraction, l’extraction et la post-extraction JWST]
+
+(Avec nos logiciels maison : TSOVORE, SOSSISSE, MIRIAM et SORBET)
+
+--- es ---
+PrOcessing General ObServations [envoltorio para la preextracción, extracción y postextracción de JWST]
+
+(Incluye nuestro software propio: TSOVORE, SOSSISSE, MIRIAM y SORBET)
 
 [ANDES]
 icon: pe-7s-world
@@ -27,17 +55,41 @@ icon: pe-7s-global
 url: https://github.com/njcuk9999?tab=repositories
 My GitHub code repositories
 
+--- fr ---
+Mes dépôts de code sur GitHub
+
+--- es ---
+Mis repositorios de código en GitHub
+
 [Google scholar]
 icon: pe-7s-albums
 url: https://scholar.google.ca/citations?user=1R-pZC8AAAAJ&hl=en
 My publications on Google Scholar
 
+--- fr ---
+Mes publications sur Google Scholar
+
+--- es ---
+Mis publicaciones en Google Scholar
+
 [ORCID]
 icon: pe-7s-user
 url: https://orcid.org/0000-0003-4166-4121
-Open Researcher and Conributor ID
+Open Researcher and Contributor ID
+
+--- fr ---
+Identifiant ouvert pour chercheurs et contributeurs
+
+--- es ---
+Identificador abierto de investigador y colaborador
 
 [iREx]
 icon: pe-7s-science
 url: http://www.exoplanetes.umontreal.ca/?lang=en
 Institute for Research on Exoplanets
+
+--- fr ---
+Institut de recherche sur les exoplanètes
+
+--- es ---
+Instituto de Investigación sobre Exoplanetas

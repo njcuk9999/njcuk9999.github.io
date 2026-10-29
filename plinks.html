@@ -4,10 +4,14 @@
     <meta charset="utf-8">
     <title>Useful links - Neil James Cook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Useful links collected by Neil James Cook: astronomy tools, archives, software and more.">
+    <link rel="canonical" href="https://njcuk9999.github.io/plinks.html">
     <!-- stylesheets -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/i18n.js"></script>
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500%7CLato:300,400,700%7CRaleway:100,300"
       rel="stylesheet" type="text/css">
@@ -83,24 +87,9 @@
       }
     </style>
   </head>
-  <body id="body">
-    <!-- Sidebar (large screens only, replaces the top bar) -->
-    <aside class="sidebar" aria-label="Site navigation">
-      <a class="sidebar-name" href="index.html">Neil James Cook</a>
-      <p class="sidebar-role">Astrophysics researcher<br>iREx, Universit&eacute; de Montr&eacute;al</p>
-      <ul class="sidebar-nav">
-        <li><a href="index.html#header"><i class="pe-7s-home"></i>Home</a></li>
-        <li><a href="index.html#services"><i class="pe-7s-science"></i>Links to research</a></li>
-        <li><a href="index.html#portfolio"><i class="pe-7s-portfolio"></i>Projects</a></li>
-        <li><a href="index.html#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
-        <li><a href="index.html#testimonial"><i class="pe-7s-user"></i>About me</a></li>
-        <li><a href="index.html#contact"><i class="pe-7s-mail"></i>Contact</a></li>
-      </ul>
-      <div class="sidebar-tools">
-        <a href="admin.html" title="Admin" aria-label="Admin"><i class="pe-7s-config"></i></a>
-        <a href="plinks.html" title="Useful links" aria-label="Useful links" class="is-active"><i class="pe-7s-link"></i></a>
-      </div>
-    </aside>
+  <body id="body" data-page="links">
+    <!-- Sidebar (large screens only; built by chrome.js) -->
+    <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
     <!-- Navigation area -->
     <section id="navigation">
       <div class="container">
@@ -109,18 +98,11 @@
             <div class="logo"><a href="index.html" class="logo-text">Neil James Cook</a></div>
           </div>
           <div class="col-xs-6">
-            <div class="nav"> <a href="#" data-placement="bottom" title="Menu"
+            <div class="nav"> <a href="#" data-placement="bottom" title="Menu" data-i18n-attr="title:nav.menu"
                 class="menu" data-toggle="dropdown"><i class="pe-7s-menu"></i></a>
               <div class="dropdown-menu">
                 <div class="arrow-up"></div>
-                <ul>
-                  <li><a href="index.html">Home <i class="pe-7s-home"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a href="index.html#contact">Contact <i class="pe-7s-mail"></i></a><span
-                      class="menu-effect"></span></li>
-                  <li><a href="admin.html">Admin <i class="pe-7s-config"></i></a><span
-                      class="menu-effect"></span></li>
-                </ul>
+                <ul id="nav-menu"></ul>
               </div>
             </div>
           </div>
@@ -131,11 +113,11 @@
     <!-- Links (loaded from links.txt, edit via admin.html) -->
     <main class="container">
       <div class="lk-hero">
-        <h1>Useful links</h1>
+        <h1 data-i18n="links.title">Useful links</h1>
         <p id="lk-summary">&nbsp;</p>
         <div class="lk-search">
           <i class="pe-7s-search"></i>
-          <input id="lk-q" type="search" placeholder="Search links" aria-label="Search links" autocomplete="off">
+          <input id="lk-q" type="search" placeholder="Search links" aria-label="Search links" data-i18n-attr="placeholder:links.search,aria-label:links.search" autocomplete="off">
           <kbd>/</kbd>
         </div>
       </div>
@@ -148,7 +130,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <p class="copyright">© Copyright 2022 <a href="https://njcuk9999.github.io">https://njcuk9999.github.io</a></p>
+            <p class="copyright">© Copyright <span id="year">2026</span> <a href="https://njcuk9999.github.io">https://njcuk9999.github.io</a></p>
           </div>
         </div>
       </div>
@@ -157,9 +139,14 @@
     <script src="assets/js/jquery-2.1.3.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/sitedata.js"></script>
+    <script src="assets/js/chrome.js"></script>
     <script>
+    I18n.apply();
+    document.title = I18n.t("links.title") + " - Neil James Cook";
+    document.getElementById("year").textContent = new Date().getFullYear();
     (function () {
         var esc = SiteData.esc;
+        var t = I18n.t;
         var sections = [];
         var active = "all";
         var query = "";
@@ -207,7 +194,7 @@
                     '" data-tab="' + s.slug + '">' + esc(s.title) + '<span class="lk-count">' + n + "</span></button>";
             }).join("");
             document.getElementById("lk-tabs").innerHTML =
-                '<button class="lk-tab' + (active === "all" ? " is-active" : "") + '" data-tab="all">All' +
+                '<button class="lk-tab' + (active === "all" ? " is-active" : "") + '" data-tab="all">' + esc(t("links.all")) +
                 '<span class="lk-count">' + total + "</span></button>" + html;
         }
 
@@ -222,8 +209,8 @@
                     links.map(card).join("") + "</div></section>";
             }).join("");
             document.getElementById("lk-results").innerHTML = html ||
-                '<div class="lk-empty"><i class="pe-7s-search"></i>No links match “' + esc(query) + "”" +
-                (active !== "all" ? " in this section" : "") + ".</div>";
+                '<div class="lk-empty"><i class="pe-7s-search"></i>' +
+                esc(t(active !== "all" ? "links.noneHere" : "links.none", { q: query })) + "</div>";
         }
 
         function render() {
@@ -283,12 +270,12 @@
             sections.forEach(function (s) { s.slug = slug(s.title); });
             var count = sections.reduce(function (n, s) { return n + s.links.length; }, 0);
             document.getElementById("lk-summary").textContent =
-                count + " links across " + sections.length + " collections";
+                t("links.summary", { links: count, sections: sections.length });
             setTab(location.hash.slice(1) || "all", false);
         }).catch(function (e) {
             console.error(e);
             document.getElementById("lk-results").innerHTML =
-                '<div class="lk-empty"><i class="pe-7s-attention"></i>Couldn’t load the links.</div>';
+                '<div class="lk-empty"><i class="pe-7s-attention"></i>' + esc(t("links.error")) + "</div>";
         });
     })();
     </script>

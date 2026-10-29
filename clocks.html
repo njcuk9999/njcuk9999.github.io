@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>World clocks - Neil James Cook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="World clocks with a live day and night map and a meeting planner.">
+    <link rel="canonical" href="https://njcuk9999.github.io/clocks.html">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500%7CLato:300,400,700%7CRaleway:100,200,300"
+      rel="stylesheet" type="text/css">
+    <script src="assets/js/i18n.js"></script>
+    <style>
+      :root {
+        --ck-bg: #0e1015; --ck-card: #171a21; --ck-card-2: #1d2129; --ck-line: #262b35;
+        --ck-ink: #eceef2; --ck-muted: #8f97a6; --ck-accent: #e66f69;
+        --ck-sun: #ffd27a; --ck-work: #3fb27f; --ck-awake: #4e7fd6; --ck-sleep: #2a2f3a; --ck-weekend: #b07ad8;
+      }
+      body { background: var(--ck-bg); color: var(--ck-ink); }
+      #navigation { position: sticky; top: 0; z-index: 20; }
+      .ck { max-width: 1200px; margin: 0 auto; padding: 28px 16px 70px; }
+      .num { font-variant-numeric: lining-nums tabular-nums; }
+
+      /* hero: your own time */
+      .ck-hero { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 20px; }
+      .ck-hero h1 { margin: 0 0 4px; font: 300 1.1em 'Dosis', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--ck-muted); }
+      .ck-big { font: 100 clamp(3.4em, 11vw, 6.6em)/1 'Raleway', sans-serif; letter-spacing: .01em; }
+      .ck-big .sec { font-size: .42em; color: var(--ck-muted); margin-left: .15em; }
+      .ck-date { margin-top: 6px; color: var(--ck-muted); }
+      .ck-date b { color: var(--ck-ink); font-weight: 400; }
+      .ck-seg { display: inline-flex; border: 1px solid var(--ck-line); border-radius: 999px; padding: 3px; gap: 2px; }
+      .ck-seg button { border: 0; background: none; color: var(--ck-muted); border-radius: 999px; padding: 4px 12px; font: 500 14px 'Dosis', sans-serif; }
+      .ck-seg button.is-active { background: var(--ck-ink); color: var(--ck-bg); }
+
+      /* map */
+      .ck-map { position: relative; border: 1px solid var(--ck-line); border-radius: 18px; overflow: hidden;
+                background: radial-gradient(ellipse at 50% 40%, #16202f 0%, #0b0e13 75%); }
+      .ck-map svg { display: block; width: 100%; height: auto; }
+      .ck-sphere { fill: #0f2033; }
+      .ck-grat { fill: none; stroke: rgba(255,255,255,.06); stroke-width: .6; }
+      .ck-land { fill: #2f4a3f; stroke: #44695a; stroke-width: .4; }
+      .ck-night path { fill: #02040a; fill-opacity: .3; }
+      .ck-term { fill: none; stroke: rgba(255,210,122,.35); stroke-width: 1; stroke-dasharray: 3 4; }
+      .ck-sunglow { fill: url(#sunglow); }
+      .ck-sundot { fill: var(--ck-sun); }
+      .ck-pin circle.dot { fill: var(--ck-accent); stroke: #fff; stroke-width: 1.5; }
+      .ck-pin circle.ring { fill: none; stroke: var(--ck-accent); stroke-width: 1.5; opacity: .6;
+                            transform-box: fill-box; transform-origin: center; animation: ping 2.4s ease-out infinite; }
+      .ck-pin.is-you circle.dot { fill: var(--ck-sun); }
+      .ck-pin.is-you circle.ring { stroke: var(--ck-sun); }
+      .ck-pin.is-hot circle.dot { stroke-width: 3; }
+      @keyframes ping { from { transform: scale(1); opacity: .7; } to { transform: scale(3.2); opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) { .ck-pin circle.ring { animation: none; } }
+      .ck-labels { position: absolute; inset: 0; pointer-events: none; }
+      .ck-label { position: absolute; padding: 3px 8px; border-radius: 8px; background: rgba(12,14,19,.78);
+                  border: 1px solid rgba(255,255,255,.1); white-space: nowrap; font-size: 12px; line-height: 1.25;
+                  backdrop-filter: blur(4px); transition: border-color .2s; }
+      .ck-label b { display: block; font: 500 15px 'Dosis', sans-serif; color: #fff; }
+      .ck-label span { color: var(--ck-muted); }
+      .ck-label.is-hot { border-color: var(--ck-accent); }
+      .ck-map-note { position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: var(--ck-muted); }
+      .ck-map-error { padding: 40px; text-align: center; color: var(--ck-muted); }
+
+      /* time travel */
+      .ck-travel { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px 18px;
+                   margin: 16px 0 26px; padding: 14px 18px; background: var(--ck-card); border: 1px solid var(--ck-line); border-radius: 14px; }
+      .ck-travel label { margin: 0; font: 500 15px 'Dosis', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--ck-muted); }
+      .ck-travel input[type=range] { width: 100%; accent-color: var(--ck-accent); }
+      .ck-travel output { min-width: 150px; text-align: right; font: 500 16px 'Dosis', sans-serif; }
+      .ck-travel output.is-live { color: var(--ck-work); }
+      .ck-travel .hint { grid-column: 1 / -1; font-size: 12px; color: var(--ck-muted); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+      .ck-travel button { border: 1px solid var(--ck-line); background: none; color: var(--ck-ink); border-radius: 999px; padding: 2px 12px; font-size: 12px; }
+      .ck-travel button:hover { border-color: var(--ck-accent); color: var(--ck-accent); }
+
+      /* city cards */
+      .ck-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+      .ck-card { position: relative; display: flex; gap: 16px; align-items: center; padding: 18px; overflow: hidden;
+                 background: linear-gradient(160deg, var(--ck-card-2), var(--ck-card)); border: 1px solid var(--ck-line);
+                 border-radius: 18px; transition: border-color .2s, transform .2s; }
+      .ck-card:hover, .ck-card.is-hot { border-color: var(--ck-accent); transform: translateY(-2px); }
+      .ck-card.is-day { background: linear-gradient(160deg, #24314a, #1a2130); }
+      .ck-face { flex: none; width: 92px; height: 92px; }
+      .ck-face .rim { fill: #f4f1ea; stroke: rgba(0,0,0,.25); stroke-width: 1; }
+      .ck-face .tick { stroke: #3a3d45; stroke-linecap: round; }
+      .ck-face .hh, .ck-face .mh { stroke: #1b1d22; stroke-linecap: round; }
+      .ck-face .sh { stroke: var(--ck-accent); stroke-linecap: round; }
+      .ck-face .hub { fill: var(--ck-accent); }
+      .ck-card.is-night .ck-face .rim { fill: #1b1f28; stroke: rgba(255,255,255,.12); }
+      .ck-card.is-night .ck-face .tick { stroke: #8f97a6; }
+      .ck-card.is-night .ck-face .hh, .ck-card.is-night .ck-face .mh { stroke: #eceef2; }
+      .ck-info { min-width: 0; flex: 1; }
+      .ck-city { display: flex; align-items: center; gap: 6px; font: 500 1.3em 'Dosis', sans-serif; }
+      .ck-city i { font-size: 20px; color: var(--ck-sun); }
+      .ck-card.is-night .ck-city i { color: #9fb3d9; }
+      .ck-time { font: 200 2.3em/1.05 'Raleway', sans-serif; }
+      .ck-sub { font-size: 12px; color: var(--ck-muted); }
+      .ck-diff { margin-top: 2px; font-size: 13px; }
+      .ck-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 2px 9px; border-radius: 999px;
+                  font-size: 11px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; background: rgba(255,255,255,.06); color: var(--ck-muted); }
+      .ck-badge:before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+      .ck-badge.work { color: var(--ck-work); } .ck-badge.awake { color: #7ea6ec; }
+      .ck-badge.weekend { color: var(--ck-weekend); } .ck-badge.asleep { color: #6c7383; }
+      .ck-card.is-you { border-style: dashed; }
+
+      /* meeting planner */
+      .ck-planner { margin-top: 30px; padding: 18px; background: var(--ck-card); border: 1px solid var(--ck-line); border-radius: 18px; }
+      .ck-planner h2 { margin: 0 0 2px; font: 400 1.5em 'Dosis', sans-serif; }
+      .ck-planner p { margin: 0 0 14px; font-size: 13px; color: var(--ck-muted); }
+      .ck-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: -6px 0 12px; font-size: 12px; color: var(--ck-muted); }
+      .ck-legend span:before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; background: var(--c); }
+      .ck-rows { overflow-x: auto; padding-bottom: 4px; }
+      .ck-row { display: grid; grid-template-columns: 130px repeat(24, minmax(30px, 1fr)); gap: 3px; margin-bottom: 3px; min-width: 860px; }
+      .ck-row .name { position: sticky; left: 0; z-index: 1; display: flex; align-items: center; padding-right: 8px;
+                      background: var(--ck-card); font: 500 14px 'Dosis', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .ck-cell { height: 34px; border: 0; border-radius: 6px; padding: 0; font-size: 12px; font-variant-numeric: tabular-nums;
+                 color: #fff; background: var(--ck-sleep); cursor: pointer; position: relative; transition: transform .1s, box-shadow .1s; }
+      .ck-cell.work { background: var(--ck-work); } .ck-cell.awake { background: var(--ck-awake); }
+      .ck-cell.weekend { background: var(--ck-weekend); } .ck-cell.asleep { color: #8f97a6; }
+      .ck-cell.midnight { box-shadow: inset 2px 0 0 #fff; }
+      .ck-cell.col-hot { outline: 2px solid #fff; outline-offset: -1px; }
+      .ck-cell.col-sel { box-shadow: 0 0 0 2px var(--ck-accent); }
+      .ck-cell:hover { transform: translateY(-1px); }
+      .ck-cell small { display: block; font-size: 9px; line-height: 1; opacity: .75; }
+
+      @media (max-width: 640px) {
+        .ck-travel { grid-template-columns: 1fr auto; }
+        .ck-travel input[type=range] { grid-column: 1 / -1; grid-row: 2; }
+        .ck-travel output { min-width: 0; }
+        .ck-label { font-size: 10px; padding: 2px 6px; }
+        .ck-label b { font-size: 12px; }
+        .ck-label span { display: none; }
+        .ck-face { width: 74px; height: 74px; }
+        .ck-time { font-size: 2em; }
+        #navigation .logo-text { font-size: 2em; }
+      }
+    </style>
+  </head>
+  <body id="body" data-page="clocks">
+    <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
+    <section id="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="logo"><a href="index.html" class="logo-text">Neil James Cook</a></div>
+          </div>
+          <div class="col-xs-6">
+            <div class="nav"> <a href="#" data-placement="bottom" title="Menu" data-i18n-attr="title:nav.menu"
+                class="menu" data-toggle="dropdown"><i class="pe-7s-menu"></i></a>
+              <div class="dropdown-menu">
+                <div class="arrow-up"></div>
+                <ul id="nav-menu"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="ck">
+      <div class="ck-hero">
+        <div>
+          <h1 data-i18n="clocks.you">Your time</h1>
+          <div class="ck-big num" id="ck-big" aria-live="off">--:--</div>
+          <div class="ck-date"><b id="ck-today"></b> · <span id="ck-zone"></span></div>
+        </div>
+        <div class="ck-seg" role="group" aria-label="12 / 24 h">
+          <button type="button" data-h12="0" data-i18n="clocks.h24">24 h</button>
+          <button type="button" data-h12="1" data-i18n="clocks.h12">12 h</button>
+        </div>
+      </div>
+
+      <div class="ck-map" id="ck-map">
+        <svg id="ck-svg" viewBox="0 0 960 500" role="img" aria-label="World map with day and night"></svg>
+        <div class="ck-labels" id="ck-labels"></div>
+        <div class="ck-map-note" id="ck-map-note"></div>
+      </div>
+
+      <div class="ck-travel">
+        <label for="ck-range" data-i18n="clocks.travel">Time travel</label>
+        <input type="range" id="ck-range" min="-1440" max="1440" step="15" value="0">
+        <output id="ck-offset" class="is-live" for="ck-range"></output>
+        <div class="hint"><span data-i18n="clocks.travelHint">Drag to see the time everywhere at another moment.</span>
+          <button type="button" id="ck-reset" hidden data-i18n="clocks.reset">Back to now</button></div>
+      </div>
+
+      <div class="ck-grid" id="ck-grid"></div>
+
+      <section class="ck-planner">
+        <h2 data-i18n="clocks.planner">Meeting planner</h2>
+        <p data-i18n="clocks.plannerHint">Your next 24 hours across the clocks. Click an hour to jump there.</p>
+        <div class="ck-legend">
+          <span style="--c: var(--ck-work)" data-i18n="clocks.work">Working hours</span>
+          <span style="--c: var(--ck-awake)" data-i18n="clocks.awake">Awake</span>
+          <span style="--c: var(--ck-weekend)" data-i18n="clocks.weekend">Weekend</span>
+          <span style="--c: var(--ck-sleep)" data-i18n="clocks.asleep">Asleep</span>
+        </div>
+        <div class="ck-rows" id="ck-rows"></div>
+      </section>
+    </main>
+
+    <script src="assets/js/jquery-2.1.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/sitedata.js"></script>
+    <script src="assets/js/chrome.js"></script>
+    <script>
+    (function () {
+        "use strict";
+        var t = I18n.t, esc = SiteData.esc;
+        var $ = function (id) { return document.getElementById(id); };
+        I18n.apply();
+        document.title = t("clocks.title") + " - Neil James Cook";
+
+        var CDN = "https://cdn.jsdelivr.net/npm/";
+        var MAP_LIBS = ["d3-array@3.2.4/dist/d3-array.min.js", "d3-geo@3.1.1/dist/d3-geo.min.js",
+            "topojson-client@3.1.0/dist/topojson-client.min.js"];
+        var LAND = CDN + "world-atlas@2.0.2/land-110m.json";
+        var W = 960, RAD = Math.PI / 180;
+        var HERE = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+
+        var state = { offset: 0, h12: false, cities: [], hot: null };
+        try { state.h12 = localStorage.getItem("clock-h12") === "1"; } catch (e) { /* default 24 h */ }
+
+        function now() { return new Date(Date.now() + state.offset * 60000); }
+
+        // ------------------------------------------------------------
+        // time zone arithmetic
+        // ------------------------------------------------------------
+        var partFmt = {};
+        var WEEKDAYS = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+        function parts(date, zone) {
+            var f = partFmt[zone] || (partFmt[zone] = new Intl.DateTimeFormat("en-US", {
+                timeZone: zone, hourCycle: "h23", weekday: "short", year: "numeric", month: "numeric",
+                day: "numeric", hour: "numeric", minute: "numeric", second: "numeric"
+            }));
+            var p = {};
+            f.formatToParts(date).forEach(function (x) { p[x.type] = x.value; });
+            return { y: +p.year, mo: +p.month, d: +p.day, h: +p.hour % 24, mi: +p.minute, s: +p.second, wd: WEEKDAYS[p.weekday] };
+        }
+
+        // minutes ahead of UTC
+        function offsetOf(date, zone) {
+            var p = parts(date, zone);
+            return Math.round((Date.UTC(p.y, p.mo - 1, p.d, p.h, p.mi, p.s) - Math.floor(date / 1000) * 1000) / 60000);
+        }
+
+        function dayNumber(p) { return Date.UTC(p.y, p.mo - 1, p.d) / 864e5; }
+
+        var timeFmt = {};
+        function fmtTime(date, zone, secs) {
+            var k = zone + secs + state.h12;
+            var f = timeFmt[k] || (timeFmt[k] = new Intl.DateTimeFormat(I18n.locale, {
+                timeZone: zone, hour: "2-digit", minute: "2-digit", second: secs ? "2-digit" : undefined,
+                hourCycle: state.h12 ? "h12" : "h23"
+            }));
+            return f.format(date);
+        }
+
+        function fmtDate(date, zone, long) {
+            return new Intl.DateTimeFormat(I18n.locale, { timeZone: zone, weekday: long ? "long" : "short",
+                day: "numeric", month: long ? "long" : "short" }).format(date);
+        }
+
+        function fmtSpan(min) {
+            var a = Math.abs(min), h = Math.floor(a / 60), m = a % 60;
+            return (h ? h + " h" : "") + (h && m ? " " : "") + (m ? m + " min" : "") || "0 h";
+        }
+
+        function utcLabel(min) {
+            var a = Math.abs(min);
+            return "UTC" + (min < 0 ? "−" : "+") + Math.floor(a / 60) + (a % 60 ? ":" + ("0" + a % 60).slice(-2) : "");
+        }
+
+        // work / awake / weekend / asleep at a given local hour and weekday
+        function status(h, wd) {
+            if (h < 7 || h >= 23) return "asleep";
+            if (wd === 0 || wd === 6) return "weekend";
+            return h >= 9 && h < 17 ? "work" : "awake";
+        }
+
+        // ------------------------------------------------------------
+        // the sun: subsolar point (low-precision solar ephemeris, ~0.01°)
+        // ------------------------------------------------------------
+        function subsolar(date) {
+            var d = (date.getTime() - Date.UTC(2000, 0, 1, 12)) / 864e5;
+            var g = (357.529 + 0.98560028 * d) * RAD;
+            var q = 280.459 + 0.98564736 * d;
+            var L = (q + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * RAD;
+            var e = (23.439 - 0.00000036 * d) * RAD;
+            var ra = Math.atan2(Math.cos(e) * Math.sin(L), Math.cos(L)) / RAD;
+            var dec = Math.asin(Math.sin(e) * Math.sin(L)) / RAD;
+            var gmst = (280.46061837 + 360.98564736629 * d) % 360;
+            var lon = ((ra - gmst) % 360 + 540) % 360 - 180;
+            return [lon, dec];
+        }
+
+        // sun altitude in degrees at [lon, lat]
+        function sunAlt(lon, lat, sun) {
+            var c = Math.sin(lat * RAD) * Math.sin(sun[1] * RAD) +
+                Math.cos(lat * RAD) * Math.cos(sun[1] * RAD) * Math.cos((lon - sun[0]) * RAD);
+            return 90 - Math.acos(Math.max(-1, Math.min(1, c))) / RAD;
+        }
+
+        // ------------------------------------------------------------
+        // analog clock face
+        // ------------------------------------------------------------
+        function face() {
+            var ticks = "";
+            for (var i = 0; i < 60; i++) {
+                var big = i % 5 === 0, a = i * 6 * RAD;
+                var r1 = big ? 36 : 40, r2 = 44;
+                ticks += '<line class="tick" stroke-width="' + (big ? 2.2 : 0.8) + '" x1="' + (r1 * Math.sin(a)).toFixed(2) +
+                    '" y1="' + (-r1 * Math.cos(a)).toFixed(2) + '" x2="' + (r2 * Math.sin(a)).toFixed(2) + '" y2="' + (-r2 * Math.cos(a)).toFixed(2) + '"/>';
+            }
+            return '<svg class="ck-face" viewBox="-50 -50 100 100" aria-hidden="true"><circle class="rim" r="48"/>' + ticks +
+                '<line class="hh" stroke-width="4" y1="6" y2="-24"/><line class="mh" stroke-width="2.6" y1="8" y2="-36"/>' +
+                '<line class="sh" stroke-width="1.2" y1="12" y2="-40"/><circle class="hub" r="3"/></svg>';
+        }
+
+        function setHands(svg, p) {
+            var s = p.s, m = p.mi + s / 60, h = (p.h % 12) + m / 60;
+            svg.querySelector(".hh").setAttribute("transform", "rotate(" + h * 30 + ")");
+            svg.querySelector(".mh").setAttribute("transform", "rotate(" + m * 6 + ")");
+            svg.querySelector(".sh").setAttribute("transform", "rotate(" + s * 6 + ")");
+        }
+
+        // ------------------------------------------------------------
+        // cards
+        // ------------------------------------------------------------
+        function buildCards() {
+            var list = youList();
+            $("ck-grid").innerHTML = list.map(function (c, i) {
+                return '<article class="ck-card' + (c.you ? " is-you" : "") + '" data-i="' + state.cities.indexOf(c) + '">' + face() +
+                    '<div class="ck-info"><div class="ck-city"><i></i><span>' + esc(c.name) + "</span></div>" +
+                    '<div class="ck-time num"></div><div class="ck-sub"></div><div class="ck-diff"></div>' +
+                    '<span class="ck-badge"></span></div></article>';
+            }).join("");
+            Array.prototype.forEach.call($("ck-grid").children, function (card, i) {
+                card._city = list[i];
+                card.addEventListener("mouseenter", function () { setHot(state.cities.indexOf(list[i])); });
+                card.addEventListener("mouseleave", function () { setHot(null); });
+            });
+        }
+
+        // your own clock first, unless one of the cities is already in your zone
+        function youList() {
+            var mine = state.cities.filter(function (c) { return c.zone === HERE; })[0];
+            if (mine) {
+                mine.you = true;
+                return [mine].concat(state.cities.filter(function (c) { return c !== mine; }));
+            }
+            return [{ you: true, name: t("clocks.you"), zone: HERE }].concat(state.cities);
+        }
+
+        function renderCards(date, sun) {
+            var here = parts(date, HERE), hereOff = offsetOf(date, HERE);
+            Array.prototype.forEach.call($("ck-grid").children, function (card) {
+                var c = card._city, p = parts(date, c.zone), off = offsetOf(date, c.zone);
+                setHands(card.querySelector(".ck-face"), p);
+                var day = c.lat != null ? sunAlt(c.lon, c.lat, sun) > -0.833 : p.h >= 7 && p.h < 19;
+                card.classList.toggle("is-day", day);
+                card.classList.toggle("is-night", !day);
+                card.querySelector(".ck-city i").className = day ? "pe-7s-sun" : "pe-7s-moon";
+                card.querySelector(".ck-time").textContent = fmtTime(date, c.zone, false);
+                var rel = dayNumber(p) - dayNumber(here);
+                var dayWord = rel === 0 ? t("clocks.today") : rel === 1 ? t("clocks.tomorrow") : rel === -1 ? t("clocks.yesterday") : "";
+                card.querySelector(".ck-sub").textContent = (c.you || !dayWord ? "" : dayWord + " · ") + fmtDate(date, c.zone, false) + " · " + utcLabel(off);
+                var d = off - hereOff;
+                card.querySelector(".ck-diff").textContent = c.you ? (c.lat === undefined ? c.zone.replace(/_/g, " ") : t("clocks.you"))
+                    : d === 0 ? t("clocks.same") : t(d > 0 ? "clocks.ahead" : "clocks.behind", { h: fmtSpan(d) });
+                var st = status(p.h, p.wd);
+                var badge = card.querySelector(".ck-badge");
+                badge.className = "ck-badge " + st;
+                badge.textContent = t("clocks." + st);
+            });
+        }
+
+        // ------------------------------------------------------------
+        // map
+        // ------------------------------------------------------------
+        var map = null;
+
+        function loadScript(src) {
+            return new Promise(function (ok, fail) {
+                var s = document.createElement("script");
+                s.src = src; s.onload = ok; s.onerror = fail;
+                document.head.appendChild(s);
+            });
+        }
+
+        function initMap() {
+            return MAP_LIBS.reduce(function (p, lib) {
+                return p.then(function () { return loadScript(CDN + lib); });
+            }, Promise.resolve()).then(function () {
+                return fetch(LAND).then(function (r) { return r.json(); });
+            }).then(function (topo) {
+                var sphere = { type: "Sphere" };
+                var proj = d3.geoNaturalEarth1().fitWidth(W, sphere);
+                var path = d3.geoPath(proj);
+                var H = Math.ceil(path.bounds(sphere)[1][1]);
+                var svg = $("ck-svg");
+                svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+                svg.innerHTML = '<defs><radialGradient id="sunglow"><stop offset="0" stop-color="#ffd27a" stop-opacity=".55"/>' +
+                    '<stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>' +
+                    '<clipPath id="clip"><path d="' + path(sphere) + '"/></clipPath></defs>' +
+                    '<path class="ck-sphere" d="' + path(sphere) + '"/>' +
+                    '<path class="ck-grat" d="' + path(d3.geoGraticule10()) + '"/>' +
+                    '<path class="ck-land" d="' + path(topojson.feature(topo, topo.objects.land)) + '"/>' +
+                    '<g class="ck-night" clip-path="url(#clip)"></g><path class="ck-term" clip-path="url(#clip)"/>' +
+                    '<g class="ck-sun"><circle class="ck-sunglow" r="34"/><circle class="ck-sundot" r="6"/></g>' +
+                    '<g class="ck-pins"></g>';
+                map = { proj: proj, path: path, svg: svg, H: H };
+                buildPins();
+            }).catch(function (e) {
+                console.error(e);
+                $("ck-map").innerHTML = '<div class="ck-map-error"><i class="pe-7s-attention"></i> ' + esc(t("clocks.mapError")) + "</div>";
+            });
+        }
+
+        function pinList() {
+            return state.cities.filter(function (c) { return c.lat != null; });
+        }
+
+        function buildPins() {
+            if (!map) return;
+            map.svg.querySelector(".ck-pins").innerHTML = pinList().map(function (c) {
+                var xy = map.proj([c.lon, c.lat]);
+                return '<g class="ck-pin" data-i="' + state.cities.indexOf(c) + '" transform="translate(' + xy[0].toFixed(1) + "," +
+                    xy[1].toFixed(1) + ')"><circle class="ring" r="5"/><circle class="dot" r="5"/></g>';
+            }).join("");
+            $("ck-labels").innerHTML = pinList().map(function (c) {
+                return '<div class="ck-label" data-i="' + state.cities.indexOf(c) + '"><b>' + esc(c.name) + '</b><span class="num"> ' +
+                    esc(fmtTime(now(), c.zone, false)) + "</span></div>";
+            }).join("");
+            placeLabels();
+        }
+
+        // put each label beside its pin, trying the sides in turn so
+        // neighbours (London / Paris) don't overlap
+        function placeLabels() {
+            if (!map) return;
+            var box = $("ck-map").getBoundingClientRect();
+            var k = box.width / W, placed = [];
+            Array.prototype.forEach.call($("ck-labels").children, function (el) {
+                var c = state.cities[+el.getAttribute("data-i")];
+                var xy = map.proj([c.lon, c.lat]);
+                var x = xy[0] * k, y = xy[1] * k, w = el.offsetWidth, h = el.offsetHeight, g = 9;
+                var options = [[x + g, y - h / 2], [x - g - w, y - h / 2], [x - w / 2, y - g - h], [x - w / 2, y + g],
+                    [x + g, y - h - 4], [x - g - w, y + 4], [x + g, y + 4], [x - g - w, y - h - 4]];
+                var best = options[0], bestScore = Infinity;
+                options.forEach(function (o, n) {
+                    var ox = Math.max(2, Math.min(box.width - w - 2, o[0])), oy = Math.max(2, Math.min(box.height - h - 2, o[1]));
+                    var overlap = placed.reduce(function (s, r) {
+                        var ix = Math.max(0, Math.min(ox + w, r[0] + r[2]) - Math.max(ox, r[0]));
+                        var iy = Math.max(0, Math.min(oy + h, r[1] + r[3]) - Math.max(oy, r[1]));
+                        return s + ix * iy;
+                    }, 0);
+                    var score = overlap * 10 + n;
+                    if (score < bestScore) { bestScore = score; best = [ox, oy]; }
+                });
+                placed.push([best[0], best[1], w, h]);
+                el.style.left = best[0] + "px";
+                el.style.top = best[1] + "px";
+            });
+        }
+
+        var lastMapMinute = null;
+        function renderMap(date, sun) {
+            if (!map) return;
+            Array.prototype.forEach.call($("ck-labels").children, function (el) {
+                var c = state.cities[+el.getAttribute("data-i")];
+                el.querySelector("span").textContent = " " + fmtTime(date, c.zone, false);
+            });
+            var minute = Math.floor(date / 60000);
+            if (minute === lastMapMinute) return;
+            lastMapMinute = minute;
+            var anti = [sun[0] + 180, -sun[1]];
+            // night, then civil, nautical and astronomical darkness stacked on top
+            map.svg.querySelector(".ck-night").innerHTML = [90, 84, 78, 72].map(function (r) {
+                return '<path d="' + map.path(d3.geoCircle().center(anti).radius(r)()) + '"/>';
+            }).join("");
+            map.svg.querySelector(".ck-term").setAttribute("d", map.path(d3.geoCircle().center(anti).radius(90)()));
+            var s = map.proj(sun);
+            map.svg.querySelector(".ck-sun").setAttribute("transform", "translate(" + s[0].toFixed(1) + "," + s[1].toFixed(1) + ")");
+            $("ck-map-note").textContent = "☀ " + t("clocks.sun") + ": " + Math.abs(sun[1]).toFixed(1) + "°" + (sun[1] >= 0 ? "N" : "S") +
+                " " + Math.abs(sun[0]).toFixed(1) + "°" + (sun[0] >= 0 ? "E" : "W");
+        }
+
+        function setHot(i) {
+            state.hot = i;
+            Array.prototype.forEach.call(document.querySelectorAll(".ck-pin, .ck-label"), function (el) {
+                el.classList.toggle("is-hot", i !== null && +el.getAttribute("data-i") === i);
+            });
+            Array.prototype.forEach.call($("ck-grid").children, function (card) {
+                card.classList.toggle("is-hot", i !== null && +card.getAttribute("data-i") === i);
+            });
+        }
+
+        // ------------------------------------------------------------
+        // meeting planner: your next 24 hours, one row per clock
+        // ------------------------------------------------------------
+        var plannerHour = null;
+        function renderPlanner(date) {
+            var real = new Date();
+            var start = Math.floor(real / 3600000) * 3600000;
+            var startKey = start + ":" + state.h12;
+            var rows = $("ck-rows");
+            if (plannerHour !== startKey) {
+                plannerHour = startKey;
+                var list = youList();
+                rows.innerHTML = list.map(function (c) {
+                    var cells = "";
+                    for (var i = 0; i < 24; i++) {
+                        var at = new Date(start + i * 3600000), p = parts(at, c.zone);
+                        var label = state.h12 ? ((p.h % 12) || 12) : p.h;
+                        var mins = p.mi ? ":" + ("0" + p.mi).slice(-2) : "";
+                        cells += '<button type="button" class="ck-cell ' + status(p.h, p.wd) + (p.h === 0 && !p.mi ? " midnight" : "") +
+                            '" data-col="' + i + '" title="' + esc(c.name + ": " + fmtDate(at, c.zone, true) + " " + fmtTime(at, c.zone, false)) + '">' +
+                            label + mins + (state.h12 ? "<small>" + (p.h < 12 ? "am" : "pm") + "</small>" : "") + "</button>";
+                    }
+                    return '<div class="ck-row"><span class="name">' + esc(c.name) + "</span>" + cells + "</div>";
+                }).join("");
+            }
+            var col = Math.floor((date - start) / 3600000);
+            Array.prototype.forEach.call(rows.querySelectorAll(".ck-cell"), function (b) {
+                b.classList.toggle("col-sel", +b.getAttribute("data-col") === col);
+            });
+        }
+
+        $("ck-rows").addEventListener("click", function (e) {
+            var b = e.target.closest(".ck-cell");
+            if (!b) return;
+            var start = Math.floor(Date.now() / 3600000) * 3600000;
+            var target = start + (+b.getAttribute("data-col")) * 3600000;
+            setOffset(Math.round((target - Date.now()) / 60000));
+        });
+        $("ck-rows").addEventListener("mouseover", function (e) {
+            var b = e.target.closest(".ck-cell");
+            var col = b ? b.getAttribute("data-col") : null;
+            Array.prototype.forEach.call($("ck-rows").querySelectorAll(".ck-cell"), function (x) {
+                x.classList.toggle("col-hot", x.getAttribute("data-col") === col);
+            });
+        });
+        $("ck-rows").addEventListener("mouseleave", function () {
+            Array.prototype.forEach.call($("ck-rows").querySelectorAll(".col-hot"), function (x) { x.classList.remove("col-hot"); });
+        });
+
+        // ------------------------------------------------------------
+        // time travel + ticking
+        // ------------------------------------------------------------
+        function setOffset(min) {
+            state.offset = Math.max(-1440, Math.min(1440, min));
+            $("ck-range").value = Math.round(state.offset / 15) * 15;
+            lastMapMinute = null;
+            tick();
+        }
+
+        $("ck-range").addEventListener("input", function () { setOffset(+$("ck-range").value); });
+        $("ck-reset").addEventListener("click", function () { setOffset(0); });
+
+        function paintSeg() {
+            Array.prototype.forEach.call(document.querySelectorAll("[data-h12]"), function (b) {
+                var on = (b.getAttribute("data-h12") === "1") === state.h12;
+                b.classList.toggle("is-active", on);
+                b.setAttribute("aria-pressed", String(on));
+            });
+        }
+        document.querySelector(".ck-seg").addEventListener("click", function (e) {
+            var b = e.target.closest("[data-h12]");
+            if (!b) return;
+            state.h12 = b.getAttribute("data-h12") === "1";
+            try { localStorage.setItem("clock-h12", state.h12 ? "1" : "0"); } catch (err) { /* ignore */ }
+            paintSeg();
+            plannerHour = null;
+            tick();
+            placeLabels();
+        });
+
+        function tick() {
+            var date = now(), sun = subsolar(date);
+            var big = fmtTime(date, HERE, true);
+            var m = big.match(/^(.*\d{2})([:.]\d{2})(.*)$/);  // smaller seconds
+            $("ck-big").innerHTML = m ? esc(m[1]) + '<span class="sec">' + esc(m[2] + m[3]) + "</span>" : esc(big);
+            $("ck-today").textContent = fmtDate(date, HERE, true);
+            $("ck-zone").textContent = t("clocks.zone", { zone: HERE.replace(/_/g, " ") + " (" + utcLabel(offsetOf(date, HERE)) + ")" });
+            var out = $("ck-offset");
+            out.classList.toggle("is-live", state.offset === 0);
+            out.textContent = state.offset === 0 ? "● " + t("clocks.now")
+                : (state.offset > 0 ? "+" : "−") + fmtSpan(state.offset);
+            $("ck-reset").hidden = state.offset === 0;
+            renderCards(date, sun);
+            renderMap(date, sun);
+            renderPlanner(date);
+        }
+
+        // ------------------------------------------------------------
+        // start: clocks.txt lists the cities (edit it in admin.html)
+        // ------------------------------------------------------------
+        function validZone(z) {
+            try { new Intl.DateTimeFormat("en", { timeZone: z }); return true; } catch (e) { return false; }
+        }
+
+        paintSeg();
+        var mapReady = initMap();
+        SiteData.loadRecords("clocks.txt").then(function (recs) {
+            state.cities = recs.filter(function (r) { return r.fields.zone && validZone(r.fields.zone); }).map(function (r) {
+                var lat = parseFloat(r.fields.lat), lon = parseFloat(r.fields.lon);
+                return { name: SiteData.tr(r, "title"), zone: r.fields.zone,
+                    lat: isNaN(lat) || isNaN(lon) ? null : lat, lon: isNaN(lat) || isNaN(lon) ? null : lon };
+            });
+            buildCards();
+            mapReady.then(buildPins);
+            tick();
+            // tick on the second
+            setTimeout(function () {
+                tick();
+                setInterval(tick, 1000);
+            }, 1000 - Date.now() % 1000);
+            var rt = null;
+            window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(placeLabels, 120); });
+            $("ck-map").addEventListener("mouseover", function (e) {
+                var g = e.target.closest && e.target.closest(".ck-pin");
+                if (g) setHot(+g.getAttribute("data-i"));
+            });
+            $("ck-map").addEventListener("mouseout", function (e) {
+                if (e.target.closest && e.target.closest(".ck-pin")) setHot(null);
+            });
+        });
+    })();
+    </script>
+  </body>
+</html>

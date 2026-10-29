@@ -131,11 +131,11 @@ var origOffsetY = menu.offset().top;
 function scroll() {
    if ($(window).scrollTop() >= origOffsetY) {
        $('#navigation').addClass('nav-wrap');
-       $('#services').addClass('exp');
+       $('#nav-spacer').addClass('exp');
        //$('.content').addClass('menu-padding');
    } else {
        $('#navigation').removeClass('nav-wrap');
-       $('#services').removeClass('exp');
+       $('#nav-spacer').removeClass('exp');
        //$('.content').removeClass('menu-padding');
    }
 

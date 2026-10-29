@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CV - Neil James Cook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Curriculum vitae of Neil James Cook, astrophysics researcher at iREx, Université de Montréal.">
+    <link rel="canonical" href="https://njcuk9999.github.io/cv.html">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Neil James Cook - CV">
+    <meta property="og:url" content="https://njcuk9999.github.io/cv.html">
+    <meta property="og:image" content="https://njcuk9999.github.io/assets/images/me-1200.jpg">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500%7CLato:300,400,700,400italic%7CRaleway:100,300"
+      rel="stylesheet" type="text/css">
+    <script src="assets/js/i18n.js"></script>
+    <style>
+      :root {
+        --cv-bg: #eef0f3; --cv-paper: #fff; --cv-ink: #1d2027; --cv-ink-2: #4a4f59; --cv-ink-3: #7b808a;
+        --cv-line: #e3e5e9; --cv-accent: #c9524c;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --cv-bg: #121317; --cv-paper: #1b1d23; --cv-ink: #ececee; --cv-ink-2: #babdc4; --cv-ink-3: #8c9099;
+                --cv-line: #2c2f37; --cv-accent: #ef8a84; }
+      }
+      body { background: var(--cv-bg); color: var(--cv-ink); }
+      #navigation { position: sticky; top: 0; z-index: 20; }
+      .cv { max-width: 900px; margin: 0 auto; padding: 32px 16px 64px; }
+      .cv-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 16px; }
+      .cv-toolbar button { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border: 0;
+                           border-radius: 999px; background: var(--cv-accent); color: #fff; font: 500 16px 'Dosis', sans-serif; }
+      .cv-toolbar button i { font-size: 22px; }
+      .cv-toolbar button:hover { filter: brightness(1.08); }
+      .cv-toolbar > span { font-size: 13px; color: var(--cv-ink-3); }
+      .cv-sheet { background: var(--cv-paper); border: 1px solid var(--cv-line); border-radius: 14px;
+                  padding: 48px 56px; box-shadow: 0 10px 40px rgba(0,0,0,.06); }
+      .cv-head { display: flex; gap: 28px; align-items: center; padding-bottom: 26px; border-bottom: 2px solid var(--cv-accent); }
+      .cv-head img { flex: none; width: 116px; height: 116px; border-radius: 50%; object-fit: cover; }
+      .cv-head h1 { margin: 0; font: 100 3em/1.05 'Raleway', sans-serif; color: var(--cv-ink); }
+      .cv-role { margin: 6px 0 10px; font-size: 16px; color: var(--cv-ink-2); }
+      .cv-contact { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; padding: 0; list-style: none; font-size: 13px; }
+      .cv-contact li { display: flex; align-items: center; gap: 5px; color: var(--cv-ink-2); }
+      .cv-contact i { font-size: 17px; color: var(--cv-accent); }
+      .cv-contact a { color: inherit; }
+      .cv-section { margin-top: 30px; break-inside: auto; }
+      .cv-section > h2 { margin: 0 0 12px; font: 500 1.05em 'Dosis', sans-serif; letter-spacing: .14em; text-transform: uppercase;
+                         color: var(--cv-accent); break-after: avoid; }
+      .cv-entry { display: grid; grid-template-columns: 140px 1fr; gap: 18px; padding: 8px 0; break-inside: avoid; }
+      .cv-when { color: var(--cv-ink-3); font-size: 14px; font-variant-numeric: tabular-nums; }
+      .cv-what h3 { margin: 0; font: 700 15px/1.4 'Lato', sans-serif; color: var(--cv-ink); }
+      .cv-what h3 a { color: inherit; border-bottom: 1px dotted var(--cv-ink-3); }
+      .cv-where { font-style: italic; font-size: 14px; color: var(--cv-ink-2); }
+      .cv-what p { margin: 4px 0 0; font-size: 14px; color: var(--cv-ink-2); }
+      .cv-summary { margin: 0 0 14px; font-size: 14px; color: var(--cv-ink-2); }
+      .cv-pubs h3 { margin: 18px 0 8px; font: 700 13px 'Lato', sans-serif; color: var(--cv-ink); }
+      .cv-publist { margin: 0; padding-left: 22px; font-size: 13px; line-height: 1.5; color: var(--cv-ink-2); }
+      .cv-publist li { margin-bottom: 6px; break-inside: avoid; }
+      .cv-publist b { color: var(--cv-ink); }
+      .cv-publist a { color: inherit; }
+      .cv-publist .t { color: var(--cv-ink); }
+      .cv-note { font-size: 13px; color: var(--cv-ink-3); }
+      .cv-note a { color: var(--cv-accent); }
+      .cv-foot { margin-top: 36px; padding-top: 12px; border-top: 1px solid var(--cv-line); font-size: 12px;
+                 color: var(--cv-ink-3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+      @media (max-width: 640px) {
+        .cv-sheet { padding: 26px 20px; }
+        .cv-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+        .cv-head h1 { font-size: 2.3em; }
+        .cv-entry { grid-template-columns: 1fr; gap: 2px; }
+        #navigation .logo-text { font-size: 2em; }
+      }
+      @media print {
+        @page { size: A4; margin: 14mm 14mm 16mm; }
+        :root { --cv-bg: #fff; --cv-paper: #fff; --cv-ink: #000; --cv-ink-2: #222; --cv-ink-3: #555; --cv-line: #ccc; --cv-accent: #a33b35; }
+        body { padding: 0 !important; background: #fff; }
+        .sidebar, #navigation, .cv-toolbar, .preview-banner { display: none !important; }
+        .cv { max-width: none; padding: 0; }
+        .cv-sheet { border: 0; box-shadow: none; padding: 0; border-radius: 0; }
+        .cv-head img { width: 90px; height: 90px; }
+        a { text-decoration: none; }
+        .cv-section > h2 { break-after: avoid-page; }
+      }
+    </style>
+  </head>
+  <body id="body" data-page="cv">
+    <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
+    <section id="navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="logo"><a href="index.html" class="logo-text">Neil James Cook</a></div>
+          </div>
+          <div class="col-xs-6">
+            <div class="nav"> <a href="#" data-placement="bottom" title="Menu" data-i18n-attr="title:nav.menu"
+                class="menu" data-toggle="dropdown"><i class="pe-7s-menu"></i></a>
+              <div class="dropdown-menu">
+                <div class="arrow-up"></div>
+                <ul id="nav-menu"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="cv">
+      <div class="cv-toolbar">
+        <button type="button" id="cv-print"><i class="pe-7s-print"></i><span data-i18n="cv.print">Download PDF</span></button>
+        <span data-i18n="cv.printHint">Choose “Save as PDF” as the printer.</span>
+      </div>
+      <article class="cv-sheet">
+        <div class="cv-head">
+          <img id="cv-photo" src="assets/images/me-600.jpg" alt="" width="116" height="116">
+          <div>
+            <h1>Neil James Cook</h1>
+            <p class="cv-role"><span data-i18n="site.role">Astrophysics researcher</span> · iREx, Université de Montréal</p>
+            <ul id="cv-contact" class="cv-contact"></ul>
+          </div>
+        </div>
+        <div id="cv-sections"></div>
+        <section class="cv-section cv-pubs" id="cv-pubs">
+          <h2 data-i18n="cv.pubs">Publications</h2>
+          <p class="cv-summary" id="cv-pub-summary" data-i18n="cv.loading">Loading…</p>
+          <div id="cv-pub-lists"></div>
+          <p class="cv-note"><span data-i18n="cv.pubs.full">Full, up-to-date list:</span>
+            <a href="https://njcuk9999.github.io/#publications">njcuk9999.github.io/#publications</a> ·
+            <a href="https://orcid.org/0000-0003-4166-4121">orcid.org/0000-0003-4166-4121</a></p>
+        </section>
+        <section class="cv-section" id="cv-software" hidden>
+          <h2 data-i18n="cv.software">Software</h2>
+          <div id="cv-software-list"></div>
+        </section>
+        <section class="cv-section" id="cv-talks" hidden>
+          <h2 data-i18n="cv.talks">Talks</h2>
+          <div id="cv-talks-list"></div>
+        </section>
+        <footer class="cv-foot">
+          <span id="cv-updated"></span>
+          <span>njcuk9999.github.io/cv.html</span>
+        </footer>
+      </article>
+    </main>
+
+    <script src="assets/js/jquery-2.1.3.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/sitedata.js"></script>
+    <script src="assets/js/chrome.js"></script>
+    <script src="assets/js/publications.js"></script>
+    <script>
+    (function () {
+        var t = I18n.t, esc = SiteData.esc, tr = SiteData.tr;
+        var $ = function (id) { return document.getElementById(id); };
+        I18n.apply();
+        document.title = t("cv.title") + " - Neil James Cook";
+        $("cv-updated").textContent = t("cv.updated", { date: I18n.date(new Date().toISOString().slice(0, 10)) });
+        $("cv-print").addEventListener("click", function () { window.print(); });
+
+        // the usual sections, in this order; any other section name follows
+        var ORDER = ["positions", "education", "awards", "grants", "teaching", "service",
+            "interests", "skills", "outreach", "languages", "other"];
+
+        function sectionName(key) {
+            var k = "cv.sec." + key.toLowerCase();
+            var name = t(k);
+            return name === k ? key : name;
+        }
+
+        function entry(when, title, url, where, body) {
+            return '<div class="cv-entry"><div class="cv-when">' + esc(when || "") + "</div>" +
+                '<div class="cv-what"><h3>' + (url ? '<a href="' + esc(SiteData.safeUrl(url)) + '">' + esc(title) + "</a>" : esc(title)) +
+                "</h3>" + (where ? '<div class="cv-where">' + esc(where) + "</div>" : "") +
+                SiteData.paragraphs(body) + "</div></div>";
+        }
+
+        SiteData.loadRecords("cv.txt").then(function (recs) {
+            var groups = {}, order = ORDER.slice();
+            recs.forEach(function (r) {
+                var key = (r.fields.section || "other").trim();
+                var k = key.toLowerCase();
+                if (order.indexOf(k) < 0) order.push(k);
+                (groups[k] = groups[k] || { name: key, recs: [] }).recs.push(r);
+            });
+            $("cv-sections").innerHTML = order.filter(function (k) { return groups[k]; }).map(function (k) {
+                return '<section class="cv-section"><h2>' + esc(sectionName(groups[k].name)) + "</h2>" +
+                    groups[k].recs.map(function (r) {
+                        return entry(tr(r, "when"), tr(r, "title"), r.fields.url, tr(r, "where"), tr(r, "body"));
+                    }).join("") + "</section>";
+            }).join("");
+        });
+
+        SiteData.loadRecords("contact.txt").then(function (recs) {
+            var items = [];
+            recs.forEach(function (r) {
+                var icon = r.fields.icon || "";
+                var text = r.body.trim();
+                if (icon === "pe-7s-mail") {
+                    var mail = text.replace(/\s+at\s+/, "@");
+                    items.push(["pe-7s-mail", mail, "mailto:" + mail]);
+                } else if (icon === "pe-7s-global" || icon === "pe-7s-call") {
+                    items.push([icon, text.replace(/^https?:\/\//, ""), r.fields.url]);
+                }
+            });
+            items.push(["pe-7s-id", "ORCID 0000-0003-4166-4121", "https://orcid.org/0000-0003-4166-4121"]);
+            items.push(["pe-7s-science", "github.com/njcuk9999", "https://github.com/njcuk9999"]);
+            $("cv-contact").innerHTML = items.map(function (x) {
+                return '<li><i class="' + x[0] + '"></i>' +
+                    (x[2] ? '<a href="' + esc(SiteData.safeUrl(x[2])) + '">' + esc(x[1]) + "</a>" : esc(x[1])) + "</li>";
+            }).join("");
+        });
+
+        SiteData.load("about.txt").then(function (text) {
+            var about = SiteData.parseRecords(text)[0];
+            if (about && about.fields.image) $("cv-photo").src = about.fields.image;
+        }).catch(function () { /* keep the default photo */ });
+
+        SiteData.loadRecords("software.txt").then(function (recs) {
+            if (!recs.length) return;
+            $("cv-software").hidden = false;
+            $("cv-software-list").innerHTML = recs.map(function (r) {
+                var repo = SiteData.repoOf(r);
+                return entry("", tr(r, "title"), r.fields.docs || (repo && "https://github.com/" + repo),
+                    repo ? "github.com/" + repo : "", tr(r, "body"));
+            }).join("");
+        });
+
+        SiteData.loadRecords("talks.txt").then(function (recs) {
+            if (!recs.length) return;
+            $("cv-talks").hidden = false;
+            $("cv-talks-list").innerHTML = SiteData.byDateDesc(recs).map(function (r) {
+                return entry(I18n.date(r.fields.date), tr(r, "title"), r.fields.slides || r.fields.url,
+                    [tr(r, "event"), tr(r, "place")].filter(Boolean).join(", "), "");
+            }).join("");
+        });
+
+        // "Cook, N. J., Artigau, É., Doyon, R., et al. 2024, Title, Journal, 167, 12"
+        function cite(p) {
+            var a = p.authors || [];
+            var names = a.slice(0, 3).map(function (x) {
+                var parts = x.name.split(" ");
+                var last = parts.pop();
+                var initials = parts.map(function (w) { return w.charAt(0) + "."; }).join(" ");
+                var n = esc(last + (initials ? ", " + initials : ""));
+                return x.me ? "<b>" + n + "</b>" : n;
+            });
+            var me = a.findIndex ? a.findIndex(function (x) { return x.me; }) : -1;
+            var authors = names.join(", ") + (a.length > 3 ? ", et al." : "") +
+                (me >= 3 ? " (" + esc(a[me].name) + ")" : "");
+            var ref = [p.venue, p.volume, p.pages && p.pages.replace("--", "–")].filter(Boolean).map(esc).join(", ");
+            return "<li>" + authors + " " + esc(p.year) + ', <a class="t" href="' + esc(SiteData.safeUrl(p.url)) + '">' +
+                esc(p.title) + "</a>" + (ref ? ", <i>" + ref + "</i>" : "") + "</li>";
+        }
+
+        Publications.load().then(function (r) {
+            var pubs = r.pubs.filter(function (p) { return !p.hidden; });
+            var s = Publications.stats(pubs);
+            $("cv-pub-summary").textContent = t("cv.pubs.summary", { n: s.n, first: s.first, cites: s.cites, h: s.h });
+            var first = pubs.filter(function (p) { return p.firstAuthor; }).sort(Publications.newestFirst);
+            var other = pubs.filter(function (p) { return !p.firstAuthor; }).sort(Publications.mostCited).slice(0, 15);
+            $("cv-pub-lists").innerHTML =
+                (first.length ? "<h3>" + esc(t("cv.pubs.first")) + '</h3><ol class="cv-publist">' + first.map(cite).join("") + "</ol>" : "") +
+                (other.length ? "<h3>" + esc(t("cv.pubs.selected")) + '</h3><ol class="cv-publist">' + other.map(cite).join("") + "</ol>" : "");
+        }).catch(function (e) {
+            console.error(e);
+            $("cv-pub-summary").textContent = "";
+        });
+    })();
+    </script>
+  </body>
+</html>

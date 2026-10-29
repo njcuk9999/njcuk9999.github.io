@@ -1,6 +1,20 @@
-image: assets/images/200923_EA_1771_corr_me.jpg
+image: assets/images/me-600.jpg
 Since September 2021, I have been a researcher at the University of Montreal with the Institute for Research on Exoplanets (iREx). I collaborate closely with the SPIRou and NIRPS teams—working with Étienne Artigau on data pipelines—and with Loïc Albert and the iREx JWST team on software for JWST.
 
 Previously, I was a Trottier Postdoctoral Fellow at UdeM from 2017 to 2021. Before moving to Montreal, I completed a short postdoc at York University in Toronto with Ray Jayawardhana, using Gaia and SuperWASP data to study very low-mass and ultracool members of nearby young moving groups. I earned my PhD at the University of Hertfordshire (UK) in August 2016, where my thesis focused on finding ultracool dwarf and giant exoplanet companions to M dwarfs—including building a massive M dwarf catalogue and developing a new approach to identify unresolved companions.
 
 My research focuses on all things cool: M dwarfs, brown dwarfs, and especially exoplanets, with a growing emphasis on detecting habitable worlds around cool stars. I'm also an avid programmer and love tackling any astrophysical coding challenge.
+
+--- fr ---
+Depuis septembre 2021, je suis chercheur à l’Université de Montréal, au sein de l’Institut de recherche sur les exoplanètes (iREx). Je collabore étroitement avec les équipes SPIRou et NIRPS — en travaillant avec Étienne Artigau sur les pipelines de données — ainsi qu’avec Loïc Albert et l’équipe JWST de l’iREx sur les logiciels pour JWST.
+
+Auparavant, j’ai été boursier postdoctoral Trottier à l’UdeM de 2017 à 2021. Avant de m’installer à Montréal, j’ai effectué un court postdoctorat à l’Université York, à Toronto, avec Ray Jayawardhana, en utilisant les données de Gaia et de SuperWASP pour étudier les membres de très faible masse et ultrafroids des jeunes groupes cinématiques proches. J’ai obtenu mon doctorat à l’Université du Hertfordshire (Royaume-Uni) en août 2016 ; ma thèse portait sur la recherche de naines ultrafroides et d’exoplanètes géantes compagnes de naines M, notamment par la construction d’un vaste catalogue de naines M et le développement d’une nouvelle méthode pour identifier les compagnons non résolus.
+
+Mes recherches portent sur tout ce qui est froid : les naines M, les naines brunes et surtout les exoplanètes, avec un intérêt croissant pour la détection de mondes habitables autour des étoiles froides. Je suis aussi un programmeur passionné et j’adore relever tous les défis de programmation en astrophysique.
+
+--- es ---
+Desde septiembre de 2021 soy investigador en la Universidad de Montreal, en el Instituto de Investigación sobre Exoplanetas (iREx). Colaboro estrechamente con los equipos de SPIRou y NIRPS —trabajando con Étienne Artigau en pipelines de datos— y con Loïc Albert y el equipo de JWST del iREx en software para JWST.
+
+Anteriormente fui becario posdoctoral Trottier en la UdeM de 2017 a 2021. Antes de mudarme a Montreal, realicé un breve posdoctorado en la Universidad York de Toronto con Ray Jayawardhana, usando datos de Gaia y SuperWASP para estudiar los miembros de muy baja masa y ultrafríos de los grupos jóvenes en movimiento cercanos. Obtuve mi doctorado en la Universidad de Hertfordshire (Reino Unido) en agosto de 2016; mi tesis se centró en encontrar enanas ultrafrías y exoplanetas gigantes compañeros de enanas M, incluida la construcción de un enorme catálogo de enanas M y el desarrollo de un nuevo método para identificar compañeras no resueltas.
+
+Mi investigación se centra en todo lo frío: enanas M, enanas marrones y, sobre todo, exoplanetas, con un interés creciente en detectar mundos habitables alrededor de estrellas frías. También soy un programador entusiasta y me encanta afrontar cualquier reto de programación astrofísica.

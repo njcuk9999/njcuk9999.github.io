@@ -60,7 +60,7 @@
       .iconbtn i { font-size: 22px; vertical-align: middle; margin-right: 6px; }
       .imgfield { display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
       .imgfield img { width: 120px; height: 90px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); background: #eee; }
-      .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 50; display: flex;
+      .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 200; display: flex;
                   align-items: center; justify-content: center; padding: 16px; }
       .modal { background: #fff; border-radius: 10px; width: min(760px, 100%); max-height: 85vh; display: flex; flex-direction: column; }
       .modal .head { padding: 12px 16px; border-bottom: 1px solid var(--line); }
@@ -109,36 +109,42 @@
       .sidebar-tools a { display: block; padding: 4px; color: #555; font-size: 26px; line-height: 1; transition: .2s ease all; }
       .sidebar-tools a:hover, .sidebar-tools a:focus { color: #fff; }
       .sidebar-tools a.is-active { color: #e66f69; }
+      .sidebar-tools { align-items: center; }
+      .sidebar-page { margin-top: 8px; padding-top: 8px; border-top: 1px solid #222; }
+      .sidebar-nav a.is-active { border-left-color: #e66f69; background: #1b1b1b; color: #fff; }
+      .lang-switch { display: flex; gap: 2px; margin-left: auto; }
+      .lang-switch button { padding: 5px; border: 0; border-radius: 4px; background: none; color: #555;
+                            font: 700 11px/1 Lato, sans-serif; letter-spacing: .06em; min-width: 0; }
+      .lang-switch button:hover { color: #fff; border: 0; }
+      .lang-switch button.is-active { color: #e66f69; }
+      .topmenu .lang-switch { gap: 6px; }
+      .topmenu .lang-switch button { border: 1px solid #ddd; color: #777; padding: 4px 8px; }
+      .topmenu .lang-switch button.is-active { border-color: #e66f69; color: #e66f69; }
+      .topmenu [hidden] { display: none !important; }
+      .topmenu { max-height: calc(100vh - 90px); overflow-y: auto; }
+      /* preview + history dialogs */
+      .modal.wide { width: min(1300px, 100%); height: 90vh; max-height: 90vh; }
+      .modal .body { flex: 1; overflow: auto; padding: 12px 16px; }
+      .previewbox { flex: 1; display: flex; justify-content: center; background: #e9ebef; overflow: auto; border-radius: 0 0 10px 10px; }
+      .previewbox iframe { width: 100%; height: 100%; border: 0; background: #fff; transition: width .2s; }
+      .previewbox.phone iframe { width: 390px; }
+      .hist { display: flex; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+      .hist .when { flex: none; width: 150px; color: var(--muted); font-size: 13px; }
+      .lang-pick { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+      .lang-pick select { width: auto; padding: 5px 8px; }
+      input.tr, textarea.tr { background: #fffbea; border-color: #ecd98a; }
+      .banner { padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; background: #fff4e5; border: 1px solid #f3c98b; color: #7a4a00; font-size: 14px; }
       code { background: #eef0f3; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
     </style>
   </head>
-  <body>
-    <!-- Sidebar (large screens only, replaces the top bar) -->
-    <aside class="sidebar" aria-label="Site navigation">
-      <a class="sidebar-name" href="index.html">Neil James Cook</a>
-      <p class="sidebar-role">Astrophysics researcher<br>iREx, Universit&eacute; de Montr&eacute;al</p>
-      <ul class="sidebar-nav">
-        <li><a href="index.html#header"><i class="pe-7s-home"></i>Home</a></li>
-        <li><a href="index.html#services"><i class="pe-7s-science"></i>Links to research</a></li>
-        <li><a href="index.html#portfolio"><i class="pe-7s-portfolio"></i>Projects</a></li>
-        <li><a href="index.html#publications"><i class="pe-7s-notebook"></i>Publications</a></li>
-        <li><a href="index.html#testimonial"><i class="pe-7s-user"></i>About me</a></li>
-        <li><a href="index.html#contact"><i class="pe-7s-mail"></i>Contact</a></li>
-      </ul>
-      <div class="sidebar-tools">
-        <a href="admin.html" title="Admin" aria-label="Admin" class="is-active"><i class="pe-7s-config"></i></a>
-        <a href="plinks.html" title="Useful links" aria-label="Useful links"><i class="pe-7s-link"></i></a>
-      </div>
-    </aside>
+  <body data-page="admin">
+    <!-- Sidebar (large screens only; built by chrome.js) -->
+    <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
     <!-- Top bar (smaller screens) -->
     <nav class="topbar">
       <a href="index.html" class="logo-text">Neil James Cook</a>
-      <button class="menu" id="menu-btn" title="Menu" aria-expanded="false" aria-controls="top-menu"><i class="pe-7s-menu"></i></button>
-      <ul class="topmenu" id="top-menu" hidden>
-        <li><a href="index.html">Home <i class="pe-7s-home"></i></a></li>
-        <li><a href="index.html#contact">Contact <i class="pe-7s-mail"></i></a></li>
-        <li><a href="plinks.html">Useful links <i class="pe-7s-link"></i></a></li>
-      </ul>
+      <button class="menu" id="menu-btn" title="Menu" aria-expanded="false" aria-controls="nav-menu"><i class="pe-7s-menu"></i></button>
+      <ul class="topmenu" id="nav-menu" hidden></ul>
     </nav>
 
     <div class="wrap">
@@ -181,14 +187,22 @@
           <span class="muted small" id="who"></span>
           <span class="spacer"></span>
           <a href="index.html" target="_blank">View site</a>
-          <a href="plinks.html" target="_blank">Links page</a>
           <button id="logout-btn">Log out</button>
         </header>
+        <div id="expiry" class="banner" hidden></div>
         <nav class="tabs" id="tabs"></nav>
         <div class="toolbar row">
           <button id="save-btn" class="primary">Save to GitHub</button>
           <button id="reload-btn">Discard &amp; reload</button>
           <button id="raw-btn">Edit as raw text</button>
+          <button id="preview-btn" title="See the page with your unsaved changes">Preview</button>
+          <button id="history-btn" title="Earlier versions of this file">History</button>
+          <label class="lang-pick" id="lang-pick">Editing
+            <select id="edit-lang">
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="es">Español</option>
+            </select></label>
           <span class="spacer"></span>
           <span id="status" class="status"></span>
         </div>
@@ -210,7 +224,7 @@
 
     <script>
       (function () {
-        var btn = document.getElementById("menu-btn"), menu = document.getElementById("top-menu");
+        var btn = document.getElementById("menu-btn"), menu = document.getElementById("nav-menu");
         btn.addEventListener("click", function (e) {
           e.stopPropagation();
           menu.hidden = !menu.hidden;
@@ -221,7 +235,34 @@
         });
       })();
     </script>
+    <div id="preview-modal" class="modal-bg" hidden>
+      <div class="modal wide">
+        <div class="head row">
+          <b id="preview-title">Preview</b>
+          <span class="muted small">Unsaved changes, only visible to you.</span>
+          <span class="spacer"></span>
+          <button id="preview-phone">Phone width</button>
+          <a id="preview-open" class="btn" target="_blank">Open in new tab</a>
+          <button id="preview-close">Close</button>
+        </div>
+        <div class="previewbox" id="preview-box"><iframe id="preview-frame" title="Preview"></iframe></div>
+      </div>
+    </div>
+
+    <div id="history-modal" class="modal-bg" hidden>
+      <div class="modal">
+        <div class="head row">
+          <b id="history-title">History</b>
+          <span class="spacer"></span>
+          <button id="history-close">Close</button>
+        </div>
+        <div class="body" id="history-list"></div>
+      </div>
+    </div>
+
+    <script src="assets/js/i18n.js"></script>
     <script src="assets/js/sitedata.js"></script>
+    <script src="assets/js/chrome.js"></script>
     <script src="assets/js/publications.js"></script>
     <script src="assets/js/admin.js"></script>
   </body>

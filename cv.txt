@@ -1,0 +1,71 @@
+[Researcher]
+title.fr: Chercheur
+title.es: Investigador
+section: positions
+when: 2021 – present
+when.fr: 2021 – aujourd’hui
+when.es: 2021 – actualidad
+where: Institute for Research on Exoplanets (iREx), Université de Montréal
+where.fr: Institut de recherche sur les exoplanètes (iREx), Université de Montréal
+where.es: Instituto de Investigación sobre Exoplanetas (iREx), Université de Montréal
+Data reduction pipelines for SPIRou and NIRPS (with Étienne Artigau); software for JWST with Loïc Albert and the iREx JWST team.
+
+--- fr ---
+Pipelines de réduction de données pour SPIRou et NIRPS (avec Étienne Artigau) ; logiciels pour JWST avec Loïc Albert et l’équipe JWST de l’iREx.
+
+--- es ---
+Pipelines de reducción de datos para SPIRou y NIRPS (con Étienne Artigau); software para JWST con Loïc Albert y el equipo de JWST del iREx.
+
+[Trottier Postdoctoral Fellow]
+title.fr: Boursier postdoctoral Trottier
+title.es: Becario posdoctoral Trottier
+section: positions
+when: 2017 – 2021
+where: Institute for Research on Exoplanets (iREx), Université de Montréal
+where.fr: Institut de recherche sur les exoplanètes (iREx), Université de Montréal
+where.es: Instituto de Investigación sobre Exoplanetas (iREx), Université de Montréal
+
+[Postdoctoral researcher]
+title.fr: Chercheur postdoctoral
+title.es: Investigador posdoctoral
+section: positions
+when: 2016 – 2017
+where: York University, Toronto
+where.fr: Université York, Toronto
+where.es: Universidad York, Toronto
+With Ray Jayawardhana: Gaia and SuperWASP data to study very low-mass and ultracool members of nearby young moving groups.
+
+--- fr ---
+Avec Ray Jayawardhana : données de Gaia et de SuperWASP pour étudier les membres de très faible masse et ultrafroids des jeunes groupes cinématiques proches.
+
+--- es ---
+Con Ray Jayawardhana: datos de Gaia y SuperWASP para estudiar los miembros de muy baja masa y ultrafríos de los grupos jóvenes en movimiento cercanos.
+
+[PhD in Astrophysics]
+title.fr: Doctorat en astrophysique
+title.es: Doctorado en astrofísica
+section: education
+when: 2016
+where: University of Hertfordshire, UK
+where.fr: Université du Hertfordshire, Royaume-Uni
+where.es: Universidad de Hertfordshire, Reino Unido
+url: https://zenodo.org/record/61337
+Thesis: finding ultracool dwarf and giant exoplanet companions to M dwarfs, including a large M dwarf catalogue and a new approach to identifying unresolved companions.
+
+--- fr ---
+Thèse : recherche de naines ultrafroides et d’exoplanètes géantes compagnes de naines M, dont un vaste catalogue de naines M et une nouvelle méthode pour identifier les compagnons non résolus.
+
+--- es ---
+Tesis: búsqueda de enanas ultrafrías y exoplanetas gigantes compañeros de enanas M, incluido un gran catálogo de enanas M y un nuevo método para identificar compañeras no resueltas.
+
+[Exoplanets and cool stars]
+title.fr: Exoplanètes et étoiles froides
+title.es: Exoplanetas y estrellas frías
+section: interests
+M dwarfs, brown dwarfs and exoplanets, with a growing emphasis on detecting habitable worlds around cool stars; precision radial velocities; high-resolution infrared spectroscopy; JWST time-series observations; scientific software.
+
+--- fr ---
+Naines M, naines brunes et exoplanètes, avec un intérêt croissant pour la détection de mondes habitables autour des étoiles froides ; vitesses radiales de précision ; spectroscopie infrarouge à haute résolution ; observations en séries temporelles avec JWST ; logiciels scientifiques.
+
+--- es ---
+Enanas M, enanas marrones y exoplanetas, con un interés creciente en detectar mundos habitables alrededor de estrellas frías; velocidades radiales de precisión; espectroscopía infrarroja de alta resolución; observaciones de series temporales con JWST; software científico.
