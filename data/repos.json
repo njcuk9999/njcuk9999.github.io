@@ -1,0 +1,61 @@
+{
+ "generated": "2026-10-29T02:17:07Z",
+ "repos": {
+  "njcuk9999/apero-drs": {
+   "stars": 13,
+   "forks": 3,
+   "lang": "Python",
+   "pushed": "2026-10-28",
+   "tag": null,
+   "relUrl": null
+  },
+  "njcuk9999/lbl": {
+   "stars": 22,
+   "forks": 4,
+   "lang": "Python",
+   "pushed": "2026-10-28",
+   "tag": "v0.65.014",
+   "relUrl": "https://github.com/njcuk9999/lbl/releases/tag/v0.65.014"
+  },
+  "njcuk9999/sossisse": {
+   "stars": 0,
+   "forks": 0,
+   "lang": "Python",
+   "pushed": "2026-10-27",
+   "tag": null,
+   "relUrl": null
+  },
+  "njcuk9999/apero-utils": {
+   "stars": 3,
+   "forks": 3,
+   "lang": "Python",
+   "pushed": "2026-10-27",
+   "tag": null,
+   "relUrl": null
+  },
+  "njcuk9999/pystilts": {
+   "stars": 11,
+   "forks": 2,
+   "lang": "Python",
+   "pushed": "2026-04-30",
+   "tag": null,
+   "relUrl": null
+  },
+  "njcuk9999/coauthors2tex": {
+   "stars": 3,
+   "forks": 1,
+   "lang": "Python",
+   "pushed": "2026-10-14",
+   "tag": null,
+   "relUrl": null
+  },
+  "njcuk9999/scarvs": {
+   "stars": 4,
+   "forks": 0,
+   "lang": "Python",
+   "pushed": "2025-02-28",
+   "tag": null,
+   "relUrl": null
+  }
+ }
+}
