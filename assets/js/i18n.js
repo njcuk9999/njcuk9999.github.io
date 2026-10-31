@@ -126,6 +126,9 @@ var I18n = (function () {
       "clocks.weekend": "Weekend",
       "clocks.planner": "Meeting planner",
       "clocks.plannerHint": "Your next 24 hours across the clocks. Click an hour to jump there.",
+      "clocks.plannerDay": "All of {date} in your time zone. Click an hour to jump there.",
+      "clocks.prevDay": "Previous day", "clocks.nextDay": "Next day", "clocks.pickDay": "Pick a day",
+      "clocks.next24": "Next 24 h", "clocks.dstChange": "Clocks change:",
       "clocks.h24": "24 h", "clocks.h12": "12 h",
       "clocks.mapError": "The map couldn’t load, but the clocks still work.",
       "clocks.sun": "Sun overhead"
@@ -238,6 +241,9 @@ var I18n = (function () {
       "clocks.weekend": "Fin de semaine",
       "clocks.planner": "Planificateur de réunions",
       "clocks.plannerHint": "Vos 24 prochaines heures dans chaque ville. Cliquez sur une heure pour y aller.",
+      "clocks.plannerDay": "Toute la journée du {date} dans votre fuseau. Cliquez sur une heure pour y aller.",
+      "clocks.prevDay": "Jour précédent", "clocks.nextDay": "Jour suivant", "clocks.pickDay": "Choisir un jour",
+      "clocks.next24": "24 prochaines h", "clocks.dstChange": "Changement d’heure :",
       "clocks.h24": "24 h", "clocks.h12": "12 h",
       "clocks.mapError": "La carte n’a pas pu être chargée, mais les horloges fonctionnent.",
       "clocks.sun": "Soleil au zénith"
@@ -350,6 +356,9 @@ var I18n = (function () {
       "clocks.weekend": "Fin de semana",
       "clocks.planner": "Planificador de reuniones",
       "clocks.plannerHint": "Tus próximas 24 horas en cada ciudad. Haz clic en una hora para ir a ella.",
+      "clocks.plannerDay": "Todo el {date} en tu zona horaria. Haz clic en una hora para ir a ella.",
+      "clocks.prevDay": "Día anterior", "clocks.nextDay": "Día siguiente", "clocks.pickDay": "Elige un día",
+      "clocks.next24": "Próximas 24 h", "clocks.dstChange": "Cambio de hora:",
       "clocks.h24": "24 h", "clocks.h12": "12 h",
       "clocks.mapError": "No se pudo cargar el mapa, pero los relojes funcionan.",
       "clocks.sun": "Sol en el cénit"
