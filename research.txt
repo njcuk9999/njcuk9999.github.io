@@ -1,4 +1,4 @@
-[APERO Pipelines]
+[APERO Pipeline]
 title.fr: Pipeline APERO
 title.es: Pipeline APERO
 icon: pe-7s-network
